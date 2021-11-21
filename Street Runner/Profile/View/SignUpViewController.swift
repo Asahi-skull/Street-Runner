@@ -48,4 +48,10 @@ class SignUpViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    
+    @IBAction func toLoginButon(_ sender: Any) {
+        
+         performSegue(withIdentifier: "toLogin", sender: nil)
+    }
+    
 }
