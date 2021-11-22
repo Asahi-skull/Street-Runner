@@ -10,7 +10,7 @@ import Foundation
 protocol LoginViewModel{
     
     func loginUser(email: String,password: String) -> Result<Void,Error>
-    func autoLogin()
+    func autoLogin() -> Bool
 }
 
 class LoginViewModelimpl: LoginViewModel{
@@ -22,12 +22,13 @@ class LoginViewModelimpl: LoginViewModel{
     }
     
     //自動ログイン
-    func autoLogin(){
+    func autoLogin() -> Bool{
         
-        if let emailAddress = UserDefaults.standard.object(forKey: "email"), let password = UserDefaults.standard.object(forKey: "password"){
-            loginModel.loginEmail(emailAddress: emailAddress as! String, password: password as! String)
+        if let emailAddress = UserDefaults.standard.string(forKey: "email"), let password = UserDefaults.standard.string(forKey: "password"){
+            loginModel.loginEmail(emailAddress: emailAddress , password: password)
+            return true
         }else{
-            return
+            return false
         }
     }
 }

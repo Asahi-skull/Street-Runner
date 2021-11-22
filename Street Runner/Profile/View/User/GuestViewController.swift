@@ -10,15 +10,17 @@ import UIKit
 class GuestViewController: UIViewController {
     
     let loginViewModel: LoginViewModel = LoginViewModelimpl()
+    let userRouter: UserRouter = UserRouterImpl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginViewModel.autoLogin()
-        performSegue(withIdentifier: "fromGuest", sender: nil)
+        if loginViewModel.autoLogin() == true{
+            userRouter.transition(idetifier: "fromGuest")
+        }
     }
 
     @IBAction func registerButton(_ sender: Any) {
-        performSegue(withIdentifier: "toSignUp", sender: nil)
+        userRouter.transition(idetifier: "toSignUp")
     }
     
 }

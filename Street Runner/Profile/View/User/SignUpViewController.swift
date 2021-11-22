@@ -13,6 +13,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     let signUpViewModel: SignUpViewModel = SignUpViewModelImpl()
+    let userRouter: UserRouter = UserRouterImpl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,30 +29,15 @@ class SignUpViewController: UIViewController {
         let result = signUpViewModel.sendEmail(emailText: email)
         switch result{
         case .success:
-            print("確認メール送信")
-            successAlert()
+            userRouter.resultAlert(titleText: "メールに送信完了", messageText: "メールを確認してください", titleOK: "OK")
         case .failure(let err):
             print(err.localizedDescription)
-            failureAlert()
+            userRouter.resultAlert(titleText: "メールに送信失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }
     
-    func successAlert() {
-        let alertController = UIAlertController(title: "メールに送信完了", message: "メールを確認してください", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func failureAlert(){
-        let alertController = UIAlertController(title: "メールに送信失敗", message: "もう一度やり直してください", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    
     @IBAction func toLoginButon(_ sender: Any) {
-        
-         performSegue(withIdentifier: "toLogin", sender: nil)
+        userRouter.transition(idetifier: "toLogin")
     }
     
 }

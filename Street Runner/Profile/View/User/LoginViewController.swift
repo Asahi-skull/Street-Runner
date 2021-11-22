@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     let loginViewModel: LoginViewModel = LoginViewModelimpl()
+    let userRouter: UserRouter = UserRouterImpl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +36,7 @@ class LoginViewController: UIViewController {
             performSegue(withIdentifier: "toProfile", sender: nil)
         case .failure(let err):
             print(err.localizedDescription)
-            failureAlert()
+            userRouter.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }
-    
-    func failureAlert(){
-        let alertController = UIAlertController(title: "ログイン失敗", message: "もう一度やり直してください", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
-    
 }

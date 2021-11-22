@@ -26,6 +26,8 @@
 		418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811B1274A5B5300DE9280 /* ProfileViewController.swift */; };
 		418811B7274B809600DE9280 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811B6274B809600DE9280 /* ProfileModel.swift */; };
 		418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811B8274B839100DE9280 /* ProfileViewModel.swift */; };
+		418811BC274BADD700DE9280 /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811BB274BADD700DE9280 /* UserRouter.swift */; };
+		418811BF274BAEC600DE9280 /* UserRouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811BE274BAEC600DE9280 /* UserRouterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		418811B1274A5B5300DE9280 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		418811B6274B809600DE9280 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		418811B8274B839100DE9280 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		418811BB274BADD700DE9280 /* UserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
+		418811BE274BAEC600DE9280 /* UserRouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouterModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,10 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				418811B0274A55A700DE9280 /* User */,
-				4188119E2748A06700DE9280 /* GuestViewController.swift */,
-				418811A12748BC5200DE9280 /* SignUpViewController.swift */,
-				418811AA274A320600DE9280 /* LoginViewController.swift */,
-				418811B1274A5B5300DE9280 /* ProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,10 +172,8 @@
 		4188119C27489FD700DE9280 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				418811BA274BABE000DE9280 /* Router */,
 				418811B4274A5B8400DE9280 /* User */,
-				418811A627493C4F00DE9280 /* SignUpViewModel.swift */,
-				418811AE274A344C00DE9280 /* LoginViewModel.swift */,
-				418811B8274B839100DE9280 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -183,10 +181,8 @@
 		4188119D27489FF100DE9280 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				418811BD274BAEAB00DE9280 /* Router */,
 				418811B5274A5B9500DE9280 /* User */,
-				418811A8274A211000DE9280 /* SignUpModel.swift */,
-				418811AC274A33DB00DE9280 /* LoginModel.swift */,
-				418811B6274B809600DE9280 /* ProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +190,10 @@
 		418811B0274A55A700DE9280 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				4188119E2748A06700DE9280 /* GuestViewController.swift */,
+				418811A12748BC5200DE9280 /* SignUpViewController.swift */,
+				418811AA274A320600DE9280 /* LoginViewController.swift */,
+				418811B1274A5B5300DE9280 /* ProfileViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -201,6 +201,9 @@
 		418811B4274A5B8400DE9280 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				418811A627493C4F00DE9280 /* SignUpViewModel.swift */,
+				418811AE274A344C00DE9280 /* LoginViewModel.swift */,
+				418811B8274B839100DE9280 /* ProfileViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -208,8 +211,27 @@
 		418811B5274A5B9500DE9280 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				418811A8274A211000DE9280 /* SignUpModel.swift */,
+				418811AC274A33DB00DE9280 /* LoginModel.swift */,
+				418811B6274B809600DE9280 /* ProfileModel.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		418811BA274BABE000DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				418811BB274BADD700DE9280 /* UserRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		418811BD274BAEAB00DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				418811BE274BAEC600DE9280 /* UserRouterModel.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,12 +375,14 @@
 				4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */,
 				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
 				418811B7274B809600DE9280 /* ProfileModel.swift in Sources */,
+				418811BC274BADD700DE9280 /* UserRouter.swift in Sources */,
 				4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */,
 				418811A727493C4F00DE9280 /* SignUpViewModel.swift in Sources */,
 				418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */,
 				418811A9274A211000DE9280 /* SignUpModel.swift in Sources */,
 				418811AD274A33DB00DE9280 /* LoginModel.swift in Sources */,
 				418811A22748BC5200DE9280 /* SignUpViewController.swift in Sources */,
+				418811BF274BAEC600DE9280 /* UserRouterModel.swift in Sources */,
 				4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */,
 				418811AF274A344C00DE9280 /* LoginViewModel.swift in Sources */,
 			);
