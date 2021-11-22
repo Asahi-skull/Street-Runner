@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -31,6 +30,8 @@ class LoginViewController: UIViewController {
         let result = loginViewModel.loginUser(email: emailText, password: passwordText)
         switch result {
         case .success:
+            UserDefaults.standard.set(emailText, forKey:"email")
+            UserDefaults.standard.set(passwordText, forKey: "password")
             performSegue(withIdentifier: "toProfile", sender: nil)
         case .failure(let err):
             print(err.localizedDescription)

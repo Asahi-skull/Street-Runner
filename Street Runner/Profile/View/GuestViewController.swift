@@ -9,10 +9,12 @@ import UIKit
 
 class GuestViewController: UIViewController {
     
+    let loginViewModel: LoginViewModel = LoginViewModelimpl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        loginViewModel.autoLogin()
+        performSegue(withIdentifier: "fromGuest", sender: nil)
     }
 
     @IBAction func registerButton(_ sender: Any) {

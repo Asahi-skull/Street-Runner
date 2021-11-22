@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NCMB
 
 class SignUpViewController: UIViewController {
     
@@ -16,7 +17,6 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

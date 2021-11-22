@@ -64,6 +64,7 @@
                     <navigationItem key="navigationItem" id="YAH-NA-0QX"/>
                     <connections>
                         <segue destination="Kpb-bu-OeS" kind="show" identifier="toSignUp" id="PXC-FV-8HX"/>
+                        <segue destination="yEa-dl-yCA" kind="show" identifier="fromGuest" id="hOr-6L-6dl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -217,13 +218,14 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-k0-gTE">
                                 <rect key="frame" x="147" y="248" width="120" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7Fg-ld-BVj"/>
                                     <constraint firstAttribute="width" constant="120" id="B7q-UX-yJi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h5Y-7d-lEi"/>
@@ -235,11 +237,24 @@
                             <constraint firstItem="Qgm-QI-JuG" firstAttribute="centerX" secondItem="5dl-Ff-3jL" secondAttribute="centerX" id="zCU-rq-twu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rbG-4M-gWW"/>
+                    <navigationItem key="navigationItem" id="rbG-4M-gWW">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="3vS-EB-BUX">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DeK-1a-tuZ">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="設定"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="userNameLabel" destination="9Z6-k0-gTE" id="7Hk-gE-r91"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHf-OG-uvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3809" y="104"/>
+            <point key="canvasLocation" x="3070" y="858"/>
         </scene>
         <!--Item-->
         <scene sceneID="Eig-dc-mjl">
@@ -278,6 +293,9 @@
             <point key="canvasLocation" x="-26.086956521739133" y="103.79464285714285"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="hOr-6L-6dl"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="person" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">

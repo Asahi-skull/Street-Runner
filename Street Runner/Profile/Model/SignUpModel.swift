@@ -15,7 +15,7 @@ protocol SignUpModel{
 
 class SignUpModelImpl: SignUpModel{
     
-    func confirmationEmail(email: String) -> Result<Void, Error> {
+    func confirmationEmail(email: String) -> Result<Void,Error>{
         let result = NCMBUser.requestAuthenticationMail(mailAddress: email)
         switch result{
         case .success:

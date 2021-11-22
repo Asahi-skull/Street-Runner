@@ -16,14 +16,7 @@ class SignUpViewModelImpl: SignUpViewModel{
     
     let signUpModel: SignUpModel = SignUpModelImpl()
     
-    func sendEmail(emailText: String) -> Result<Void,Error> {
-//        let result = signUpModel.confirmationEmail(email: emailText)
-//        switch result{
-//        case .success:
-//            return Result.success(())
-//        case .failure(let err):
-//            return Result.failure(err)
-//        }
+    func sendEmail(emailText: String) -> Result<Void,Error>{
         //confirmationEmailの関数がResult型を返しているので一行でも良い
         signUpModel.confirmationEmail(email: emailText)
     }
