@@ -13,11 +13,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     let signUpViewModel: SignUpViewModel = SignUpViewModelImpl()
-    let userRouter: UserRouter = UserRouterImpl()
+    lazy var router: SignUpRouter = SignUpRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -29,15 +28,16 @@ class SignUpViewController: UIViewController {
         let result = signUpViewModel.sendEmail(emailText: email)
         switch result{
         case .success:
-            userRouter.resultAlert(titleText: "メールに送信完了", messageText: "メールを確認してください", titleOK: "OK")
+            router.resultAlert(titleText: "送信完了", messageText: "メールを確認してください", titleOK: "OK")
+            break
         case .failure(let err):
             print(err.localizedDescription)
-            userRouter.resultAlert(titleText: "メールに送信失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+            router.resultAlert(titleText: "送信失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }
     
     @IBAction func toLoginButon(_ sender: Any) {
-        userRouter.transition(idetifier: "toLogin")
+        router.transition(idetifier: "toLogin")
     }
     
 }

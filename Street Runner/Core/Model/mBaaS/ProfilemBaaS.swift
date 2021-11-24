@@ -8,13 +8,11 @@
 import Foundation
 import NCMB
 
-protocol ProfileModel{
-    
+protocol ProfilemBaaS{
     func getUser() -> String
 }
 
-class ProfileModelImpl: ProfileModel{
-        
+class ProfilemBaaSImpl: ProfilemBaaS{
     func getUser() -> String {
         guard let user = NCMBUser.currentUser else {return ""}
         guard let userName = user.userName else {return ""}

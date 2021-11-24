@@ -9,18 +9,18 @@ import UIKit
 
 class GuestViewController: UIViewController {
     
-    let loginViewModel: LoginViewModel = LoginViewModelimpl()
-    let userRouter: UserRouter = UserRouterImpl()
+    let viewModel: GuestViewModel = GuestViewModelImpl()
+    lazy var router: GuestRouter = GuestRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if loginViewModel.autoLogin() == true{
-            userRouter.transition(idetifier: "fromGuest")
+        if viewModel.autoLogin(){
+            router.transition(idetifier: "fromGuest")
         }
     }
 
     @IBAction func registerButton(_ sender: Any) {
-        userRouter.transition(idetifier: "toSignUp")
+        router.transition(idetifier: "toSignUp")
     }
     
 }

@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     let loginViewModel: LoginViewModel = LoginViewModelimpl()
-    let userRouter: UserRouter = UserRouterImpl()
+    lazy var router: LoginRouter = LoginRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButton(_ sender: Any) {
-        
         guard let emailText = emailTextField.text else {return}
         guard let passwordText = passwordTextField.text else {return}
         let result = loginViewModel.loginUser(email: emailText, password: passwordText)
@@ -36,7 +35,7 @@ class LoginViewController: UIViewController {
             performSegue(withIdentifier: "toProfile", sender: nil)
         case .failure(let err):
             print(err.localizedDescription)
-            userRouter.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+            router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }
 }

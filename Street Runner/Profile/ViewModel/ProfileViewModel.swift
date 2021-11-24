@@ -8,16 +8,13 @@
 import Foundation
 
 protocol ProfileViewModel{
-    
     func setUser() -> String
 }
 
 class ProfileViewModelImpl: ProfileViewModel{
-    
     let profileModel: ProfileModel = ProfileModelImpl()
     
     func setUser() -> String {
-        let name = profileModel.getUser()
-        return name
+        profileModel.setUser()
     }
 }

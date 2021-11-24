@@ -8,13 +8,11 @@
 import Foundation
 import NCMB
 
-protocol LoginModel{
-    
+protocol LoginmBaaS{
     func loginEmail(emailAddress: String,password: String) -> Result<Void,Error>
 }
 
-class LoginModelImpl: LoginModel{
-    
+class LoginmBaaSImpl: LoginmBaaS{
     func loginEmail(emailAddress: String, password: String) -> Result<Void, Error> {
         let result = NCMBUser.logIn(mailAddress: emailAddress, password: password)
         switch result{

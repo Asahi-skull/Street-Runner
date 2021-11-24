@@ -8,16 +8,14 @@
 import Foundation
 
 protocol SignUpViewModel{
-    
     func sendEmail(emailText:String) -> Result<Void,Error>
 }
 
 class SignUpViewModelImpl: SignUpViewModel{
     
-    let signUpModel: SignUpModel = SignUpModelImpl()
-    
+    let signModel: SignUpModel = SignUpModelImpl()
+        
     func sendEmail(emailText: String) -> Result<Void,Error>{
-        //confirmationEmailの関数がResult型を返しているので一行でも良い
-        signUpModel.confirmationEmail(email: emailText)
+        signModel.sendEmail(emailText: emailText)
     }
 }

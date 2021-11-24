@@ -8,13 +8,11 @@
 import Foundation
 import NCMB
 
-protocol SignUpModel{
-    
+protocol SignUpmBaaS{
     func confirmationEmail(email: String) -> Result<Void,Error>
 }
 
-class SignUpModelImpl: SignUpModel{
-    
+class SignUpmBaaSImpl: SignUpmBaaS{
     func confirmationEmail(email: String) -> Result<Void,Error>{
         let result = NCMBUser.requestAuthenticationMail(mailAddress: email)
         switch result{
