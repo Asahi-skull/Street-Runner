@@ -33,7 +33,7 @@
 		418811DD274E122A00DE9280 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811DC274E122A00DE9280 /* LoginRouter.swift */; };
 		418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811DE274E301A00DE9280 /* SignUpModel.swift */; };
 		418811E1274E43FC00DE9280 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E0274E43FC00DE9280 /* LoginModel.swift */; };
-		418811E3274E451600DE9280 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E2274E451600DE9280 /* ProfileModel.swift */; };
+		418811E6274F23DB00DE9280 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E5274F23DB00DE9280 /* ProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +83,7 @@
 		418811DC274E122A00DE9280 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		418811DE274E301A00DE9280 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		418811E0274E43FC00DE9280 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		418811E2274E451600DE9280 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		418811E5274F23DB00DE9280 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +172,7 @@
 			children = (
 				4188119A27489F9000DE9280 /* View */,
 				4188119C27489FD700DE9280 /* ViewModel */,
-				418811DA274E0E3F00DE9280 /* Model */,
+				418811E4274F23AE00DE9280 /* Model */,
 				418811DB274E0E5800DE9280 /* Router */,
 			);
 			path = Profile;
@@ -349,19 +349,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		418811DA274E0E3F00DE9280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				418811E2274E451600DE9280 /* ProfileModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		418811DB274E0E5800DE9280 /* Router */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		418811E4274F23AE00DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418811E5274F23DB00DE9280 /* ProfileModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,7 +516,7 @@
 				418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */,
 				418811A9274A211000DE9280 /* SignUpmBaaS.swift in Sources */,
 				418811AD274A33DB00DE9280 /* LoginmBaaS.swift in Sources */,
-				418811E3274E451600DE9280 /* ProfileModel.swift in Sources */,
+				418811E6274F23DB00DE9280 /* ProfileModel.swift in Sources */,
 				418811A22748BC5200DE9280 /* SignUpViewController.swift in Sources */,
 				418811BF274BAEC600DE9280 /* GuestRouter.swift in Sources */,
 				4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */,
