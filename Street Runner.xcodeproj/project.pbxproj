@@ -9,13 +9,31 @@
 /* Begin PBXBuildFile section */
 		4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116927477D1700DE9280 /* AppDelegate.swift */; };
 		4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116B27477D1700DE9280 /* SceneDelegate.swift */; };
-		4188116E27477D1700DE9280 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116D27477D1700DE9280 /* ViewController.swift */; };
 		4188117127477D1700DE9280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4188116F27477D1700DE9280 /* Main.storyboard */; };
 		4188117327477D1900DE9280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4188117227477D1900DE9280 /* Assets.xcassets */; };
 		4188117627477D1900DE9280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4188117427477D1900DE9280 /* LaunchScreen.storyboard */; };
 		4188118127477D1900DE9280 /* Street_RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188118027477D1900DE9280 /* Street_RunnerTests.swift */; };
 		4188118B27477D1900DE9280 /* Street_RunnerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188118A27477D1900DE9280 /* Street_RunnerUITests.swift */; };
 		4188118D27477D1900DE9280 /* Street_RunnerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188118C27477D1900DE9280 /* Street_RunnerUITestsLaunchTests.swift */; };
+		4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188119E2748A06700DE9280 /* GuestViewController.swift */; };
+		418811A22748BC5200DE9280 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811A12748BC5200DE9280 /* SignUpViewController.swift */; };
+		418811A52748C15500DE9280 /* NCMB in Frameworks */ = {isa = PBXBuildFile; productRef = 418811A42748C15500DE9280 /* NCMB */; };
+		418811A727493C4F00DE9280 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811A627493C4F00DE9280 /* SignUpViewModel.swift */; };
+		418811A9274A211000DE9280 /* SignUpmBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811A8274A211000DE9280 /* SignUpmBaaS.swift */; };
+		418811AB274A320600DE9280 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811AA274A320600DE9280 /* LoginViewController.swift */; };
+		418811AD274A33DB00DE9280 /* LoginmBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811AC274A33DB00DE9280 /* LoginmBaaS.swift */; };
+		418811AF274A344C00DE9280 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811AE274A344C00DE9280 /* LoginViewModel.swift */; };
+		418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811B1274A5B5300DE9280 /* ProfileViewController.swift */; };
+		418811B7274B809600DE9280 /* ProfilemBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811B6274B809600DE9280 /* ProfilemBaaS.swift */; };
+		418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811B8274B839100DE9280 /* ProfileViewModel.swift */; };
+		418811BF274BAEC600DE9280 /* GuestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811BE274BAEC600DE9280 /* GuestRouter.swift */; };
+		418811C6274CB12A00DE9280 /* GuestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811C5274CB12A00DE9280 /* GuestViewModel.swift */; };
+		418811C8274CB13B00DE9280 /* GuestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811C7274CB13B00DE9280 /* GuestModel.swift */; };
+		418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811CF274E0BDA00DE9280 /* SignUpRouter.swift */; };
+		418811DD274E122A00DE9280 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811DC274E122A00DE9280 /* LoginRouter.swift */; };
+		418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811DE274E301A00DE9280 /* SignUpModel.swift */; };
+		418811E1274E43FC00DE9280 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E0274E43FC00DE9280 /* LoginModel.swift */; };
+		418811E3274E451600DE9280 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E2274E451600DE9280 /* ProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +57,6 @@
 		4188116627477D1700DE9280 /* Street Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Street Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4188116927477D1700DE9280 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4188116B27477D1700DE9280 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4188116D27477D1700DE9280 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4188117027477D1700DE9280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4188117227477D1900DE9280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4188117527477D1900DE9280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +66,24 @@
 		4188118627477D1900DE9280 /* Street RunnerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Street RunnerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4188118A27477D1900DE9280 /* Street_RunnerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street_RunnerUITests.swift; sourceTree = "<group>"; };
 		4188118C27477D1900DE9280 /* Street_RunnerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Street_RunnerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4188119E2748A06700DE9280 /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
+		418811A12748BC5200DE9280 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		418811A627493C4F00DE9280 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		418811A8274A211000DE9280 /* SignUpmBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpmBaaS.swift; sourceTree = "<group>"; };
+		418811AA274A320600DE9280 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		418811AC274A33DB00DE9280 /* LoginmBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginmBaaS.swift; sourceTree = "<group>"; };
+		418811AE274A344C00DE9280 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		418811B1274A5B5300DE9280 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		418811B6274B809600DE9280 /* ProfilemBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilemBaaS.swift; sourceTree = "<group>"; };
+		418811B8274B839100DE9280 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		418811BE274BAEC600DE9280 /* GuestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestRouter.swift; sourceTree = "<group>"; };
+		418811C5274CB12A00DE9280 /* GuestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewModel.swift; sourceTree = "<group>"; };
+		418811C7274CB13B00DE9280 /* GuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestModel.swift; sourceTree = "<group>"; };
+		418811CF274E0BDA00DE9280 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
+		418811DC274E122A00DE9280 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		418811DE274E301A00DE9280 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		418811E0274E43FC00DE9280 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		418811E2274E451600DE9280 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418811A52748C15500DE9280 /* NCMB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +137,11 @@
 			children = (
 				4188116927477D1700DE9280 /* AppDelegate.swift */,
 				4188116B27477D1700DE9280 /* SceneDelegate.swift */,
-				4188116D27477D1700DE9280 /* ViewController.swift */,
+				418811C9274CB2B300DE9280 /* Core */,
+				418811C0274CAF8F00DE9280 /* Guest */,
+				418811CC274E0B2200DE9280 /* SignUp */,
+				418811D5274E0D9000DE9280 /* Login */,
+				4188119927489F5700DE9280 /* Profile */,
 				4188116F27477D1700DE9280 /* Main.storyboard */,
 				4188117227477D1900DE9280 /* Assets.xcassets */,
 				4188117427477D1900DE9280 /* LaunchScreen.storyboard */,
@@ -127,6 +167,203 @@
 			path = "Street RunnerUITests";
 			sourceTree = "<group>";
 		};
+		4188119927489F5700DE9280 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4188119A27489F9000DE9280 /* View */,
+				4188119C27489FD700DE9280 /* ViewModel */,
+				418811DA274E0E3F00DE9280 /* Model */,
+				418811DB274E0E5800DE9280 /* Router */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4188119A27489F9000DE9280 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				418811B1274A5B5300DE9280 /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4188119C27489FD700DE9280 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				418811B8274B839100DE9280 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		418811C0274CAF8F00DE9280 /* Guest */ = {
+			isa = PBXGroup;
+			children = (
+				418811C1274CAFB000DE9280 /* View */,
+				418811C2274CAFC000DE9280 /* ViewModel */,
+				418811C3274CAFCB00DE9280 /* Model */,
+				418811C4274CAFD200DE9280 /* Router */,
+			);
+			path = Guest;
+			sourceTree = "<group>";
+		};
+		418811C1274CAFB000DE9280 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4188119E2748A06700DE9280 /* GuestViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		418811C2274CAFC000DE9280 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				418811C5274CB12A00DE9280 /* GuestViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		418811C3274CAFCB00DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418811C7274CB13B00DE9280 /* GuestModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		418811C4274CAFD200DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				418811BE274BAEC600DE9280 /* GuestRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		418811C9274CB2B300DE9280 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				418811CA274CB2C500DE9280 /* Model */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		418811CA274CB2C500DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418811CB274CB2D900DE9280 /* mBaaS */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		418811CB274CB2D900DE9280 /* mBaaS */ = {
+			isa = PBXGroup;
+			children = (
+				418811A8274A211000DE9280 /* SignUpmBaaS.swift */,
+				418811AC274A33DB00DE9280 /* LoginmBaaS.swift */,
+				418811B6274B809600DE9280 /* ProfilemBaaS.swift */,
+			);
+			path = mBaaS;
+			sourceTree = "<group>";
+		};
+		418811CC274E0B2200DE9280 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				418811D4274E0C3300DE9280 /* View */,
+				418811D3274E0C2100DE9280 /* ViewModel */,
+				418811D2274E0BFF00DE9280 /* Model */,
+				418811D1274E0BE500DE9280 /* Router */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		418811D1274E0BE500DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				418811CF274E0BDA00DE9280 /* SignUpRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		418811D2274E0BFF00DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418811DE274E301A00DE9280 /* SignUpModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		418811D3274E0C2100DE9280 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				418811A627493C4F00DE9280 /* SignUpViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		418811D4274E0C3300DE9280 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				418811A12748BC5200DE9280 /* SignUpViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		418811D5274E0D9000DE9280 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				418811D9274E0DCE00DE9280 /* View */,
+				418811D8274E0DC300DE9280 /* ViewModel */,
+				418811D7274E0DB800DE9280 /* Model */,
+				418811D6274E0DAD00DE9280 /* Router */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		418811D6274E0DAD00DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				418811DC274E122A00DE9280 /* LoginRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		418811D7274E0DB800DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418811E0274E43FC00DE9280 /* LoginModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		418811D8274E0DC300DE9280 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				418811AE274A344C00DE9280 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		418811D9274E0DCE00DE9280 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				418811AA274A320600DE9280 /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		418811DA274E0E3F00DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418811E2274E451600DE9280 /* ProfileModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		418811DB274E0E5800DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +380,9 @@
 			dependencies = (
 			);
 			name = "Street Runner";
+			packageProductDependencies = (
+				418811A42748C15500DE9280 /* NCMB */,
+			);
 			productName = "Street Runner";
 			productReference = 4188116627477D1700DE9280 /* Street Runner.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +455,9 @@
 				Base,
 			);
 			mainGroup = 4188115D27477D1700DE9280;
+			packageReferences = (
+				418811A32748C15500DE9280 /* XCRemoteSwiftPackageReference "ncmb_swift" */,
+			);
 			productRefGroup = 4188116727477D1700DE9280 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,9 +501,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4188116E27477D1700DE9280 /* ViewController.swift in Sources */,
+				418811E1274E43FC00DE9280 /* LoginModel.swift in Sources */,
+				418811AB274A320600DE9280 /* LoginViewController.swift in Sources */,
 				4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */,
+				418811C6274CB12A00DE9280 /* GuestViewModel.swift in Sources */,
+				418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */,
+				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
+				418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */,
+				418811C8274CB13B00DE9280 /* GuestModel.swift in Sources */,
+				418811DD274E122A00DE9280 /* LoginRouter.swift in Sources */,
+				418811B7274B809600DE9280 /* ProfilemBaaS.swift in Sources */,
 				4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */,
+				418811A727493C4F00DE9280 /* SignUpViewModel.swift in Sources */,
+				418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */,
+				418811A9274A211000DE9280 /* SignUpmBaaS.swift in Sources */,
+				418811AD274A33DB00DE9280 /* LoginmBaaS.swift in Sources */,
+				418811E3274E451600DE9280 /* ProfileModel.swift in Sources */,
+				418811A22748BC5200DE9280 /* SignUpViewController.swift in Sources */,
+				418811BF274BAEC600DE9280 /* GuestRouter.swift in Sources */,
+				4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */,
+				418811AF274A344C00DE9280 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +884,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		418811A32748C15500DE9280 /* XCRemoteSwiftPackageReference "ncmb_swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NIFCLOUD-mbaas/ncmb_swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		418811A42748C15500DE9280 /* NCMB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 418811A32748C15500DE9280 /* XCRemoteSwiftPackageReference "ncmb_swift" */;
+			productName = NCMB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4188115E27477D1700DE9280 /* Project object */;
 }
