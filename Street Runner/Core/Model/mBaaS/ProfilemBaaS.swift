@@ -7,9 +7,12 @@
 
 import Foundation
 import NCMB
+import UIKit
 
 protocol ProfilemBaaS{
     func getUser() -> String
+    func getIconImage(fileName: String) -> Result<UIImage,Error>
+    func getID() -> String 
 }
 
 class ProfilemBaaSImpl: ProfilemBaaS{
@@ -17,5 +20,23 @@ class ProfilemBaaSImpl: ProfilemBaaS{
         guard let user = NCMBUser.currentUser else {return ""}
         guard let userName = user.userName else {return ""}
         return userName
+    }
+    
+    func getIconImage(fileName: String) -> Result<UIImage,Error> {
+        let file: NCMBFile = NCMBFile(fileName: fileName)
+        let result = file.fetch()
+        switch result{
+        case .success(let data):
+            let image = UIImage(data: data!)
+            return Result.success(image!)
+        case .failure(let err):
+            return Result.failure(err)
+        }
+    }
+    
+    func getID() -> String {
+        guard let user = NCMBUser.currentUser else {return ""}
+        guard let usesrId = user.objectId else {return ""}
+        return usesrId
     }
 }

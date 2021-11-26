@@ -1,5 +1,5 @@
 //
-//  ProfileModel.swift
+//  EditProfileModel.swift
 //  Street Runner
 //
 //  Created by 木本朝陽 on 2021/11/25.
@@ -8,17 +8,23 @@
 import Foundation
 import UIKit
 
-protocol ProfileModel{
-    func setUser() -> String
+protocol EditProfileModel{
+    func saveImageFile(img: UIImage,fileName: String) -> Result<String,Error>
+    func saveImageUser(fileName: String)
     func getId() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
 }
 
-class ProfileModelImpl: ProfileModel{
+class EditProfileModelImpl: EditProfileModel{
+    let editProfile: EditProfilemBaaSImpl = EditProfilemBaaSImpl()
     let profile: ProfilemBaaS = ProfilemBaaSImpl()
     
-    func setUser() -> String{
-        profile.getUser()
+    func saveImageFile(img: UIImage,fileName: String) -> Result<String,Error> {
+        editProfile.saveImageFile(img: img, fileName: fileName)
+    }
+    
+    func saveImageUser(fileName: String) {
+        editProfile.saveImageuser(fileName: fileName)
     }
     
     func getId() -> String {
