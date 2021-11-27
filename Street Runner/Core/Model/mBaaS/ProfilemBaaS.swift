@@ -25,16 +25,22 @@ class ProfilemBaaSImpl: ProfilemBaaS{
     func getIconImage(fileName: String) -> Result<UIImage,Error> {
         let file: NCMBFile = NCMBFile(fileName: fileName)
         let result = file.fetch()
+        
         switch result{
         case .success(let data):
-            guard let data = data else {return Result.failure(data as! Error)}
-            guard let image = UIImage(data: data) else {return Result.failure(data as! Error)}
-            return Result.success(image)
+            if let imageData = data{
+                if let image = UIImage(data: imageData){
+                    return Result.success(image)
+                }else{
+                    return Result.failure(Error.self as! Error)
+                }
+            }else{
+                return Result.failure(Error.self as! Error)
+            }
         case .failure(let err):
             return Result.failure(err)
         }
     }
-    
     func getID() -> String {
         guard let user = NCMBUser.currentUser else {return ""}
         guard let usesrId = user.objectId else {return ""}
