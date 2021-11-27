@@ -27,8 +27,9 @@ class ProfilemBaaSImpl: ProfilemBaaS{
         let result = file.fetch()
         switch result{
         case .success(let data):
-            let image = UIImage(data: data!)
-            return Result.success(image!)
+            guard let data = data else {return Result.failure(data as! Error)}
+            guard let image = UIImage(data: data) else {return Result.failure(data as! Error)}
+            return Result.success(image)
         case .failure(let err):
             return Result.failure(err)
         }
