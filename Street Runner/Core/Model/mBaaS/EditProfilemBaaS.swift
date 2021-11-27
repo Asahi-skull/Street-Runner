@@ -30,13 +30,6 @@ class EditProfilemBaaSImpl: EditProfilemBaaS{
     func saveImageuser(fileName: String){
         guard let user = NCMBUser.currentUser else {return}
         user["iconImage"] = fileName
-        user.saveInBackground(callback: {result in
-            switch result{
-            case .success:
-                break
-            case .failure:
-                return
-            }
-        })
+        user.save()
     }
 }
