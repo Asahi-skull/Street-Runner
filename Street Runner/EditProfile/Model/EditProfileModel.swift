@@ -13,6 +13,8 @@ protocol EditProfileModel{
     func saveImageUser(fileName: String)
     func getId() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
+    func getUserName() -> String
+    func saveUserName(userName: String)
 }
 
 class EditProfileModelImpl: EditProfileModel{
@@ -39,5 +41,13 @@ class EditProfileModelImpl: EditProfileModel{
         case .failure(let err):
             return Result.failure(err)
         }
+    }
+    
+    func getUserName() -> String {
+        profile.getUser()
+    }
+    
+    func saveUserName(userName: String) {
+        editProfile.saveUserName(userName: userName)
     }
 }

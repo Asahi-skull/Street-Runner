@@ -12,6 +12,7 @@ import UIKit
 protocol EditProfilemBaaS{
     func saveImageFile(img: UIImage, fileName: String) -> Result<String,Error>
     func saveImageuser(fileName: String)
+    func saveUserName(userName: String)
 }
 
 class EditProfilemBaaSImpl: EditProfilemBaaS{
@@ -30,6 +31,12 @@ class EditProfilemBaaSImpl: EditProfilemBaaS{
     func saveImageuser(fileName: String){
         guard let user = NCMBUser.currentUser else {return}
         user["iconImage"] = fileName
+        user.save()
+    }
+    
+    func saveUserName(userName: String) {
+        guard let user = NCMBUser.currentUser else {return}
+        user.userName = userName
         user.save()
     }
 }

@@ -11,6 +11,8 @@ import UIKit
 protocol EditProfileViewModel{
     func saveImage(img: UIImage) -> Result<Void,Error>
     func getIconImage() -> Result<UIImage,Error>
+    func getUserName() -> String
+    func saveUserName(userName: String)
 }
 
 class EditProfileViewModelImpl: EditProfileViewModel{
@@ -32,5 +34,13 @@ class EditProfileViewModelImpl: EditProfileViewModel{
         let fileName = editProfile.getId()
         let imageResult = editProfile.getIconImage(fileName: fileName)
         return imageResult
+    }
+    
+    func getUserName() -> String {
+        editProfile.getUserName()
+    }
+    
+    func saveUserName(userName: String){
+        editProfile.saveUserName(userName: userName)
     }
 }
