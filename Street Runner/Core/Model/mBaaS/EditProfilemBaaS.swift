@@ -12,7 +12,7 @@ import UIKit
 protocol EditProfilemBaaS{
     func saveImageFile(img: UIImage, fileName: String) -> Result<String,Error>
     func saveImageuser(fileName: String)
-    func saveUserName(userName: String)
+    func saveUserName(userName: String) -> Result<Void,Error>
 }
 
 class EditProfilemBaaSImpl: EditProfilemBaaS{
@@ -34,9 +34,15 @@ class EditProfilemBaaSImpl: EditProfilemBaaS{
         user.save()
     }
     
-    func saveUserName(userName: String) {
-        guard let user = NCMBUser.currentUser else {return}
-        user.userName = userName
-        user.save()
+    func saveUserName(userName: String) -> Result<Void,Error>{
+        let user = NCMBUser.currentUser
+        user!.userName = userName
+        let result = user!.save()
+        switch result{
+        case .success:
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
     }
 }

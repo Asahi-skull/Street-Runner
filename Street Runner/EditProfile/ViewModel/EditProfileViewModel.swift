@@ -12,7 +12,7 @@ protocol EditProfileViewModel{
     func saveImage(img: UIImage) -> Result<Void,Error>
     func getIconImage() -> Result<UIImage,Error>
     func getUserName() -> String
-    func saveUserName(userName: String)
+    func saveUserName(userName: String) -> Result<Void,Error>
 }
 
 class EditProfileViewModelImpl: EditProfileViewModel{
@@ -40,7 +40,7 @@ class EditProfileViewModelImpl: EditProfileViewModel{
         editProfile.getUserName()
     }
     
-    func saveUserName(userName: String){
+    func saveUserName(userName: String) -> Result<Void,Error>{
         editProfile.saveUserName(userName: userName)
     }
 }

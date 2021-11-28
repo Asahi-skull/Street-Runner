@@ -48,10 +48,16 @@ class EditProfileViewController: UIViewController{
         case .success:
             break
         case .failure:
-            router.resultAlert(titleText: "エラー", messageText: "もう一度やり直してください", titleOK: "OK")
+            router.resultAlert(titleText: "画像の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
         guard let userName = userNameTextField.text else {return}
-        editProfile.saveUserName(userName: userName)
+        let res = editProfile.saveUserName(userName: userName)
+        switch res{
+        case .success:
+            break
+        case .failure:
+            router.resultAlert(titleText: "ユーザーネームの保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+        }
     }
     
     
@@ -68,14 +74,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else if let originalImage = info[.originalImage] as? UIImage {
             iconImage.image = originalImage
         }
-//        guard let icon = iconImage.image else {return}
-//        let result = editProfile.saveImage(img: icon)
-//        switch result{
-//        case .success:
-//            break
-//        case .failure:
-//            router.resultAlert(titleText: "エラー", messageText: "もう一度やり直してください", titleOK: "OK")
-//        }
         router.backView()
     }
 }

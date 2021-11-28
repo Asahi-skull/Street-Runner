@@ -14,26 +14,26 @@ protocol EditProfileModel{
     func getId() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
     func getUserName() -> String
-    func saveUserName(userName: String)
+    func saveUserName(userName: String) -> Result<Void,Error>
 }
 
 class EditProfileModelImpl: EditProfileModel{
     let editProfile: EditProfilemBaaSImpl = EditProfilemBaaSImpl()
     let profile: ProfilemBaaS = ProfilemBaaSImpl()
     
-    func saveImageFile(img: UIImage,fileName: String) -> Result<String,Error> {
+    func saveImageFile(img: UIImage,fileName: String) -> Result<String,Error>{
         editProfile.saveImageFile(img: img, fileName: fileName)
     }
     
-    func saveImageUser(fileName: String) {
+    func saveImageUser(fileName: String){
         editProfile.saveImageuser(fileName: fileName)
     }
     
-    func getId() -> String {
+    func getId() -> String{
         profile.getID()
     }
     
-    func getIconImage(fileName: String) -> Result<UIImage,Error> {
+    func getIconImage(fileName: String) -> Result<UIImage,Error>{
         let result = profile.getIconImage(fileName: fileName)
         switch result{
         case .success(let image):
@@ -43,11 +43,17 @@ class EditProfileModelImpl: EditProfileModel{
         }
     }
     
-    func getUserName() -> String {
+    func getUserName() -> String{
         profile.getUser()
     }
     
-    func saveUserName(userName: String) {
-        editProfile.saveUserName(userName: userName)
+    func saveUserName(userName: String) -> Result<Void,Error>{
+        let result = editProfile.saveUserName(userName: userName)
+        switch result{
+        case .success(let image):
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
     }
 }
