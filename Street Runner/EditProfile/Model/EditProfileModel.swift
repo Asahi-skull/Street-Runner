@@ -14,7 +14,7 @@ protocol EditProfileModel{
     func getId() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
     func getUserName() -> String
-    func saveUserName(userName: String) -> Result<Void,Error>
+    func saveUserName(userName: String) -> Bool
 }
 
 class EditProfileModelImpl: EditProfileModel{
@@ -47,13 +47,15 @@ class EditProfileModelImpl: EditProfileModel{
         profile.getUser()
     }
     
-    func saveUserName(userName: String) -> Result<Void,Error>{
-        let result = editProfile.saveUserName(userName: userName)
-        switch result{
-        case .success(let image):
-            return Result.success(())
-        case .failure(let err):
-            return Result.failure(err)
-        }
+    func saveUserName(userName: String) -> Bool{
+//        let result = editProfile.saveUserName(userName: userName)
+//        switch result{
+//        case .success:
+//            return Result.success(())
+//        case .failure(let err):
+//            return Result.failure(err)
+//        }
+        
+        editProfile.saveUserName(userName: userName)
     }
 }

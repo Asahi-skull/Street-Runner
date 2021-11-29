@@ -41,25 +41,22 @@ class EditProfileViewController: UIViewController{
     }
     
     @IBAction func backButton(_ sender: Any) {
-        router.backView()
         guard let icon = iconImage.image else {return}
         let result = editProfile.saveImage(img: icon)
         switch result{
         case .success:
-            break
+            guard let userName = userNameTextField.text else {return}
+            if editProfile.saveUserName(userName: userName){
+                router.backView()
+            }else{
+                router.resultAlert(titleText: "ユーザーネームの保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+                return
+            }
         case .failure:
             router.resultAlert(titleText: "画像の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
-        }
-        guard let userName = userNameTextField.text else {return}
-        let res = editProfile.saveUserName(userName: userName)
-        switch res{
-        case .success:
-            break
-        case .failure:
-            router.resultAlert(titleText: "ユーザーネームの保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+            return
         }
     }
-    
     
     @IBAction func cancelButton(_ sender: Any) {
         router.backView()
