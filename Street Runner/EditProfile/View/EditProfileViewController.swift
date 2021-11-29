@@ -10,6 +10,7 @@ import UIKit
 class EditProfileViewController: UIViewController{
     
     @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var userNameTextField: UITextField!
     
     let editProfile: EditProfileViewModel = EditProfileViewModelImpl()
     lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
@@ -24,6 +25,11 @@ class EditProfileViewController: UIViewController{
         case .failure:
             return
         }
+        userNameTextField.text = editProfile.getUserName()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     @IBAction func editIconButton(_ sender: Any) {
@@ -35,6 +41,26 @@ class EditProfileViewController: UIViewController{
     }
     
     @IBAction func backButton(_ sender: Any) {
+        guard let icon = iconImage.image else {return}
+        let result = editProfile.saveImage(img: icon)
+        switch result{
+        case .success:
+            guard let userName = userNameTextField.text else {return}
+            let res = editProfile.saveUserName(userName: userName)
+            switch res{
+            case .success:
+                router.backView()
+            case .failure:
+                router.resultAlert(titleText: "すでに使われているユーザーネーム", messageText: "別の名前を入力してください", titleOK: "OK")
+                return
+            }
+        case .failure:
+            router.resultAlert(titleText: "画像の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+            return
+        }
+    }
+    
+    @IBAction func cancelButton(_ sender: Any) {
         router.backView()
     }
 }
@@ -46,14 +72,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             iconImage.image = editImage
         } else if let originalImage = info[.originalImage] as? UIImage {
             iconImage.image = originalImage
-        }
-        guard let icon = iconImage.image else {return}
-        let result = editProfile.saveImage(img: icon)
-        switch result{
-        case .success:
-            break
-        case .failure:
-            router.resultAlert(titleText: "エラー", messageText: "もう一度やり直してください", titleOK: "OK")
         }
         router.backView()
     }

@@ -40,6 +40,11 @@
 		418811F3274F784500DE9280 /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F2274F784500DE9280 /* EditProfileModel.swift */; };
 		418811F5274F786A00DE9280 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F4274F786A00DE9280 /* EditProfileRouter.swift */; };
 		418811F7274FCF0000DE9280 /* EditProfilemBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */; };
+		418811FD2754EBEA00DE9280 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811FC2754EBE900DE9280 /* TestViewController.swift */; };
+		418811FF2754EE3D00DE9280 /* Cell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811FE2754EE3D00DE9280 /* Cell1.swift */; };
+		418812012754EE4B00DE9280 /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812002754EE4B00DE9280 /* TableViewCell2.swift */; };
+		418812032754EE5500DE9280 /* TableViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812022754EE5500DE9280 /* TableViewCell3.swift */; };
+		418812052754F5A700DE9280 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812042754F5A700DE9280 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,11 @@
 		418811F2274F784500DE9280 /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
 		418811F4274F786A00DE9280 /* EditProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
 		418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilemBaaS.swift; sourceTree = "<group>"; };
+		418811FC2754EBE900DE9280 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		418811FE2754EE3D00DE9280 /* Cell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell1.swift; sourceTree = "<group>"; };
+		418812002754EE4B00DE9280 /* TableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
+		418812022754EE5500DE9280 /* TableViewCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell3.swift; sourceTree = "<group>"; };
+		418812042754F5A700DE9280 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +159,7 @@
 			children = (
 				4188116927477D1700DE9280 /* AppDelegate.swift */,
 				4188116B27477D1700DE9280 /* SceneDelegate.swift */,
+				4188120627550AD100DE9280 /* TestPost */,
 				418811C9274CB2B300DE9280 /* Core */,
 				418811C0274CAF8F00DE9280 /* Guest */,
 				418811CC274E0B2200DE9280 /* SignUp */,
@@ -422,6 +433,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4188120627550AD100DE9280 /* TestPost */ = {
+			isa = PBXGroup;
+			children = (
+				418811FC2754EBE900DE9280 /* TestViewController.swift */,
+				418811FE2754EE3D00DE9280 /* Cell1.swift */,
+				418812002754EE4B00DE9280 /* TableViewCell2.swift */,
+				418812022754EE5500DE9280 /* TableViewCell3.swift */,
+				418812042754F5A700DE9280 /* CollectionViewCell.swift */,
+			);
+			path = TestPost;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -570,14 +593,18 @@
 				418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */,
 				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
 				418811E8274F6DCD00DE9280 /* ProfileRouter.swift in Sources */,
+				418811FF2754EE3D00DE9280 /* Cell1.swift in Sources */,
 				418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */,
 				418811C8274CB13B00DE9280 /* GuestModel.swift in Sources */,
+				418812052754F5A700DE9280 /* CollectionViewCell.swift in Sources */,
 				418811DD274E122A00DE9280 /* LoginRouter.swift in Sources */,
 				418811F1274F782D00DE9280 /* EditProfileViewModel.swift in Sources */,
 				418811B7274B809600DE9280 /* ProfilemBaaS.swift in Sources */,
+				418811FD2754EBEA00DE9280 /* TestViewController.swift in Sources */,
 				4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */,
 				418811A727493C4F00DE9280 /* SignUpViewModel.swift in Sources */,
 				418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */,
+				418812012754EE4B00DE9280 /* TableViewCell2.swift in Sources */,
 				418811A9274A211000DE9280 /* SignUpmBaaS.swift in Sources */,
 				418811AD274A33DB00DE9280 /* LoginmBaaS.swift in Sources */,
 				418811E6274F23DB00DE9280 /* ProfileModel.swift in Sources */,
@@ -585,6 +612,7 @@
 				418811BF274BAEC600DE9280 /* GuestRouter.swift in Sources */,
 				4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */,
 				418811AF274A344C00DE9280 /* LoginViewModel.swift in Sources */,
+				418812032754EE5500DE9280 /* TableViewCell3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

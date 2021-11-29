@@ -12,14 +12,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     
+    
+    
     lazy var router: ProfileRouter = ProfileRouterImpl(viewController: self)
     
     let profileViewModel: ProfileViewModel = ProfileViewModelImpl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameLabel.text = "名前：" + profileViewModel.setUser()
         iconImage.layer.cornerRadius = 60
+        navigationItem.hidesBackButton = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +34,7 @@ class ProfileViewController: UIViewController {
         case .failure:
             return
         }
+        userNameLabel.text = "名前：" + profileViewModel.setUser()
     }
     
     @IBAction func editButton(_ sender: Any) {

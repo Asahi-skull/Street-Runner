@@ -25,7 +25,6 @@ class ProfilemBaaSImpl: ProfilemBaaS{
     func getIconImage(fileName: String) -> Result<UIImage,Error> {
         let file: NCMBFile = NCMBFile(fileName: fileName)
         let result = file.fetch()
-        
         switch result{
         case .success(let data):
             if let imageData = data{
