@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         iconImage.layer.cornerRadius = 60
+        navigationItem.hidesBackButton = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

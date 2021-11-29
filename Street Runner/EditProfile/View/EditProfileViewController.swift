@@ -46,10 +46,12 @@ class EditProfileViewController: UIViewController{
         switch result{
         case .success:
             guard let userName = userNameTextField.text else {return}
-            if editProfile.saveUserName(userName: userName){
+            let res = editProfile.saveUserName(userName: userName)
+            switch res{
+            case .success:
                 router.backView()
-            }else{
-                router.resultAlert(titleText: "ユーザーネームの保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+            case .failure:
+                router.resultAlert(titleText: "すでに使われているユーザーネーム", messageText: "別の名前を入力してください", titleOK: "OK")
                 return
             }
         case .failure:
