@@ -14,6 +14,10 @@ class GuestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if viewModel.autoLogin(){
             router.transition(idetifier: "fromGuest")
         }
