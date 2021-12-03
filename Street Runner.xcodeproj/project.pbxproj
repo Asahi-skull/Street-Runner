@@ -45,6 +45,13 @@
 		418812012754EE4B00DE9280 /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812002754EE4B00DE9280 /* TableViewCell2.swift */; };
 		418812032754EE5500DE9280 /* TableViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812022754EE5500DE9280 /* TableViewCell3.swift */; };
 		418812052754F5A700DE9280 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812042754F5A700DE9280 /* CollectionViewCell.swift */; };
+		4188120D27563D5F00DE9280 /* PostRequestMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */; };
+		4188120F27563F5100DE9280 /* SelectPost ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188120E27563F5100DE9280 /* SelectPost ViewController.swift */; };
+		41881211275763F000DE9280 /* SelectPostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41881210275763F000DE9280 /* SelectPostRouter.swift */; };
+		418812182757809700DE9280 /* PostRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812172757809700DE9280 /* PostRequestViewController.swift */; };
+		4188121A2757999700DE9280 /* PostRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812192757999700DE9280 /* PostRequestViewModel.swift */; };
+		4188121C275799A700DE9280 /* PostRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188121B275799A700DE9280 /* PostRequestModel.swift */; };
+		4188121E2758BD0900DE9280 /* PostRequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188121D2758BD0900DE9280 /* PostRequestRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +113,13 @@
 		418812002754EE4B00DE9280 /* TableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
 		418812022754EE5500DE9280 /* TableViewCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell3.swift; sourceTree = "<group>"; };
 		418812042754F5A700DE9280 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestMBaaS.swift; sourceTree = "<group>"; };
+		4188120E27563F5100DE9280 /* SelectPost ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectPost ViewController.swift"; sourceTree = "<group>"; };
+		41881210275763F000DE9280 /* SelectPostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPostRouter.swift; sourceTree = "<group>"; };
+		418812172757809700DE9280 /* PostRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestViewController.swift; sourceTree = "<group>"; };
+		418812192757999700DE9280 /* PostRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestViewModel.swift; sourceTree = "<group>"; };
+		4188121B275799A700DE9280 /* PostRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestModel.swift; sourceTree = "<group>"; };
+		4188121D2758BD0900DE9280 /* PostRequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +180,8 @@
 				418811D5274E0D9000DE9280 /* Login */,
 				4188119927489F5700DE9280 /* Profile */,
 				418811E9274F769800DE9280 /* EditProfile */,
+				4188120727563B3600DE9280 /* SelectPost */,
+				41881212275765C200DE9280 /* PostRequest */,
 				4188116F27477D1700DE9280 /* Main.storyboard */,
 				4188117227477D1900DE9280 /* Assets.xcassets */,
 				4188117427477D1900DE9280 /* LaunchScreen.storyboard */,
@@ -284,6 +300,7 @@
 				418811AC274A33DB00DE9280 /* LoginmBaaS.swift */,
 				418811B6274B809600DE9280 /* ProfilemBaaS.swift */,
 				418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */,
+				4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */,
 			);
 			path = mBaaS;
 			sourceTree = "<group>";
@@ -445,6 +462,90 @@
 			path = TestPost;
 			sourceTree = "<group>";
 		};
+		4188120727563B3600DE9280 /* SelectPost */ = {
+			isa = PBXGroup;
+			children = (
+				4188120B27563BBB00DE9280 /* View */,
+				4188120A27563BB300DE9280 /* ViewModel */,
+				4188120927563BAA00DE9280 /* Model */,
+				4188120827563B7800DE9280 /* Router */,
+			);
+			path = SelectPost;
+			sourceTree = "<group>";
+		};
+		4188120827563B7800DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				41881210275763F000DE9280 /* SelectPostRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4188120927563BAA00DE9280 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4188120A27563BB300DE9280 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4188120B27563BBB00DE9280 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4188120E27563F5100DE9280 /* SelectPost ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		41881212275765C200DE9280 /* PostRequest */ = {
+			isa = PBXGroup;
+			children = (
+				418812162757661C00DE9280 /* View */,
+				418812152757661100DE9280 /* ViewModel */,
+				418812142757660900DE9280 /* Mdoel */,
+				41881213275765FF00DE9280 /* Router */,
+			);
+			path = PostRequest;
+			sourceTree = "<group>";
+		};
+		41881213275765FF00DE9280 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4188121D2758BD0900DE9280 /* PostRequestRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		418812142757660900DE9280 /* Mdoel */ = {
+			isa = PBXGroup;
+			children = (
+				4188121B275799A700DE9280 /* PostRequestModel.swift */,
+			);
+			path = Mdoel;
+			sourceTree = "<group>";
+		};
+		418812152757661100DE9280 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				418812192757999700DE9280 /* PostRequestViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		418812162757661C00DE9280 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				418812172757809700DE9280 /* PostRequestViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -582,16 +683,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4188121E2758BD0900DE9280 /* PostRequestRouter.swift in Sources */,
 				418811F7274FCF0000DE9280 /* EditProfilemBaaS.swift in Sources */,
 				418811EF274F781300DE9280 /* EditProfileViewController.swift in Sources */,
 				418811F3274F784500DE9280 /* EditProfileModel.swift in Sources */,
 				418811E1274E43FC00DE9280 /* LoginModel.swift in Sources */,
+				41881211275763F000DE9280 /* SelectPostRouter.swift in Sources */,
 				418811AB274A320600DE9280 /* LoginViewController.swift in Sources */,
 				418811F5274F786A00DE9280 /* EditProfileRouter.swift in Sources */,
 				4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */,
+				418812182757809700DE9280 /* PostRequestViewController.swift in Sources */,
 				418811C6274CB12A00DE9280 /* GuestViewModel.swift in Sources */,
 				418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */,
 				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
+				4188121A2757999700DE9280 /* PostRequestViewModel.swift in Sources */,
 				418811E8274F6DCD00DE9280 /* ProfileRouter.swift in Sources */,
 				418811FF2754EE3D00DE9280 /* Cell1.swift in Sources */,
 				418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */,
@@ -610,9 +715,12 @@
 				418811E6274F23DB00DE9280 /* ProfileModel.swift in Sources */,
 				418811A22748BC5200DE9280 /* SignUpViewController.swift in Sources */,
 				418811BF274BAEC600DE9280 /* GuestRouter.swift in Sources */,
+				4188120D27563D5F00DE9280 /* PostRequestMBaaS.swift in Sources */,
 				4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */,
+				4188121C275799A700DE9280 /* PostRequestModel.swift in Sources */,
 				418811AF274A344C00DE9280 /* LoginViewModel.swift in Sources */,
 				418812032754EE5500DE9280 /* TableViewCell3.swift in Sources */,
+				4188120F27563F5100DE9280 /* SelectPost ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
