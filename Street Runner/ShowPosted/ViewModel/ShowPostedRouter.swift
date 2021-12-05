@@ -1,27 +1,21 @@
 //
-//  PostRequestRouter.swift
+//  ShowPostedRouter.swift
 //  Street Runner
 //
-//  Created by 木本朝陽 on 2021/12/02.
+//  Created by 木本朝陽 on 2021/12/05.
 //
 
 import Foundation
 import UIKit
 
-protocol PostRequestRouter{
-    func backView()
+protocol ShowPostedRouter{
     func resultAlert(titleText: String, messageText: String, titleOK: String)
 }
 
-class PostRequestRouterImpl: PostRequestRouter{
-    
+class ShowPostedRouterImpl: ShowPostedRouter{
     let viewController: UIViewController
-    init(viewController: UIViewController){
+    init(viewController :UIViewController){
         self.viewController = viewController
-    }
-    
-    func backView() {
-        viewController.dismiss(animated: true, completion: nil)
     }
     
     func resultAlert(titleText: String, messageText: String, titleOK: String) {
