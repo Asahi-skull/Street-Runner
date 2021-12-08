@@ -16,10 +16,10 @@ class ShowPostedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let SegmentedNib = UINib(nibName: "SegmentedTableCell", bundle: nil)
-        tableView.register(SegmentedNib, forCellReuseIdentifier: "segmentedCell")
-        let PostedTableNib = UINib(nibName: "ShowPostedTableCell", bundle: nil)
-        tableView.register(PostedTableNib, forCellReuseIdentifier: "postedCell")
+        let segmentedNib = UINib(nibName: "SegmentedTableCell", bundle: nil)
+        tableView.register(segmentedNib, forCellReuseIdentifier: "segmentedCell")
+        let postedTableNib = UINib(nibName: "ShowPostedTableCell", bundle: nil)
+        tableView.register(postedTableNib, forCellReuseIdentifier: "postedCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +56,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
         if indexPath.row == 0{
             return 40
         }else{
-            return 700
+            return tableView.bounds.height - 40
         }
     }
     
@@ -82,8 +82,10 @@ extension ShowPostedViewController:UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postedCollectionCell", for: indexPath) as! ShowPostedCollectionCell
         let data = viewModel.getData(indexPath: indexPath)
-        cell.userNameLabel.text = data.userName!
-        cell.contentTextLabel.text = data.requestText!
+        guard let userName = data.userName else {return cell}
+        cell.userNameLabel.text = userName
+        guard let requestText = data.requestText else {return cell}
+        cell.contentTextLabel.text = requestText
         guard let iconFileName = data.userObjectID else {return cell}
         let iconResult = viewModel.getIconImage(fileName: iconFileName)
         switch iconResult{
