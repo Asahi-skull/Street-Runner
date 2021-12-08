@@ -38,8 +38,9 @@ class ProfilemBaaSImpl: ProfilemBaaS{
             }
         case .failure(let err):
             return Result.failure(err)
-        }
+        }        
     }
+    
     func getID() -> String {
         guard let user = NCMBUser.currentUser else {return ""}
         guard let usesrId = user.objectId else {return ""}

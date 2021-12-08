@@ -8,7 +8,7 @@
 import UIKit
 
 class ShowPostedTableCell: UITableViewCell {
-
+ 
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {

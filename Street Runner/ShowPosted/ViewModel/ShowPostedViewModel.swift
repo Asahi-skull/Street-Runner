@@ -37,6 +37,7 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
             return Result.failure(err)
         }
     }
+    
     func getIconImage(fileName: String) -> Result<UIImage,Error>{
         model.getIconImage(fileName: fileName)
     }

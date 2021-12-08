@@ -17,5 +17,6 @@ class ShowPostedCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        iconImage.layer.cornerRadius = 15
     }
 }

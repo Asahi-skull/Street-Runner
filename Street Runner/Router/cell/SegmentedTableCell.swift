@@ -8,7 +8,9 @@
 import UIKit
 
 class SegmentedTableCell: UITableViewCell {
-
+    
+    @IBOutlet weak var segmented: UISegmentedControl!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

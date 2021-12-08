@@ -42,9 +42,12 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "segmentedCell", for: indexPath) as! SegmentedTableCell
+            cell.segmented.addTarget(self, action: #selector(self.segmentChanged(_:)), for: .valueChanged)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "postedCell", for: indexPath) as! ShowPostedTableCell
+            cell.collectionView.delegate = self
+            cell.collectionView.dataSource = self
             return cell
         }
     }
@@ -56,9 +59,22 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             return 700
         }
     }
+    
+    @objc func segmentChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("First")
+            break
+        case 1:
+            print("Second")
+            break
+        default:
+            break
+        }
+    }
 }
 
-extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDataSource{
+extension ShowPostedViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.dataCount()
     }
@@ -66,8 +82,8 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postedCollectionCell", for: indexPath) as! ShowPostedCollectionCell
         let data = viewModel.getData(indexPath: indexPath)
-        cell.userNameLabel.text = data.userName
-        cell.contentTextLabel.text = data.requestText
+        cell.userNameLabel.text = data.userName!
+        cell.contentTextLabel.text = data.requestText!
         guard let iconFileName = data.userObjectID else {return cell}
         let iconResult = viewModel.getIconImage(fileName: iconFileName)
         switch iconResult{
@@ -86,10 +102,10 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         }
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let horizontalSpace: CGFloat = 10
-        let cellSize: CGFloat = self.view.bounds.width/2 - horizontalSpace
-        return CGSize(width: cellSize, height: cellSize + 50)
+        let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
+        return CGSize(width: cellSize, height: cellSize + 150)
     }
 }

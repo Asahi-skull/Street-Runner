@@ -143,7 +143,7 @@
 		419E3C85275C9CBA00059CB9 /* RequestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEntity.swift; sourceTree = "<group>"; };
 		419E3C87275CA0AB00059CB9 /* ShowPostedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedModel.swift; sourceTree = "<group>"; };
 		419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedViewModel.swift; sourceTree = "<group>"; };
-		419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShowPostedRouter.swift; path = "Street Runner/ShowPosted/ViewModel/ShowPostedRouter.swift"; sourceTree = SOURCE_ROOT; };
+		419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShowPostedRouter.swift; path = "Street Runner/ShowPosted/Router/ShowPostedRouter.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -575,23 +575,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		41902CDF27607EC000130C3B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		419E3C65275B626100059CB9 /* ShowPosted */ = {
 			isa = PBXGroup;
 			children = (
 				419E3C69275B62B600059CB9 /* View */,
 				419E3C68275B62A700059CB9 /* ViewModel */,
 				419E3C67275B628C00059CB9 /* Model */,
-				419E3C66275B628200059CB9 /* Router */,
+				41902CDF27607EC000130C3B /* Router */,
 			);
 			path = ShowPosted;
-			sourceTree = "<group>";
-		};
-		419E3C66275B628200059CB9 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		419E3C67275B628C00059CB9 /* Model */ = {
