@@ -10,18 +10,17 @@ import UIKit
 
 protocol ShowPostedModel{
     func getRequest(className: String) -> Result<[RequestEntity],Error>
-    func getIconImage(fileName: String) -> Result<UIImage,Error>
+    func getIconImage(fileName: String,imageView: UIImageView)
 }
 
 class ShowPostedModelImpl: ShowPostedModel{
     let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
-    let profile: ProfilemBaaS = ProfilemBaaSImpl()
     
     func getRequest(className: String) -> Result<[RequestEntity],Error>{
         showPosted.getRequest(className: className)
     }
     
-    func getIconImage(fileName: String) -> Result<UIImage, Error> {
-        profile.getIconImage(fileName: fileName)
+    func getIconImage(fileName: String,imageView: UIImageView){
+        showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
 }

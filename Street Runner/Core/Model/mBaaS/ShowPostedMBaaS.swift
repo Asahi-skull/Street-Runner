@@ -7,6 +7,7 @@
 
 import Foundation
 import NCMB
+import UIKit
 
 enum ShowPostedMBaaSError: Error,LocalizedError{
     case loseObjectID
@@ -32,6 +33,7 @@ enum ShowPostedMBaaSError: Error,LocalizedError{
 
 protocol ShowPostedMBaaS{
     func getRequest(className: String) -> Result<[RequestEntity],Error>
+    func getIconImage(fileName: String,imageView: UIImageView)
 }
 
 class ShowPostedMBaaSImpl: ShowPostedMBaaS{
@@ -59,5 +61,24 @@ class ShowPostedMBaaSImpl: ShowPostedMBaaS{
         case .failure(let err):
             return Result.failure(err)
         }
+    }
+    
+    func getIconImage(fileName: String,imageView: UIImageView) {
+        let file: NCMBFile = NCMBFile(fileName: fileName)
+        file.fetchInBackground(callback: {result in
+            switch result{
+            case .success(let data):
+                if let imageData = data{
+                    let image = UIImage(data: imageData)
+                    DispatchQueue.main.async{
+                        imageView.image = image
+                    }
+                }else{
+                    return
+                }
+            case .failure:
+                return
+            }
+        })
     }
 }

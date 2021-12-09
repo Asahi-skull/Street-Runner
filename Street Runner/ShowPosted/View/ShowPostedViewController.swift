@@ -87,21 +87,9 @@ extension ShowPostedViewController:UICollectionViewDelegate,UICollectionViewData
         guard let requestText = data.requestText else {return cell}
         cell.contentTextLabel.text = requestText
         guard let iconFileName = data.userObjectID else {return cell}
-        let iconResult = viewModel.getIconImage(fileName: iconFileName)
-        switch iconResult{
-        case .success(let Image):
-            cell.iconImage.image = Image
-        case .failure:
-            break
-        }
+        viewModel.getIconImage(fileName: iconFileName, imageView: cell.iconImage)
         guard let requestFileName = data.requestImage else {return cell}
-        let requestResult = viewModel.getIconImage(fileName: requestFileName)
-        switch requestResult{
-        case .success(let Image):
-            cell.requestImage.image = Image
-        case .failure:
-            break
-        }
+        viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
         return cell
     }
     

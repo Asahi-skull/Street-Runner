@@ -12,7 +12,7 @@ protocol ShowPostedViewModel{
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> RequestEntity
     func getRequestData() -> Result<Void,Error>
-    func getIconImage(fileName: String) -> Result<UIImage,Error>
+    func getIconImage(fileName: String,imageView: UIImageView)
 }
 
 class ShowPostedViewModelImpl: ShowPostedViewModel{
@@ -38,7 +38,7 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
         }
     }
     
-    func getIconImage(fileName: String) -> Result<UIImage,Error>{
-        model.getIconImage(fileName: fileName)
+    func getIconImage(fileName: String,imageView: UIImageView){
+        model.getIconImage(fileName: fileName, imageView: imageView)
     }
 }
