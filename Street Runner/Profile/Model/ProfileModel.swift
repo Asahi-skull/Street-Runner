@@ -12,10 +12,13 @@ protocol ProfileModel{
     func setUser() -> String
     func getId() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
+    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error>
+    func getImage(fileName: String,imageView: UIImageView)
 }
 
 class ProfileModelImpl: ProfileModel{
     let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     
     func setUser() -> String{
         profile.getUser()
@@ -33,5 +36,13 @@ class ProfileModelImpl: ProfileModel{
         case .failure(let err):
             return Result.failure(err)
         }
+    }
+    
+    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error>{
+        profile.getRequest(className: className, userName: userName)
+    }
+    
+    func getImage(fileName: String,imageView: UIImageView){
+        showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
 }

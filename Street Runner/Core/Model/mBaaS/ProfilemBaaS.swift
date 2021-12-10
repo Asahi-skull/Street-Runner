@@ -12,7 +12,8 @@ import UIKit
 protocol ProfilemBaaS{
     func getUser() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
-    func getID() -> String 
+    func getID() -> String
+    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error>
 }
 
 class ProfilemBaaSImpl: ProfilemBaaS{
@@ -45,5 +46,25 @@ class ProfilemBaaSImpl: ProfilemBaaS{
         guard let user = NCMBUser.currentUser else {return ""}
         guard let usesrId = user.objectId else {return ""}
         return usesrId
+    }
+    
+    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error> {
+        var query = NCMBQuery.getQuery(className: className)
+        query.where(field: "userObjectID", equalTo: userName)
+        let result = query.find()
+        switch result{
+        case .success(let datas):
+            var profilePostedEntitys: [ProfilePostedEntity] = []
+            for data in datas{
+                let objectID: String? = data["objectID"]
+                let requestImage: String? = data["requestImage"]
+                let requestText: String? = data["requestText"]
+                let profilePostedEntity = ProfilePostedEntity(objectID: objectID, requestImage: requestImage, requestText: requestText)
+                profilePostedEntitys.append(profilePostedEntity)
+            }
+            return Result.success(profilePostedEntitys)
+        case .failure(let err):
+            return Result.failure(err)
+        }
     }
 }
