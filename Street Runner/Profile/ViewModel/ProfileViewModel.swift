@@ -40,7 +40,7 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRequest() -> Result<Void,Error> {
-        let result = profileModel.getRequest(className: "request", userName: profileModel.setUser())
+        let result = profileModel.getRequest(className: "request", objectID: profileModel.getId())
         switch result{
         case .success(let datas):
             self.datas = datas

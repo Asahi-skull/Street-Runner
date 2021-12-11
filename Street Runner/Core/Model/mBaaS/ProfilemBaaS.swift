@@ -13,7 +13,7 @@ protocol ProfilemBaaS{
     func getUser() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
     func getID() -> String
-    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error>
+    func getRequest(className: String,objectID: String) -> Result<[ProfilePostedEntity],Error>
 }
 
 class ProfilemBaaSImpl: ProfilemBaaS{
@@ -48,9 +48,9 @@ class ProfilemBaaSImpl: ProfilemBaaS{
         return usesrId
     }
     
-    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error> {
+    func getRequest(className: String,objectID: String) -> Result<[ProfilePostedEntity],Error> {
         var query = NCMBQuery.getQuery(className: className)
-        query.where(field: "userObjectID", equalTo: userName)
+        query.where(field: "userObjectID", equalTo: objectID)
         let result = query.find()
         switch result{
         case .success(let datas):

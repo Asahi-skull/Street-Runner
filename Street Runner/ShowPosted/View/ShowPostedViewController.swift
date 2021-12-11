@@ -74,7 +74,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     }
 }
 
-extension ShowPostedViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.dataCount()
     }

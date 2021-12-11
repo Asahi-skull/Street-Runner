@@ -96,7 +96,9 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
 
 extension ProfileViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        profileViewModel.dataCount()
+        let int = profileViewModel.dataCount()
+        print(int)
+        return int
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

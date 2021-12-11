@@ -12,7 +12,7 @@ protocol ProfileModel{
     func setUser() -> String
     func getId() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
-    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error>
+    func getRequest(className: String,objectID: String) -> Result<[ProfilePostedEntity],Error>
     func getImage(fileName: String,imageView: UIImageView)
 }
 
@@ -38,8 +38,8 @@ class ProfileModelImpl: ProfileModel{
         }
     }
     
-    func getRequest(className: String,userName: String) -> Result<[ProfilePostedEntity],Error>{
-        profile.getRequest(className: className, userName: userName)
+    func getRequest(className: String,objectID: String) -> Result<[ProfilePostedEntity],Error>{
+        profile.getRequest(className: className, objectID: objectID)
     }
     
     func getImage(fileName: String,imageView: UIImageView){
