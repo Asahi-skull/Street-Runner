@@ -208,34 +208,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Qgm-QI-JuG">
-                                <rect key="frame" x="147" y="109.5" width="120" height="117.5"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="0nc-YC-MWZ"/>
-                                    <constraint firstAttribute="height" constant="120" id="Xhp-85-O6T"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Z6-k0-gTE">
-                                <rect key="frame" x="82" y="248" width="250" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7Fg-ld-BVj"/>
-                                    <constraint firstAttribute="width" constant="250" id="GN2-gO-xlb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="u5S-jb-13T">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="yEa-dl-yCA" id="Bmf-Ql-p4p"/>
+                                    <outlet property="delegate" destination="yEa-dl-yCA" id="RRb-Y5-FYW"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h5Y-7d-lEi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9Z6-k0-gTE" firstAttribute="top" secondItem="Qgm-QI-JuG" secondAttribute="bottom" constant="20" id="7YD-OS-Kfz"/>
-                            <constraint firstItem="Qgm-QI-JuG" firstAttribute="top" secondItem="h5Y-7d-lEi" secondAttribute="top" constant="20" id="whV-AE-cJQ"/>
-                            <constraint firstItem="9Z6-k0-gTE" firstAttribute="centerX" secondItem="5dl-Ff-3jL" secondAttribute="centerX" id="y62-rd-yVp"/>
-                            <constraint firstItem="Qgm-QI-JuG" firstAttribute="centerX" secondItem="5dl-Ff-3jL" secondAttribute="centerX" id="zCU-rq-twu"/>
+                            <constraint firstItem="h5Y-7d-lEi" firstAttribute="bottom" secondItem="u5S-jb-13T" secondAttribute="bottom" id="8Nv-jc-crL"/>
+                            <constraint firstItem="u5S-jb-13T" firstAttribute="leading" secondItem="h5Y-7d-lEi" secondAttribute="leading" id="SN4-R5-D0N"/>
+                            <constraint firstItem="h5Y-7d-lEi" firstAttribute="trailing" secondItem="u5S-jb-13T" secondAttribute="trailing" id="rpO-k3-Mec"/>
+                            <constraint firstItem="u5S-jb-13T" firstAttribute="top" secondItem="h5Y-7d-lEi" secondAttribute="top" id="tEt-R3-msw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rbG-4M-gWW">
@@ -253,14 +241,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="iconImage" destination="Qgm-QI-JuG" id="Zc9-wL-rIV"/>
-                        <outlet property="userNameLabel" destination="9Z6-k0-gTE" id="7Hk-gE-r91"/>
+                        <outlet property="table" destination="u5S-jb-13T" id="xm8-yq-EWZ"/>
                         <segue destination="36G-pW-9Cy" kind="presentation" identifier="toEdit" modalPresentationStyle="fullScreen" id="zHi-oJ-2kG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHf-OG-uvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2307" y="842"/>
+            <point key="canvasLocation" x="2305.7971014492755" y="841.74107142857144"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="cI6-HT-6dz">

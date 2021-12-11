@@ -13,8 +13,8 @@ class ShowPostedTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let PostedCollectionNib = UINib(nibName: "ShowPostedCollectionCell", bundle: nil)
-        collectionView.register(PostedCollectionNib, forCellWithReuseIdentifier: "postedCollectionCell")
+        let postedCollectionNib = UINib(nibName: "ShowPostedCollectionCell", bundle: nil)
+        collectionView.register(postedCollectionNib, forCellWithReuseIdentifier: "postedCollectionCell")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
