@@ -18,5 +18,9 @@ class SelectPostViewController: UIViewController{
     @IBAction func requestButton(_ sender: Any) {
         router.transition(idetifier: "toPostRequest")
     }
+    
+    @IBAction func RecruitmentButton(_ sender: Any) {
+        router.transition(idetifier: "toPostRecruitment")
+    }
 }
 

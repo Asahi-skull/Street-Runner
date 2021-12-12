@@ -12,6 +12,7 @@ protocol ShowPostedViewModel{
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> RequestEntity
     func getRequestData() -> Result<Void,Error>
+    func getRecruitmentData() -> Result<Void,Error>
     func getIconImage(fileName: String,imageView: UIImageView)
 }
 
@@ -32,6 +33,17 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
         switch result{
         case .success(let datas):
             self.datas = datas
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
+    }
+    
+    func getRecruitmentData() -> Result<Void,Error>{
+        let result = model.getRequest(className: "recruitment")
+        switch result{
+        case .success(let data):
+            self.datas = data
             return Result.success(())
         case .failure(let err):
             return Result.failure(err)

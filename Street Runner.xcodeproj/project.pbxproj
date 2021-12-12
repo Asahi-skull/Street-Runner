@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		415B0FA52765D5B600211118 /* PostRecruitmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FA42765D5B600211118 /* PostRecruitmentViewController.swift */; };
+		415B0FA72765D99000211118 /* PostRecruitmentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FA62765D99000211118 /* PostRecruitmentRouter.swift */; };
+		415B0FA92765DBCB00211118 /* PostRecruitmentMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FA82765DBCB00211118 /* PostRecruitmentMBaaS.swift */; };
+		415B0FAB2765DD4500211118 /* PostRecruitmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FAA2765DD4500211118 /* PostRecruitmentModel.swift */; };
+		415B0FAD2765E14400211118 /* PostRecruitmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FAC2765E14400211118 /* PostRecruitmentViewModel.swift */; };
 		4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116927477D1700DE9280 /* AppDelegate.swift */; };
 		4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116B27477D1700DE9280 /* SceneDelegate.swift */; };
 		4188117127477D1700DE9280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4188116F27477D1700DE9280 /* Main.storyboard */; };
@@ -91,6 +96,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		415B0FA42765D5B600211118 /* PostRecruitmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecruitmentViewController.swift; sourceTree = "<group>"; };
+		415B0FA62765D99000211118 /* PostRecruitmentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecruitmentRouter.swift; sourceTree = "<group>"; };
+		415B0FA82765DBCB00211118 /* PostRecruitmentMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecruitmentMBaaS.swift; sourceTree = "<group>"; };
+		415B0FAA2765DD4500211118 /* PostRecruitmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecruitmentModel.swift; sourceTree = "<group>"; };
+		415B0FAC2765E14400211118 /* PostRecruitmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRecruitmentViewModel.swift; sourceTree = "<group>"; };
 		4188116627477D1700DE9280 /* Street Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Street Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4188116927477D1700DE9280 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4188116B27477D1700DE9280 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -222,6 +232,7 @@
 				418811E9274F769800DE9280 /* EditProfile */,
 				4188120727563B3600DE9280 /* SelectPost */,
 				41881212275765C200DE9280 /* PostRequest */,
+				41902CF32765CCD200130C3B /* PostRecruitment */,
 				419E3C65275B626100059CB9 /* ShowPosted */,
 				4188116F27477D1700DE9280 /* Main.storyboard */,
 				4188117227477D1900DE9280 /* Assets.xcassets */,
@@ -343,6 +354,7 @@
 				418811B6274B809600DE9280 /* ProfilemBaaS.swift */,
 				418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */,
 				4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */,
+				415B0FA82765DBCB00211118 /* PostRecruitmentMBaaS.swift */,
 				419E3C82275C958700059CB9 /* ShowPostedMBaaS.swift */,
 			);
 			path = mBaaS;
@@ -597,6 +609,49 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		41902CF32765CCD200130C3B /* PostRecruitment */ = {
+			isa = PBXGroup;
+			children = (
+				41902CF72765CD1200130C3B /* View */,
+				41902CF62765CD0000130C3B /* ViewModel */,
+				41902CF52765CCF900130C3B /* Model */,
+				41902CF42765CCEF00130C3B /* Router */,
+			);
+			path = PostRecruitment;
+			sourceTree = "<group>";
+		};
+		41902CF42765CCEF00130C3B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				415B0FA62765D99000211118 /* PostRecruitmentRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		41902CF52765CCF900130C3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				415B0FAA2765DD4500211118 /* PostRecruitmentModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41902CF62765CD0000130C3B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				415B0FAC2765E14400211118 /* PostRecruitmentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		41902CF72765CD1200130C3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				415B0FA42765D5B600211118 /* PostRecruitmentViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		419E3C65275B626100059CB9 /* ShowPosted */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +901,7 @@
 				419E3C72275B679E00059CB9 /* SegmentedTableCell.swift in Sources */,
 				4188121E2758BD0900DE9280 /* PostRequestRouter.swift in Sources */,
 				418811F7274FCF0000DE9280 /* EditProfilemBaaS.swift in Sources */,
+				415B0FA92765DBCB00211118 /* PostRecruitmentMBaaS.swift in Sources */,
 				419E3C83275C958700059CB9 /* ShowPostedMBaaS.swift in Sources */,
 				418811EF274F781300DE9280 /* EditProfileViewController.swift in Sources */,
 				418811F3274F784500DE9280 /* EditProfileModel.swift in Sources */,
@@ -857,9 +913,11 @@
 				418811F5274F786A00DE9280 /* EditProfileRouter.swift in Sources */,
 				41902CEC27635D8100130C3B /* ProfilePostedTableViewCell.swift in Sources */,
 				4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */,
+				415B0FA72765D99000211118 /* PostRecruitmentRouter.swift in Sources */,
 				418812182757809700DE9280 /* PostRequestViewController.swift in Sources */,
 				418811C6274CB12A00DE9280 /* GuestViewModel.swift in Sources */,
 				418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */,
+				415B0FA52765D5B600211118 /* PostRecruitmentViewController.swift in Sources */,
 				419E3C6E275B64A700059CB9 /* ShowPostedTableCell.swift in Sources */,
 				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
 				419E3C86275C9CBA00059CB9 /* RequestEntity.swift in Sources */,
@@ -877,8 +935,10 @@
 				418811B7274B809600DE9280 /* ProfilemBaaS.swift in Sources */,
 				418811FD2754EBEA00DE9280 /* TestViewController.swift in Sources */,
 				4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */,
+				415B0FAD2765E14400211118 /* PostRecruitmentViewModel.swift in Sources */,
 				418811A727493C4F00DE9280 /* SignUpViewModel.swift in Sources */,
 				418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */,
+				415B0FAB2765DD4500211118 /* PostRecruitmentModel.swift in Sources */,
 				418812012754EE4B00DE9280 /* TableViewCell2.swift in Sources */,
 				418811A9274A211000DE9280 /* SignUpmBaaS.swift in Sources */,
 				418811AD274A33DB00DE9280 /* LoginmBaaS.swift in Sources */,

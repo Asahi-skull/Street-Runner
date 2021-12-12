@@ -13,7 +13,7 @@ class ShowPostedViewController: UIViewController {
     
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         let segmentedNib = UINib(nibName: "SegmentedTableCell", bundle: nil)
@@ -24,7 +24,8 @@ class ShowPostedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let result = viewModel.getRequestData()
+//        let result = viewModel.getRequestData()
+        let result = viewModel.getRecruitmentData()
         switch result{
         case .success:
             tableView.reloadData()
@@ -63,11 +64,22 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("First")
-            break
+            let result = viewModel.getRequestData()
+            switch result{
+            case .success:
+                tableView.reloadData()
+            case .failure:
+                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+            }
         case 1:
-            print("Second")
-            break
+            let result = viewModel.getRecruitmentData()
+            switch result{
+            case .success:
+                tableView.reloadData()
+            case .failure:
+                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+            }
+            print("成功")
         default:
             break
         }
@@ -89,6 +101,7 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         guard let iconFileName = data.userObjectID else {return cell}
         viewModel.getIconImage(fileName: iconFileName, imageView: cell.iconImage)
         guard let requestFileName = data.requestImage else {return cell}
+        print(requestFileName)
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
         return cell
     }
