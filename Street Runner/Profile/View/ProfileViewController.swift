@@ -64,6 +64,7 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "profilePostedCell", for: indexPath) as! ProfilePostedTableViewCell
+            cell.collectionView.reloadData()
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             return cell
@@ -83,11 +84,25 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("First")
-            break
+            let result = profileViewModel.getRequest()
+            switch result{
+            case.success:
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                }
+            case .failure:
+                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+            }
         case 1:
-            print("Second")
-            break
+            let result = profileViewModel.getRecruitmentData()
+            switch result{
+            case.success:
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                }
+            case .failure:
+                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+            }
         default:
             break
         }

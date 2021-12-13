@@ -24,8 +24,7 @@ class ShowPostedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        let result = viewModel.getRequestData()
-        let result = viewModel.getRecruitmentData()
+        let result = viewModel.getRequestData()
         switch result{
         case .success:
             tableView.reloadData()
@@ -47,6 +46,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "postedCell", for: indexPath) as! ShowPostedTableCell
+            cell.collectionView.reloadData()
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             return cell
@@ -67,7 +67,9 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             let result = viewModel.getRequestData()
             switch result{
             case .success:
-                tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .failure:
                 router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
             }
@@ -75,11 +77,12 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             let result = viewModel.getRecruitmentData()
             switch result{
             case .success:
-                tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .failure:
                 router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
             }
-            print("成功")
         default:
             break
         }
@@ -101,7 +104,6 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         guard let iconFileName = data.userObjectID else {return cell}
         viewModel.getIconImage(fileName: iconFileName, imageView: cell.iconImage)
         guard let requestFileName = data.requestImage else {return cell}
-        print(requestFileName)
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
         return cell
     }

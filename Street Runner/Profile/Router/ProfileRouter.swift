@@ -10,6 +10,7 @@ import UIKit
 
 protocol ProfileRouter{
     func transition(idetifier: String)
+    func resultAlert(titleText: String, messageText: String, titleOK: String)
 }
 
 class ProfileRouterImpl: ProfileRouter{
@@ -20,5 +21,11 @@ class ProfileRouterImpl: ProfileRouter{
     
     func transition(idetifier: String) {
         viewController.performSegue(withIdentifier: idetifier, sender: nil)
+    }
+    
+    func resultAlert(titleText: String, messageText: String, titleOK: String) {
+        let alertController = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: titleOK, style: .default, handler: nil))
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }
