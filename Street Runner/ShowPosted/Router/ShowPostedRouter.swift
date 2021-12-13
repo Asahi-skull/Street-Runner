@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol ShowPostedRouter{
+    func transition(idetifier: String,sender: Any?)
     func resultAlert(titleText: String, messageText: String, titleOK: String)
 }
 
@@ -16,6 +17,10 @@ class ShowPostedRouterImpl: ShowPostedRouter{
     let viewController: UIViewController
     init(viewController :UIViewController){
         self.viewController = viewController
+    }
+    
+    func transition(idetifier: String,sender: Any?) {
+        viewController.performSegue(withIdentifier: idetifier, sender: sender)
     }
     
     func resultAlert(titleText: String, messageText: String, titleOK: String) {

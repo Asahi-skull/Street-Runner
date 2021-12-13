@@ -44,7 +44,7 @@ class ShowPostedMBaaSImpl: ShowPostedMBaaS{
         case .success(let datas):
             var requestEntitys: [RequestEntity] = []
             for data in datas{
-                let objectID: String? = data["objectID"]
+                let objectID: String? = data["objectId"]
                 let requestImage: String? = data["requestImage"]
                 let requestText: String? = data["requestText"]
                 let userName: String? = data["userName"]
