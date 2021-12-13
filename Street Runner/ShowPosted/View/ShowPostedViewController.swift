@@ -13,7 +13,7 @@ class ShowPostedViewController: UIViewController {
     
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         let segmentedNib = UINib(nibName: "SegmentedTableCell", bundle: nil)
@@ -46,6 +46,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "postedCell", for: indexPath) as! ShowPostedTableCell
+            cell.collectionView.reloadData()
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             return cell
@@ -63,11 +64,25 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("First")
-            break
+            let result = viewModel.getRequestData()
+            switch result{
+            case .success:
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure:
+                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+            }
         case 1:
-            print("Second")
-            break
+            let result = viewModel.getRecruitmentData()
+            switch result{
+            case .success:
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure:
+                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+            }
         default:
             break
         }

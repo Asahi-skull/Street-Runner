@@ -530,6 +530,17 @@
                                     <action selector="requestButton:" destination="Ee1-LG-d6f" eventType="touchUpInside" id="fjO-Yt-r0Z"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOp-qh-HNB">
+                                <rect key="frame" x="96" y="414" width="222" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="募集"/>
+                                <connections>
+                                    <action selector="RecruitmentButton:" destination="Ee1-LG-d6f" eventType="touchUpInside" id="iSf-1T-C4P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ACx-VP-Qge"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -537,11 +548,101 @@
                     <navigationItem key="navigationItem" id="5v6-k5-jdi"/>
                     <connections>
                         <segue destination="ksH-Nx-xML" kind="show" identifier="toPostRequest" id="aXy-Ev-II9"/>
+                        <segue destination="eiv-mS-acV" kind="show" identifier="toPostRecruitment" id="A7e-Jb-swK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phh-Wu-Rwy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529" y="-882"/>
+            <point key="canvasLocation" x="1528.985507246377" y="-882.58928571428567"/>
+        </scene>
+        <!--Post Recruitment View Controller-->
+        <scene sceneID="Fuz-Tf-bRF">
+            <objects>
+                <viewController id="eiv-mS-acV" customClass="PostRecruitmentViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7bR-YY-Ggd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-FA-1b5">
+                                <rect key="frame" x="127" y="89" width="160" height="117.5"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="88j-xi-yeG"/>
+                                    <constraint firstAttribute="height" constant="120" id="HpY-6j-JbF"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0i-uk-RiH">
+                                <rect key="frame" x="107" y="213" width="200" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="2TX-Xx-zMa"/>
+                                    <constraint firstAttribute="height" constant="20" id="ffH-7u-yqN"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="投稿する写真を選択"/>
+                                <connections>
+                                    <action selector="selectImageButton:" destination="eiv-mS-acV" eventType="touchUpInside" id="W0R-7a-qtS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="募集内容" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fl-Da-26m">
+                                <rect key="frame" x="20" y="253" width="90" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="B5J-q0-dAb"/>
+                                    <constraint firstAttribute="height" constant="30" id="ZMp-9I-7ll"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="テキストを入力" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wTI-b5-RRx">
+                                <rect key="frame" x="115" y="253" width="219" height="180"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="r3G-ut-Bpc"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRF-Lh-zh0">
+                                <rect key="frame" x="132" y="513" width="150" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="8B8-Gd-Nyi"/>
+                                    <constraint firstAttribute="height" constant="60" id="xQy-nd-Y2B"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Post"/>
+                                <connections>
+                                    <action selector="postButton:" destination="eiv-mS-acV" eventType="touchUpInside" id="Ngl-qC-gwS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="y0H-Lz-7rl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1fl-Da-26m" firstAttribute="leading" secondItem="y0H-Lz-7rl" secondAttribute="leading" constant="20" id="4vX-Je-PpK"/>
+                            <constraint firstItem="5YR-FA-1b5" firstAttribute="centerX" secondItem="7bR-YY-Ggd" secondAttribute="centerX" id="CQa-ww-KcC"/>
+                            <constraint firstItem="d0i-uk-RiH" firstAttribute="centerX" secondItem="7bR-YY-Ggd" secondAttribute="centerX" id="MCa-TQ-O3M"/>
+                            <constraint firstItem="y0H-Lz-7rl" firstAttribute="trailing" secondItem="wTI-b5-RRx" secondAttribute="trailing" constant="80" id="Tb6-EI-BQ2"/>
+                            <constraint firstItem="yRF-Lh-zh0" firstAttribute="top" secondItem="wTI-b5-RRx" secondAttribute="bottom" constant="80" id="XX5-ll-8F6"/>
+                            <constraint firstItem="d0i-uk-RiH" firstAttribute="top" secondItem="5YR-FA-1b5" secondAttribute="bottom" constant="5" id="clm-cE-tht"/>
+                            <constraint firstItem="wTI-b5-RRx" firstAttribute="leading" secondItem="1fl-Da-26m" secondAttribute="trailing" constant="5" id="dSZ-JJ-WCg"/>
+                            <constraint firstItem="1fl-Da-26m" firstAttribute="top" secondItem="d0i-uk-RiH" secondAttribute="bottom" constant="20" id="fZk-Tf-lsj"/>
+                            <constraint firstItem="wTI-b5-RRx" firstAttribute="top" secondItem="d0i-uk-RiH" secondAttribute="bottom" constant="20" id="hQ3-Qv-6cq"/>
+                            <constraint firstItem="5YR-FA-1b5" firstAttribute="top" secondItem="y0H-Lz-7rl" secondAttribute="top" id="iWi-Q9-88t"/>
+                            <constraint firstItem="yRF-Lh-zh0" firstAttribute="centerX" secondItem="7bR-YY-Ggd" secondAttribute="centerX" id="z0l-lX-ymi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3Eo-sF-edF"/>
+                    <connections>
+                        <outlet property="recruitmentImage" destination="5YR-FA-1b5" id="KYk-OU-ShX"/>
+                        <outlet property="recruitmentText" destination="wTI-b5-RRx" id="mgt-by-RSy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vNB-L5-gSp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2306" y="-565"/>
         </scene>
         <!--Item-->
         <scene sceneID="n0A-Kv-fis">
@@ -635,7 +736,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkW-km-3o8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2310" y="-1194"/>
+            <point key="canvasLocation" x="2306" y="-1272"/>
         </scene>
         <!--Show Posted View Controller-->
         <scene sceneID="OsC-qE-kDY">
