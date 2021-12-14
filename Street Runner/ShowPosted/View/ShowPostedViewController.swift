@@ -11,9 +11,6 @@ class ShowPostedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-//    var className: String?
-//    var objectID: String?
-    
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
         
@@ -30,7 +27,6 @@ class ShowPostedViewController: UIViewController {
         let result = viewModel.getRequestData()
         switch result{
         case .success:
-//            className = "request"
             tableView.reloadData()
         case .failure:
             router.resultAlert(titleText: "読み込みに失敗", messageText: "アプリを再起動してください", titleOK: "OK")
@@ -71,7 +67,6 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             let result = viewModel.getRequestData()
             switch result{
             case .success:
-//                className = "request"
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -82,7 +77,6 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             let result = viewModel.getRecruitmentData()
             switch result{
             case .success:
-//                className = "recruitment"
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -111,7 +105,6 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         viewModel.getIconImage(fileName: iconFileName, imageView: cell.iconImage)
         guard let requestFileName = data.requestImage else {return cell}
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
-//        objectID = data.objectID
         return cell
     }
     
@@ -129,8 +122,5 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         let entity = sender as! RequestEntity
         let toDetailPosted = segue.destination as! DetailPostedViewController
         toDetailPosted.entity = entity
-//        toDetailPosted.className = className
-//        guard let objectID = objectID else {return}
-//        toDetailPosted.objectID = objectID
     }
 }

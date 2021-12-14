@@ -13,8 +13,8 @@ protocol ProfileViewModel{
     func getIconImage() -> Result<UIImage,Error>
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> ProfilePostedEntity
-    func getRequest() -> Result<Void,Error>
-    func getRecruitmentData() -> Result<Void,Error>
+    func getRequest(completion: @escaping (Result<Void,Error>) -> Void)
+    func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
     func getImage(fileName: String,imageView: UIImageView)
 }
 
@@ -40,25 +40,27 @@ class ProfileViewModelImpl: ProfileViewModel{
         datas[indexPath.row]
     }
     
-    func getRequest() -> Result<Void,Error> {
-        let result = profileModel.getRequest(className: "request", objectID: profileModel.getId())
-        switch result{
-        case .success(let datas):
-            self.datas = datas
-            return Result.success(())
-        case .failure(let err):
-            return Result.failure(err)
+    func getRequest(completion: @escaping (Result<Void,Error>) -> Void) {
+        profileModel.getRequest(className: "request", objectID: profileModel.getId()) { result in
+            switch result{
+            case .success(let datas):
+                self.datas = datas
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
         }
     }
     
-    func getRecruitmentData() -> Result<Void, Error> {
-        let result = profileModel.getRequest(className: "recruitment", objectID: profileModel.getId())
-        switch result{
-        case .success(let datas):
-            self.datas = datas
-            return Result.success(())
-        case .failure(let err):
-            return Result.failure(err)
+    func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
+        profileModel.getRequest(className: "recruitment", objectID: profileModel.getId()) { result in
+            switch result{
+            case .success(let datas):
+                self.datas = datas
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
         }
     }
     
