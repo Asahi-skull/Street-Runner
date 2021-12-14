@@ -27,12 +27,15 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let iconResult = profileViewModel.getRequest()
-        switch iconResult{
-        case .success:
-            table.reloadData()
-        case .failure:
-            return
+        profileViewModel.getRequest { iconResult in
+            switch iconResult{
+            case .success:
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                }
+            case .failure:
+                return
+            }
         }
     }
     
@@ -77,31 +80,37 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
         }else if indexPath.row == 1{
             return tableView.bounds.height/18
         }else{
-            return tableView.bounds.height - tableView.bounds.height/6 - tableView.bounds.height/18
+            return tableView.bounds.height - tableView.bounds.height/18
         }
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            let result = profileViewModel.getRequest()
-            switch result{
-            case.success:
-                DispatchQueue.main.async {
-                    self.table.reloadData()
+            profileViewModel.getRequest { result in
+                switch result{
+                case.success:
+                    DispatchQueue.main.async {
+                        self.table.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async{
+                        self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
                 }
-            case .failure:
-                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
             }
         case 1:
-            let result = profileViewModel.getRecruitmentData()
-            switch result{
-            case.success:
-                DispatchQueue.main.async {
-                    self.table.reloadData()
+            profileViewModel.getRecruitmentData { result in
+                switch result{
+                case.success:
+                    DispatchQueue.main.async {
+                        self.table.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async{
+                        self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
                 }
-            case .failure:
-                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
             }
         default:
             break
@@ -111,9 +120,7 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
 
 extension ProfileViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let int = profileViewModel.dataCount()
-        print(int)
-        return int
+        profileViewModel.dataCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

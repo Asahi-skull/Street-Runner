@@ -13,7 +13,7 @@ protocol ProfilemBaaS{
     func getUser() -> String
     func getIconImage(fileName: String) -> Result<UIImage,Error>
     func getID() -> String
-    func getRequest(className: String,objectID: String) -> Result<[ProfilePostedEntity],Error>
+    func getRequest(className: String,objectID: String,completion: @escaping (Result<[ProfilePostedEntity],Error>) -> Void)
 }
 
 class ProfilemBaaSImpl: ProfilemBaaS{
@@ -48,23 +48,24 @@ class ProfilemBaaSImpl: ProfilemBaaS{
         return usesrId
     }
     
-    func getRequest(className: String,objectID: String) -> Result<[ProfilePostedEntity],Error> {
+    func getRequest(className: String,objectID: String,completion: @escaping (Result<[ProfilePostedEntity],Error>) -> Void){
         var query = NCMBQuery.getQuery(className: className)
         query.where(field: "userObjectID", equalTo: objectID)
-        let result = query.find()
-        switch result{
-        case .success(let datas):
-            var profilePostedEntitys: [ProfilePostedEntity] = []
-            for data in datas{
-                let objectID: String? = data["objectID"]
-                let requestImage: String? = data["requestImage"]
-                let requestText: String? = data["requestText"]
-                let profilePostedEntity = ProfilePostedEntity(objectID: objectID, requestImage: requestImage, requestText: requestText)
-                profilePostedEntitys.append(profilePostedEntity)
+        query.findInBackground { result in
+            switch result{
+            case .success(let datas):
+                var profilePostedEntitys: [ProfilePostedEntity] = []
+                for data in datas{
+                    let objectID: String? = data["objectID"]
+                    let requestImage: String? = data["requestImage"]
+                    let requestText: String? = data["requestText"]
+                    let profilePostedEntity = ProfilePostedEntity(objectID: objectID, requestImage: requestImage, requestText: requestText)
+                    profilePostedEntitys.append(profilePostedEntity)
+                }
+                completion(Result.success(profilePostedEntitys))
+            case .failure(let err):
+                completion(Result.failure(err))
             }
-            return Result.success(profilePostedEntitys)
-        case .failure(let err):
-            return Result.failure(err)
         }
     }
 }

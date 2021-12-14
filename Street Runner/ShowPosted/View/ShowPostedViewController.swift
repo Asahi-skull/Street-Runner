@@ -96,7 +96,7 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postedCollectionCell", for: indexPath) as! ShowPostedCollectionCell
-        let data = viewModel.getData(indexPath: indexPath)
+         let data = viewModel.getData(indexPath: indexPath)
         guard let userName = data.userName else {return cell}
         cell.userNameLabel.text = userName
         guard let requestText = data.requestText else {return cell}
@@ -112,5 +112,15 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         let horizontalSpace: CGFloat = 5
         let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
         return CGSize(width: cellSize, height: cellSize + cellSize * 3/4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        router.transition(idetifier: "toDetailPosted", sender: viewModel.getData(indexPath:indexPath))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let entity = sender as! RequestEntity
+        let toDetailPosted = segue.destination as! DetailPostedViewController
+        toDetailPosted.entity = entity
     }
 }
