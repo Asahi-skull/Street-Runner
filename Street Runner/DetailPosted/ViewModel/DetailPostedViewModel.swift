@@ -19,10 +19,10 @@ class DetailPostedViewModelImpl: DetailPostedViewModel{
     }
     
     let entity: RequestEntity
-    let model: DetailPostedModel = DetailPostedModelImpl()
+    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     
     func getImage(fileName: String, imageView: UIImageView) {
-        model.getImage(fileName: fileName, imageView: imageView)
+        showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
     
     func getEntity() -> RequestEntity {

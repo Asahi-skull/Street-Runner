@@ -16,14 +16,15 @@ protocol EditProfileViewModel{
 }
 
 class EditProfileViewModelImpl: EditProfileViewModel{
-    let editProfile: EditProfileModel = EditProfileModelImpl()
+    let editProfile: EditProfilemBaaSImpl = EditProfilemBaaSImpl()
+    let profile: ProfilemBaaS = ProfilemBaaSImpl()
     
     func saveImage(img: UIImage) -> Result<Void,Error> {
-        let fileName = editProfile.getId()
+        let fileName = profile.getID()
         let result = editProfile.saveImageFile(img: img, fileName: fileName)
         switch result{
         case .success:
-            let res = editProfile.saveImageUser(fileName: fileName)
+            let res = editProfile.saveImageuser(fileName: fileName)
             switch res{
             case .success:
                 break
@@ -37,13 +38,13 @@ class EditProfileViewModelImpl: EditProfileViewModel{
     }
     
     func getIconImage() -> Result<UIImage,Error>{
-        let fileName = editProfile.getId()
-        let imageResult = editProfile.getIconImage(fileName: fileName)
+        let fileName = profile.getID()
+        let imageResult = profile.getIconImage(fileName: fileName)
         return imageResult
     }
     
     func getUserName() -> String {
-        editProfile.getUserName()
+        profile.getUser()
     }
     
     func saveUserName(userName: String) ->  Result<Void,Error>{

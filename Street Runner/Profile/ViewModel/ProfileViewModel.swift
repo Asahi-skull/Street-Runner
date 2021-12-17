@@ -19,16 +19,17 @@ protocol ProfileViewModel{
 }
 
 class ProfileViewModelImpl: ProfileViewModel{
-    let profileModel: ProfileModel = ProfileModelImpl()
+    let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private var datas: [ProfilePostedEntity] = []
     
     func setUser() -> String {
-        profileModel.setUser()
+        profile.getUser()
     }
     
     func getIconImage() -> Result<UIImage,Error>{
-        let fileName = profileModel.getId()
-        let imageResult = profileModel.getIconImage(fileName: fileName)
+        let fileName = profile.getID()
+        let imageResult = profile.getIconImage(fileName: fileName)
         return imageResult
     }
     
@@ -41,7 +42,7 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRequest(completion: @escaping (Result<Void,Error>) -> Void) {
-        profileModel.getRequest(className: "request", objectID: profileModel.getId()) { result in
+        profile.getRequest(className: "request", objectID: profile.getID()) { result in
             switch result{
             case .success(let datas):
                 self.datas = datas
@@ -53,7 +54,7 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profileModel.getRequest(className: "recruitment", objectID: profileModel.getId()) { result in
+        profile.getRequest(className: "recruitment", objectID: profile.getID()) { result in
             switch result{
             case .success(let datas):
                 self.datas = datas
@@ -65,6 +66,6 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getImage(fileName: String,imageView: UIImageView){
-        profileModel.getImage(fileName: fileName, imageView: imageView)
+        showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
 }

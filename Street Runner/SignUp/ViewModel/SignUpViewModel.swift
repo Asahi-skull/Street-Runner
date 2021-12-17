@@ -12,10 +12,9 @@ protocol SignUpViewModel{
 }
 
 class SignUpViewModelImpl: SignUpViewModel{
+    let signUpmBaaS: SignUpmBaaS = SignUpmBaaSImpl()
     
-    let signModel: SignUpModel = SignUpModelImpl()
-        
     func sendEmail(emailText: String) -> Result<Void,Error>{
-        signModel.sendEmail(emailText: emailText)
+        signUpmBaaS.confirmationEmail(email: emailText)
     }
 }

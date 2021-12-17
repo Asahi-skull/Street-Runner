@@ -17,7 +17,7 @@ protocol ShowPostedViewModel{
 }
 
 class ShowPostedViewModelImpl: ShowPostedViewModel{
-    let model: ShowPostedModel = ShowPostedModelImpl()
+    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private var datas: [RequestEntity] = []
     
     func dataCount() -> Int {
@@ -29,7 +29,7 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getRequestData() -> Result<Void, Error> {
-        let result = model.getRequest(className: "request")
+        let result = showPosted.getRequest(className: "request")
         switch result{
         case .success(let datas):
             self.datas = datas
@@ -40,7 +40,7 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getRecruitmentData() -> Result<Void,Error>{
-        let result = model.getRequest(className: "recruitment")
+        let result = showPosted.getRequest(className: "recruitment")
         switch result{
         case .success(let data):
             self.datas = data
@@ -51,6 +51,6 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getIconImage(fileName: String,imageView: UIImageView){
-        model.getIconImage(fileName: fileName, imageView: imageView)
+        showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
 }

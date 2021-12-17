@@ -16,10 +16,13 @@ protocol PostRequestViewModel{
 
 class PostRequestViewModelImpl: PostRequestViewModel{
     let postRequest: PostRequestModel = PostRequestModelImpl()
+    let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    let saveImage: EditProfilemBaaS = EditProfilemBaaSImpl()
+    let saveRequest: PostRequestMBaaS = PostRequestMBaaSImpl()
     
     func saveImageFile(img: UIImage) -> Result<String,Error>{
         let fileName = postRequest.getUUID()
-        let result = postRequest.saveImageFile(img: img, fileName: fileName)
+        let result = saveImage.saveImageFile(img: img, fileName: fileName)
         switch result{
         case .success(let data):
             return Result.success(data)
@@ -29,9 +32,11 @@ class PostRequestViewModelImpl: PostRequestViewModel{
     }
     
     func saveRequest(requestImageFile: String, requestText: String) -> Result<Void, Error>{
-        let userObjectID = postRequest.getUserObjectID()
-        let userName = postRequest.getuserName()
-        let result = postRequest.saveRequest(requestImageFile: requestImageFile, requestText: requestText, userObjectID: userObjectID, userName: userName)
+        let userObjectID = profile.getID()
+        let userName = profile.getUser()
+        print(userName)
+        print(userObjectID)
+        let result = saveRequest.saveRequest(requestImageFile: requestImageFile, requestText: requestText, userObjectID: userObjectID, userName: userName)
         switch result{
         case .success:
             return Result.success(())
@@ -41,6 +46,6 @@ class PostRequestViewModelImpl: PostRequestViewModel{
     }
     
     func deleteImageFile(fileName: String){
-        postRequest.deleteImageFile(fileName: fileName)
+        saveRequest.deleteImagefile(fileName: fileName)
     }
 }

@@ -12,10 +12,9 @@ protocol LoginViewModel{
 }
 
 class LoginViewModelimpl: LoginViewModel{
-    
-    let loginModel: LoginModel = LoginModelImpl()
+    let login: LoginmBaaS = LoginmBaaSImpl()
     
     func loginUser(email: String, password: String) -> Result<Void, Error> {
-        loginModel.loginUser(email: email, password: password)
+        login.loginEmail(emailAddress: email, password: password)
     }
 }
