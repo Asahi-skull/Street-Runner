@@ -16,10 +16,13 @@ protocol PostRecruitmentViewModel{
 
 class PostRecruitmentViewModelImpl: PostRecruitmentViewModel{
     let postRecruitment: PostRecruitmentModel = PostRecruitmentModelImpl()
+    let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    let saveImage: EditProfilemBaaS = EditProfilemBaaSImpl()
+    let saveRecruitment: PostRecruitmentMBaaS = PostRecruitmentMBaaSImpl()
     
     func saveImageFile(img: UIImage) -> Result<String, Error> {
         let fileName = postRecruitment.getUUID()
-        let result = postRecruitment.saveImageFile(img: img, fileName: fileName)
+        let result = saveImage.saveImageFile(img: img, fileName: fileName)
         switch result{
         case .success(let data):
             return Result.success(data)
@@ -29,9 +32,9 @@ class PostRecruitmentViewModelImpl: PostRecruitmentViewModel{
     }
     
     func saveRecruitment(requestImageFile: String, requestText: String) -> Result<Void, Error> {
-        let userObjectID = postRecruitment.getUserObjectID()
-        let userName = postRecruitment.getuserName()
-        let result = postRecruitment.saveRecruitment(recruitmentImageFile: requestImageFile, recruitmentText: requestText, userObjectID: userObjectID, userName: userName)
+        let userObjectID = profile.getID()
+        let userName = profile.getUser()
+        let result = saveRecruitment.saveRecruitment(recruitmentImageFile: requestImageFile, recruitmentText: requestText, userObjectID: userObjectID, userName: userName)
         switch result{
         case .success:
             return Result.success(())
@@ -41,6 +44,6 @@ class PostRecruitmentViewModelImpl: PostRecruitmentViewModel{
     }
     
     func deleteImageFile(fileName: String) {
-        postRecruitment.deleteImageFile(fileName: fileName)
+        saveRecruitment.deleteImagefile(fileName: fileName)
     }
 }

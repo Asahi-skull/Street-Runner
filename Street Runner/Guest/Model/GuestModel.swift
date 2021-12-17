@@ -13,7 +13,6 @@ protocol AutologinModel{
 
 class AutologinModelImpl: AutologinModel{
     func autoLogin() -> (String,String)?{
-        
         if let emailAddress = UserDefaults.standard.string(forKey: "email"), let password = UserDefaults.standard.string(forKey: "password"){
             return (emailAddress,password)
         }else{

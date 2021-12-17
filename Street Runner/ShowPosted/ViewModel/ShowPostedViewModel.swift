@@ -11,13 +11,13 @@ import UIKit
 protocol ShowPostedViewModel{
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> RequestEntity
-    func getRequestData() -> Result<Void,Error>
-    func getRecruitmentData() -> Result<Void,Error>
+    func getRequestData(completion: @escaping (Result<Void,Error>) -> Void)
+    func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
     func getIconImage(fileName: String,imageView: UIImageView)
 }
 
 class ShowPostedViewModelImpl: ShowPostedViewModel{
-    let model: ShowPostedModel = ShowPostedModelImpl()
+    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private var datas: [RequestEntity] = []
     
     func dataCount() -> Int {
@@ -28,29 +28,31 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
         datas[indexPath.row]
     }
     
-    func getRequestData() -> Result<Void, Error> {
-        let result = model.getRequest(className: "request")
-        switch result{
-        case .success(let datas):
-            self.datas = datas
-            return Result.success(())
-        case .failure(let err):
-            return Result.failure(err)
+    func getRequestData(completion: @escaping (Result<Void,Error>) -> Void) {
+        showPosted.getRequest(className: "request") { result in
+            switch result{
+            case .success(let datas):
+                self.datas = datas
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
         }
     }
     
-    func getRecruitmentData() -> Result<Void,Error>{
-        let result = model.getRequest(className: "recruitment")
-        switch result{
-        case .success(let data):
-            self.datas = data
-            return Result.success(())
-        case .failure(let err):
-            return Result.failure(err)
+    func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
+        showPosted.getRequest(className: "recruitment") { result in
+            switch result{
+            case .success(let datas):
+                self.datas = datas
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
         }
     }
     
     func getIconImage(fileName: String,imageView: UIImageView){
-        model.getIconImage(fileName: fileName, imageView: imageView)
+        showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
 }

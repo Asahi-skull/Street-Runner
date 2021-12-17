@@ -18,7 +18,6 @@
 		415B0FBF2767381B00211118 /* DetailPostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FBD2767381B00211118 /* DetailPostedTableViewCell.swift */; };
 		415B0FC02767381B00211118 /* DetailPostedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415B0FBE2767381B00211118 /* DetailPostedTableViewCell.xib */; };
 		415B0FC2276743F600211118 /* DetailPostedMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FC1276743F600211118 /* DetailPostedMBaaS.swift */; };
-		415B0FC42767451A00211118 /* DetailPostedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FC32767451A00211118 /* DetailPostedModel.swift */; };
 		415B0FC627674F0400211118 /* DetailPostedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415B0FC527674F0400211118 /* DetailPostedViewModel.swift */; };
 		4188116A27477D1700DE9280 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116927477D1700DE9280 /* AppDelegate.swift */; };
 		4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188116B27477D1700DE9280 /* SceneDelegate.swift */; };
@@ -44,20 +43,11 @@
 		418811C8274CB13B00DE9280 /* GuestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811C7274CB13B00DE9280 /* GuestModel.swift */; };
 		418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811CF274E0BDA00DE9280 /* SignUpRouter.swift */; };
 		418811DD274E122A00DE9280 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811DC274E122A00DE9280 /* LoginRouter.swift */; };
-		418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811DE274E301A00DE9280 /* SignUpModel.swift */; };
-		418811E1274E43FC00DE9280 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E0274E43FC00DE9280 /* LoginModel.swift */; };
-		418811E6274F23DB00DE9280 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E5274F23DB00DE9280 /* ProfileModel.swift */; };
 		418811E8274F6DCD00DE9280 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811E7274F6DCD00DE9280 /* ProfileRouter.swift */; };
 		418811EF274F781300DE9280 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811EE274F781300DE9280 /* EditProfileViewController.swift */; };
 		418811F1274F782D00DE9280 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F0274F782D00DE9280 /* EditProfileViewModel.swift */; };
-		418811F3274F784500DE9280 /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F2274F784500DE9280 /* EditProfileModel.swift */; };
 		418811F5274F786A00DE9280 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F4274F786A00DE9280 /* EditProfileRouter.swift */; };
 		418811F7274FCF0000DE9280 /* EditProfilemBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */; };
-		418811FD2754EBEA00DE9280 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811FC2754EBE900DE9280 /* TestViewController.swift */; };
-		418811FF2754EE3D00DE9280 /* Cell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418811FE2754EE3D00DE9280 /* Cell1.swift */; };
-		418812012754EE4B00DE9280 /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812002754EE4B00DE9280 /* TableViewCell2.swift */; };
-		418812032754EE5500DE9280 /* TableViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812022754EE5500DE9280 /* TableViewCell3.swift */; };
-		418812052754F5A700DE9280 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418812042754F5A700DE9280 /* CollectionViewCell.swift */; };
 		4188120D27563D5F00DE9280 /* PostRequestMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */; };
 		4188120F27563F5100DE9280 /* SelectPost ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4188120E27563F5100DE9280 /* SelectPost ViewController.swift */; };
 		41881211275763F000DE9280 /* SelectPostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41881210275763F000DE9280 /* SelectPostRouter.swift */; };
@@ -81,9 +71,9 @@
 		419E3C81275B6EDE00059CB9 /* ShowPostedCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419E3C7F275B6EDE00059CB9 /* ShowPostedCollectionCell.xib */; };
 		419E3C83275C958700059CB9 /* ShowPostedMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C82275C958700059CB9 /* ShowPostedMBaaS.swift */; };
 		419E3C86275C9CBA00059CB9 /* RequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C85275C9CBA00059CB9 /* RequestEntity.swift */; };
-		419E3C88275CA0AB00059CB9 /* ShowPostedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C87275CA0AB00059CB9 /* ShowPostedModel.swift */; };
 		419E3C8A275CA93500059CB9 /* ShowPostedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */; };
 		419E3C8C275CADBD00059CB9 /* ShowPostedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */; };
+		41C3746E276C84BE00264C46 /* DetailPostedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,7 +105,6 @@
 		415B0FBD2767381B00211118 /* DetailPostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedTableViewCell.swift; sourceTree = "<group>"; };
 		415B0FBE2767381B00211118 /* DetailPostedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailPostedTableViewCell.xib; sourceTree = "<group>"; };
 		415B0FC1276743F600211118 /* DetailPostedMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedMBaaS.swift; sourceTree = "<group>"; };
-		415B0FC32767451A00211118 /* DetailPostedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedModel.swift; sourceTree = "<group>"; };
 		415B0FC527674F0400211118 /* DetailPostedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedViewModel.swift; sourceTree = "<group>"; };
 		4188116627477D1700DE9280 /* Street Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Street Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4188116927477D1700DE9280 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,20 +133,11 @@
 		418811C7274CB13B00DE9280 /* GuestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestModel.swift; sourceTree = "<group>"; };
 		418811CF274E0BDA00DE9280 /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
 		418811DC274E122A00DE9280 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		418811DE274E301A00DE9280 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
-		418811E0274E43FC00DE9280 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		418811E5274F23DB00DE9280 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		418811E7274F6DCD00DE9280 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		418811EE274F781300DE9280 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		418811F0274F782D00DE9280 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
-		418811F2274F784500DE9280 /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
 		418811F4274F786A00DE9280 /* EditProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
 		418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilemBaaS.swift; sourceTree = "<group>"; };
-		418811FC2754EBE900DE9280 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		418811FE2754EE3D00DE9280 /* Cell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell1.swift; sourceTree = "<group>"; };
-		418812002754EE4B00DE9280 /* TableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
-		418812022754EE5500DE9280 /* TableViewCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell3.swift; sourceTree = "<group>"; };
-		418812042754F5A700DE9280 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequestMBaaS.swift; sourceTree = "<group>"; };
 		4188120E27563F5100DE9280 /* SelectPost ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectPost ViewController.swift"; sourceTree = "<group>"; };
 		41881210275763F000DE9280 /* SelectPostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPostRouter.swift; sourceTree = "<group>"; };
@@ -181,9 +161,9 @@
 		419E3C7F275B6EDE00059CB9 /* ShowPostedCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowPostedCollectionCell.xib; sourceTree = "<group>"; };
 		419E3C82275C958700059CB9 /* ShowPostedMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedMBaaS.swift; sourceTree = "<group>"; };
 		419E3C85275C9CBA00059CB9 /* RequestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEntity.swift; sourceTree = "<group>"; };
-		419E3C87275CA0AB00059CB9 /* ShowPostedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedModel.swift; sourceTree = "<group>"; };
 		419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedViewModel.swift; sourceTree = "<group>"; };
 		419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShowPostedRouter.swift; path = "Street Runner/ShowPosted/Router/ShowPostedRouter.swift"; sourceTree = SOURCE_ROOT; };
+		41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +197,6 @@
 			children = (
 				415B0FB427672CE800211118 /* View */,
 				415B0FB327672CDD00211118 /* ViewModel */,
-				415B0FB227672CD700211118 /* Model */,
 				415B0FB127672CCD00211118 /* Router */,
 			);
 			path = DetailPosted;
@@ -226,16 +205,9 @@
 		415B0FB127672CCD00211118 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		415B0FB227672CD700211118 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				415B0FC32767451A00211118 /* DetailPostedModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		415B0FB327672CDD00211118 /* ViewModel */ = {
@@ -279,7 +251,6 @@
 			children = (
 				4188116927477D1700DE9280 /* AppDelegate.swift */,
 				4188116B27477D1700DE9280 /* SceneDelegate.swift */,
-				4188120627550AD100DE9280 /* TestPost */,
 				418811C9274CB2B300DE9280 /* Core */,
 				419E3C74275B68FB00059CB9 /* TableViewCell */,
 				419E3C77275B6B5800059CB9 /* CollectionViewCell */,
@@ -323,7 +294,6 @@
 			children = (
 				4188119A27489F9000DE9280 /* View */,
 				4188119C27489FD700DE9280 /* ViewModel */,
-				418811E4274F23AE00DE9280 /* Model */,
 				418811DB274E0E5800DE9280 /* Router */,
 			);
 			path = Profile;
@@ -425,7 +395,6 @@
 			children = (
 				418811D4274E0C3300DE9280 /* View */,
 				418811D3274E0C2100DE9280 /* ViewModel */,
-				418811D2274E0BFF00DE9280 /* Model */,
 				418811D1274E0BE500DE9280 /* Router */,
 			);
 			path = SignUp;
@@ -437,14 +406,6 @@
 				418811CF274E0BDA00DE9280 /* SignUpRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		418811D2274E0BFF00DE9280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				418811DE274E301A00DE9280 /* SignUpModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		418811D3274E0C2100DE9280 /* ViewModel */ = {
@@ -468,7 +429,6 @@
 			children = (
 				418811D9274E0DCE00DE9280 /* View */,
 				418811D8274E0DC300DE9280 /* ViewModel */,
-				418811D7274E0DB800DE9280 /* Model */,
 				418811D6274E0DAD00DE9280 /* Router */,
 			);
 			path = Login;
@@ -480,14 +440,6 @@
 				418811DC274E122A00DE9280 /* LoginRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		418811D7274E0DB800DE9280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				418811E0274E43FC00DE9280 /* LoginModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		418811D8274E0DC300DE9280 /* ViewModel */ = {
@@ -514,20 +466,11 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		418811E4274F23AE00DE9280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				418811E5274F23DB00DE9280 /* ProfileModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		418811E9274F769800DE9280 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
 				418811ED274F76E900DE9280 /* View */,
 				418811EC274F76E100DE9280 /* ViewModel */,
-				418811EB274F76D800DE9280 /* Model */,
 				418811EA274F76C900DE9280 /* Router */,
 			);
 			path = EditProfile;
@@ -539,14 +482,6 @@
 				418811F4274F786A00DE9280 /* EditProfileRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		418811EB274F76D800DE9280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				418811F2274F784500DE9280 /* EditProfileModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		418811EC274F76E100DE9280 /* ViewModel */ = {
@@ -565,24 +500,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4188120627550AD100DE9280 /* TestPost */ = {
-			isa = PBXGroup;
-			children = (
-				418811FC2754EBE900DE9280 /* TestViewController.swift */,
-				418811FE2754EE3D00DE9280 /* Cell1.swift */,
-				418812002754EE4B00DE9280 /* TableViewCell2.swift */,
-				418812022754EE5500DE9280 /* TableViewCell3.swift */,
-				418812042754F5A700DE9280 /* CollectionViewCell.swift */,
-			);
-			path = TestPost;
-			sourceTree = "<group>";
-		};
 		4188120727563B3600DE9280 /* SelectPost */ = {
 			isa = PBXGroup;
 			children = (
 				4188120B27563BBB00DE9280 /* View */,
-				4188120A27563BB300DE9280 /* ViewModel */,
-				4188120927563BAA00DE9280 /* Model */,
 				4188120827563B7800DE9280 /* Router */,
 			);
 			path = SelectPost;
@@ -594,20 +515,6 @@
 				41881210275763F000DE9280 /* SelectPostRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		4188120927563BAA00DE9280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4188120A27563BB300DE9280 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		4188120B27563BBB00DE9280 /* View */ = {
@@ -717,18 +624,9 @@
 			children = (
 				419E3C69275B62B600059CB9 /* View */,
 				419E3C68275B62A700059CB9 /* ViewModel */,
-				419E3C67275B628C00059CB9 /* Model */,
 				41902CDF27607EC000130C3B /* Router */,
 			);
 			path = ShowPosted;
-			sourceTree = "<group>";
-		};
-		419E3C67275B628C00059CB9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				419E3C87275CA0AB00059CB9 /* ShowPostedModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		419E3C68275B62A700059CB9 /* ViewModel */ = {
@@ -969,10 +867,7 @@
 				418811F7274FCF0000DE9280 /* EditProfilemBaaS.swift in Sources */,
 				415B0FA92765DBCB00211118 /* PostRecruitmentMBaaS.swift in Sources */,
 				419E3C83275C958700059CB9 /* ShowPostedMBaaS.swift in Sources */,
-				415B0FC42767451A00211118 /* DetailPostedModel.swift in Sources */,
 				418811EF274F781300DE9280 /* EditProfileViewController.swift in Sources */,
-				418811F3274F784500DE9280 /* EditProfileModel.swift in Sources */,
-				418811E1274E43FC00DE9280 /* LoginModel.swift in Sources */,
 				415B0FC2276743F600211118 /* DetailPostedMBaaS.swift in Sources */,
 				41881211275763F000DE9280 /* SelectPostRouter.swift in Sources */,
 				418811AB274A320600DE9280 /* LoginViewController.swift in Sources */,
@@ -984,8 +879,8 @@
 				415B0FA72765D99000211118 /* PostRecruitmentRouter.swift in Sources */,
 				418812182757809700DE9280 /* PostRequestViewController.swift in Sources */,
 				418811C6274CB12A00DE9280 /* GuestViewModel.swift in Sources */,
-				418811DF274E301A00DE9280 /* SignUpModel.swift in Sources */,
 				415B0FA52765D5B600211118 /* PostRecruitmentViewController.swift in Sources */,
+				41C3746E276C84BE00264C46 /* DetailPostedRouter.swift in Sources */,
 				419E3C6E275B64A700059CB9 /* ShowPostedTableCell.swift in Sources */,
 				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
 				419E3C86275C9CBA00059CB9 /* RequestEntity.swift in Sources */,
@@ -994,33 +889,26 @@
 				415B0FB9276737E500211118 /* DetailUserTableViewCell.swift in Sources */,
 				4188121A2757999700DE9280 /* PostRequestViewModel.swift in Sources */,
 				418811E8274F6DCD00DE9280 /* ProfileRouter.swift in Sources */,
-				418811FF2754EE3D00DE9280 /* Cell1.swift in Sources */,
 				419E3C6B275B63DD00059CB9 /* ShowPostedViewController.swift in Sources */,
 				418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */,
 				418811C8274CB13B00DE9280 /* GuestModel.swift in Sources */,
-				418812052754F5A700DE9280 /* CollectionViewCell.swift in Sources */,
 				418811DD274E122A00DE9280 /* LoginRouter.swift in Sources */,
 				418811F1274F782D00DE9280 /* EditProfileViewModel.swift in Sources */,
 				418811B7274B809600DE9280 /* ProfilemBaaS.swift in Sources */,
 				415B0FBF2767381B00211118 /* DetailPostedTableViewCell.swift in Sources */,
-				418811FD2754EBEA00DE9280 /* TestViewController.swift in Sources */,
 				4188116C27477D1700DE9280 /* SceneDelegate.swift in Sources */,
 				415B0FAD2765E14400211118 /* PostRecruitmentViewModel.swift in Sources */,
 				418811A727493C4F00DE9280 /* SignUpViewModel.swift in Sources */,
 				418811B9274B839100DE9280 /* ProfileViewModel.swift in Sources */,
 				415B0FAB2765DD4500211118 /* PostRecruitmentModel.swift in Sources */,
-				418812012754EE4B00DE9280 /* TableViewCell2.swift in Sources */,
 				418811A9274A211000DE9280 /* SignUpmBaaS.swift in Sources */,
 				418811AD274A33DB00DE9280 /* LoginmBaaS.swift in Sources */,
-				418811E6274F23DB00DE9280 /* ProfileModel.swift in Sources */,
 				418811A22748BC5200DE9280 /* SignUpViewController.swift in Sources */,
 				418811BF274BAEC600DE9280 /* GuestRouter.swift in Sources */,
 				4188120D27563D5F00DE9280 /* PostRequestMBaaS.swift in Sources */,
 				4188119F2748A06700DE9280 /* GuestViewController.swift in Sources */,
-				419E3C88275CA0AB00059CB9 /* ShowPostedModel.swift in Sources */,
 				4188121C275799A700DE9280 /* PostRequestModel.swift in Sources */,
 				418811AF274A344C00DE9280 /* LoginViewModel.swift in Sources */,
-				418812032754EE5500DE9280 /* TableViewCell3.swift in Sources */,
 				4188120F27563F5100DE9280 /* SelectPost ViewController.swift in Sources */,
 				419E3C8A275CA93500059CB9 /* ShowPostedViewModel.swift in Sources */,
 				419E3C80275B6EDE00059CB9 /* ShowPostedCollectionCell.swift in Sources */,
