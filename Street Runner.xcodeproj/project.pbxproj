@@ -73,6 +73,7 @@
 		419E3C86275C9CBA00059CB9 /* RequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C85275C9CBA00059CB9 /* RequestEntity.swift */; };
 		419E3C8A275CA93500059CB9 /* ShowPostedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */; };
 		419E3C8C275CADBD00059CB9 /* ShowPostedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */; };
+		41C3746E276C84BE00264C46 /* DetailPostedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		419E3C85275C9CBA00059CB9 /* RequestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEntity.swift; sourceTree = "<group>"; };
 		419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedViewModel.swift; sourceTree = "<group>"; };
 		419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShowPostedRouter.swift; path = "Street Runner/ShowPosted/Router/ShowPostedRouter.swift"; sourceTree = SOURCE_ROOT; };
+		41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 		415B0FB127672CCD00211118 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				418812182757809700DE9280 /* PostRequestViewController.swift in Sources */,
 				418811C6274CB12A00DE9280 /* GuestViewModel.swift in Sources */,
 				415B0FA52765D5B600211118 /* PostRecruitmentViewController.swift in Sources */,
+				41C3746E276C84BE00264C46 /* DetailPostedRouter.swift in Sources */,
 				419E3C6E275B64A700059CB9 /* ShowPostedTableCell.swift in Sources */,
 				418811B2274A5B5300DE9280 /* ProfileViewController.swift in Sources */,
 				419E3C86275C9CBA00059CB9 /* RequestEntity.swift in Sources */,

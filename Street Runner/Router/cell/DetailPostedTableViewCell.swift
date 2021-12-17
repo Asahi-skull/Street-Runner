@@ -20,4 +20,8 @@ class DetailPostedTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func setData(entity: RequestEntity){
+        postedText.text = entity.requestText
+    }
+    
 }

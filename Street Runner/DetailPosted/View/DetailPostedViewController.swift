@@ -12,6 +12,7 @@ class DetailPostedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: DetailPostedViewModel?
+    lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
     
     var entity: RequestEntity?
 
@@ -20,7 +21,7 @@ class DetailPostedViewController: UIViewController {
         if let entity = entity {
             viewModel = DetailPostedViewModelImpl(entity: entity)
         }else{
-            print("警告")
+            router.resultAlert(titleText: "読み込み失敗", messageText: "再起動してください", titleOK: "OK")
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier: "detailUserCell")
@@ -37,20 +38,21 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
-            guard let iconFileName = entity?.userObjectID else {return cell}
-            viewModel?.getImage(fileName: iconFileName, imageView: cell.iconImage)
             if let entityData = viewModel?.getEntity(){
+                guard let iconFileName = entityData.userObjectID else {return cell}
+                viewModel?.getImage(fileName: iconFileName, imageView: cell.iconImage)
                 cell.setData(entity: entityData)
             }
-//            guard let userName = entity?.userName else {return cell}
-//            cell.userNameLabel.text = userName
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailPostedCell", for: indexPath) as! DetailPostedTableViewCell
             guard let imageFileName = entity?.requestImage else {return cell}
             viewModel?.getImage(fileName: imageFileName, imageView: cell.postedImage)
-            guard let postedText = entity?.requestText else {return cell}
-            cell.postedText.text = postedText
+            if let entityData = viewModel?.getEntity(){
+                guard let postedText = entityData.requestText else {return cell}
+                cell.postedText.text = postedText
+                cell.setData(entity: entityData)
+            }
             return cell
         }
     }

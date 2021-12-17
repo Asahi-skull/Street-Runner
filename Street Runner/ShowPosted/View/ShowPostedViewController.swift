@@ -24,12 +24,17 @@ class ShowPostedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let result = viewModel.getRequestData()
-        switch result{
-        case .success:
-            tableView.reloadData()
-        case .failure:
-            router.resultAlert(titleText: "読み込みに失敗", messageText: "アプリを再起動してください", titleOK: "OK")
+        viewModel.getRequestData { result in
+            switch result{
+            case .success:
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure:
+                DispatchQueue.main.async {
+                    self.router.resultAlert(titleText: "読み込みに失敗", messageText: "アプリを再起動してください", titleOK: "OK")
+                }
+            }
         }
     }
 }
@@ -64,24 +69,30 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            let result = viewModel.getRequestData()
-            switch result{
-            case .success:
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            viewModel.getRequestData { result in
+                switch result{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async{
+                        self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
                 }
-            case .failure:
-                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
             }
         case 1:
-            let result = viewModel.getRecruitmentData()
-            switch result{
-            case .success:
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            viewModel.getRecruitmentData { result in
+                switch result{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async{
+                        self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
                 }
-            case .failure:
-                router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
             }
         default:
             break
