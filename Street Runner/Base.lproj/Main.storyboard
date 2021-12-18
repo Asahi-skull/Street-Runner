@@ -648,7 +648,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZl-qD-YG3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529" y="-1975"/>
+            <point key="canvasLocation" x="1474" y="-2384"/>
         </scene>
         <!--Detail Posted View Controller-->
         <scene sceneID="TTx-GU-LHj">
@@ -679,11 +679,45 @@
                     <navigationItem key="navigationItem" id="idZ-VJ-YfB"/>
                     <connections>
                         <outlet property="tableView" destination="0Lt-Aa-IRu" id="cOg-hr-GRu"/>
+                        <segue destination="cmQ-Qo-cLK" kind="show" identifier="toUserProfile" id="7O8-eG-gAh"/>
+                        <segue destination="yEb-lx-6dV" kind="show" identifier="toCommentList" id="WJZ-gh-SOT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qb2-dV-S8p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2305.7971014492755" y="-1975.4464285714284"/>
+            <point key="canvasLocation" x="2251" y="-2384"/>
+        </scene>
+        <!--Comment List View Controller-->
+        <scene sceneID="uf8-xj-BQ4">
+            <objects>
+                <viewController id="yEb-lx-6dV" customClass="CommentListViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kgT-tY-f5t">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Fqp-Cx-sIt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dyv-D7-iyU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXf-W2-PZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3070" y="-1962"/>
+        </scene>
+        <!--User Profile View Controller-->
+        <scene sceneID="Rec-hC-9Wt">
+            <objects>
+                <viewController id="cmQ-Qo-cLK" customClass="UserProfileViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2PR-7B-iAv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="k1V-pL-6eb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dEL-M7-3Of"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LfP-qM-hpt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3070" y="-2699"/>
         </scene>
         <!--Item-->
         <scene sceneID="q5c-aX-Eou">
@@ -721,7 +755,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7ng-EG-ARW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="792.75362318840587" y="-1975.4464285714284"/>
+            <point key="canvasLocation" x="738" y="-2384"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

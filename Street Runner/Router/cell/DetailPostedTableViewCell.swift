@@ -9,7 +9,6 @@ import UIKit
 
 class DetailPostedTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var postedImage: UIImageView!
     @IBOutlet weak var postedText: UILabel!
     
     override func awakeFromNib() {
