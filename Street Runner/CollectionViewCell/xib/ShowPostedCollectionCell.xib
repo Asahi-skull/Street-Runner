@@ -38,18 +38,18 @@
                             <constraint firstAttribute="height" constant="180" id="Lgb-8f-oQT"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="依頼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QI-dE-Nvy">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コメント" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QI-dE-Nvy">
                         <rect key="frame" x="0.0" y="225" width="190" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="gyr-5y-E31"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CG2-Cx-9Dm">
-                        <rect key="frame" x="0.0" y="255" width="190" height="71"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="0.0" y="255" width="190" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -67,7 +67,6 @@
                 <constraint firstAttribute="trailing" secondItem="9QI-dE-Nvy" secondAttribute="trailing" id="Q7v-pI-hFq"/>
                 <constraint firstItem="FY6-rt-7aD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TyK-C8-8UL"/>
                 <constraint firstItem="FY6-rt-7aD" firstAttribute="top" secondItem="5ek-fp-hE0" secondAttribute="bottom" constant="5" id="U5h-Rm-7W4"/>
-                <constraint firstAttribute="bottom" secondItem="CG2-Cx-9Dm" secondAttribute="bottom" id="W53-3B-bRk"/>
                 <constraint firstItem="5ek-fp-hE0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XuC-2A-76l"/>
                 <constraint firstAttribute="trailing" secondItem="CG2-Cx-9Dm" secondAttribute="trailing" id="wFt-DJ-ROO"/>
                 <constraint firstItem="9QI-dE-Nvy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xgE-8j-aPy"/>
