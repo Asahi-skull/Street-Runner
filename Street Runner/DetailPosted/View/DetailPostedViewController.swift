@@ -32,6 +32,11 @@ class DetailPostedViewController: UIViewController {
         let commentNib = UINib(nibName: "DetailCommentTableViewCell", bundle: nil)
         tableView.register(commentNib, forCellReuseIdentifier: "detailCommentCell")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 }
 
 extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
@@ -88,7 +93,13 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
         }else if indexPath.row == 2{
             
         }else{
-            router.transition(idetifier: "toCommentList", sender: nil)
+            router.transition(idetifier: "toCommentList", sender: entity)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let entityItem = sender as! RequestEntity
+        let toCommentList = segue.destination as! CommentListViewController
+        toCommentList.objectId = entityItem.objectID
     }
 }
