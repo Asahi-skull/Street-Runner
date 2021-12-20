@@ -9,7 +9,7 @@ import Foundation
 import NCMB
 
 protocol CommentMBaaS{
-    
+    //
 }
 
 class CommentMBaaSImpl: CommentMBaaS{
