@@ -13,6 +13,8 @@ class ShowPostedViewController: UIViewController {
     
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
+    
+    var ncmbClass: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class ShowPostedViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                self.ncmbClass = "request"
             case .failure:
                 DispatchQueue.main.async {
                     self.router.resultAlert(titleText: "読み込みに失敗", messageText: "アプリを再起動してください", titleOK: "OK")
@@ -75,6 +78,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    self.ncmbClass = "request"
                 case .failure:
                     DispatchQueue.main.async{
                         self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
@@ -88,6 +92,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    self.ncmbClass = "recruitment"
                 case .failure:
                     DispatchQueue.main.async{
                         self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
@@ -132,6 +137,8 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let entity = sender as! RequestEntity
         let toDetailPosted = segue.destination as! DetailPostedViewController
-        toDetailPosted.entity = entity
+        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userName: entity.userName, userObjectID: entity.userObjectID, className: ncmbClass)
+        toDetailPosted.entity = data
     }
 }
+

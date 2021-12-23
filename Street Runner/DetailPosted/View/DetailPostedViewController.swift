@@ -14,7 +14,7 @@ class DetailPostedViewController: UIViewController {
     var viewModel: DetailPostedViewModel?
     lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
     
-    var entity: RequestEntity?
+    var entity: detailData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +87,7 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0{
-            router.transition(idetifier: "toUserProfile", sender: nil)
+            router.transition(idetifier: "toUserProfile", sender: entity)
         }else if indexPath.row == 1{
             
         }else if indexPath.row == 2{
@@ -98,8 +98,9 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let entityItem = sender as! RequestEntity
+        let entityItem = sender as! detailData
         let toCommentList = segue.destination as! CommentListViewController
-        toCommentList.objectId = entityItem.objectID
+        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+        toCommentList.entity = commentData
     }
 }

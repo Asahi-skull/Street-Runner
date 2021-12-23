@@ -21,7 +21,7 @@ class DetailUserTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setData(entity: RequestEntity){
+    func setData(entity: detailData){
         userNameLabel.text = entity.userName
     }
 }

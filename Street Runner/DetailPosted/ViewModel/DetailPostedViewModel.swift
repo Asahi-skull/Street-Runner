@@ -10,22 +10,22 @@ import UIKit
 
 protocol DetailPostedViewModel{
     func getImage(fileName: String, imageView: UIImageView)
-    func getEntity() -> RequestEntity
+    func getEntity() -> detailData
 }
 
 class DetailPostedViewModelImpl: DetailPostedViewModel{
-    init(entity: RequestEntity){
+    init(entity: detailData){
         self.entity = entity
     }
     
-    let entity: RequestEntity
+    let entity: detailData
     let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     
     func getImage(fileName: String, imageView: UIImageView) {
         showPosted.getIconImage(fileName: fileName, imageView: imageView)
     }
     
-    func getEntity() -> RequestEntity {
+    func getEntity() -> detailData {
         entity
     }
 }
