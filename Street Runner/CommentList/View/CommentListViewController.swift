@@ -25,6 +25,7 @@ class CommentListViewController: UIViewController {
         }else{
             router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             navigationController?.popViewController(animated: true)
+            return
         }
         viewModel?.getComment(completion: { result in
             switch result{
