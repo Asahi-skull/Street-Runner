@@ -11,7 +11,6 @@ struct detailData{
     var objectID: String?
     var requestImage: String?
     var requestText: String?
-    var userName: String?
     var userObjectID: String?
     var className: String?
 }

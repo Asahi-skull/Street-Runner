@@ -9,17 +9,16 @@ import Foundation
 import NCMB
 
 protocol PostRecruitmentMBaaS{
-    func saveRecruitment(recruitmentImageFile: String, recruitmentText: String, userObjectID: String, userName: String) -> Result<Void,Error>
+    func saveRecruitment(recruitmentImageFile: String, recruitmentText: String, userObjectID: String) -> Result<Void,Error>
     func deleteImagefile(fileName: String)
 }
 
 class PostRecruitmentMBaaSImpl: PostRecruitmentMBaaS{
-    func saveRecruitment(recruitmentImageFile: String, recruitmentText: String, userObjectID: String, userName: String) -> Result<Void,Error>{
+    func saveRecruitment(recruitmentImageFile: String, recruitmentText: String, userObjectID: String) -> Result<Void,Error>{
         let object = NCMBObject(className: "recruitment")
         object["requestImage"] = recruitmentImageFile
         object["requestText"] = recruitmentText
         object["userObjectID"] = userObjectID
-        object["userName"] = userName
         let result = object.save()
         switch result{
         case .success:

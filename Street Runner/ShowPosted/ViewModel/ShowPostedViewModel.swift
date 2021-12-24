@@ -14,10 +14,12 @@ protocol ShowPostedViewModel{
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void)
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
     func getIconImage(fileName: String,imageView: UIImageView)
+    func getUserInfo(userObjectId: String, completion: @escaping (Result<UserData,Error>) -> Void)
 }
 
 class ShowPostedViewModelImpl: ShowPostedViewModel{
     let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    let userInfo: CommentMBaaS = CommentMBaaSImpl()
     private var datas: [RequestEntity] = []
     
     func dataCount() -> Int {
@@ -54,5 +56,16 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     
     func getIconImage(fileName: String,imageView: UIImageView){
         showPosted.getIconImage(fileName: fileName, imageView: imageView)
+    }
+    
+    func getUserInfo(userObjectId: String, completion: @escaping (Result<UserData,Error>) -> Void){
+        userInfo.getUserData(userObjectId: userObjectId) { result in
+            switch result{
+            case .success(let data):
+                completion(Result.success(data))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }

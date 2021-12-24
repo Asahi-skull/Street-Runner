@@ -75,7 +75,6 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     func getUserData(completion: @escaping (Result<UserData,Error>) -> Void){
         guard let userObjectId = entity.userObjectId else {return}
-        print(userObjectId)
         commentMbaas.getUserData(userObjectId: userObjectId) { result in
             switch result{
             case .success(let data):

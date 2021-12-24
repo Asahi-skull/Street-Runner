@@ -9,22 +9,22 @@ import Foundation
 import NCMB
 
 protocol PostRequestMBaaS{
-    func saveRequest(requestImageFile: String, requestText: String, userObjectID: String, userName: String) -> Result<Void,Error>
+    func saveRequest(requestImageFile: String, requestText: String, userObjectID: String) -> Result<Void,Error>
     func deleteImagefile(fileName: String)
 }
 
 class PostRequestMBaaSImpl: PostRequestMBaaS{
-    func saveRequest(requestImageFile: String, requestText: String, userObjectID: String, userName: String) -> Result<Void,Error>{
+    func saveRequest(requestImageFile: String, requestText: String, userObjectID: String) -> Result<Void,Error>{
         let object = NCMBObject(className: "request")
         object["requestImage"] = requestImageFile
         object["requestText"] = requestText
         object["userObjectID"] = userObjectID
-        object["userName"] = userName
         let result = object.save()
         switch result{
         case .success:
             return Result.success(())
         case .failure(let err):
+            print(err)
             return Result.failure(err)
         }
     }

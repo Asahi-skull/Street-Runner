@@ -87,11 +87,11 @@ extension CommentListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.userCommentText.text = data.commentText
         viewModel?.getUserData(completion: { result in
             switch result{
-            case .success(let data):
+            case .success(let datas):
                 DispatchQueue.main.async {
-                    cell.userNameLabel.text = data.userName
+                    cell.userNameLabel.text = datas.userName
                 }
-                guard let fileName = data.iconImageFile else {return}
+                guard let fileName = datas.iconImageFile else {return}
                 self.viewModel?.getIconImage(fileName: fileName, imageView: cell.iconImage)
             case .failure:
                 return

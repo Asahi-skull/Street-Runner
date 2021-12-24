@@ -47,11 +47,17 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
-            if let entityData = viewModel?.getEntity(){
-                guard let iconFileName = entityData.userObjectID else {return cell}
-                viewModel?.getImage(fileName: iconFileName, imageView: cell.iconImage)
-                cell.setData(entity: entityData)
-            }
+            viewModel?.getUserInfo(compltion: { result in
+                switch result{
+                case .success(let data):
+                    guard let iconImageFile = data.iconImageFile else {return}
+                    self.viewModel?.getImage(fileName: iconImageFile, imageView: cell.iconImage)
+                    guard let userName = data.userName else {return}
+                    cell.setData(userName: userName)
+                case .failure:
+                    return
+                }
+            })
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell

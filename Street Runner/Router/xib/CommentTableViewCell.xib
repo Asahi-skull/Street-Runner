@@ -29,15 +29,15 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="PvJ-ZP-gPY"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="こんにちは" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6S-dE-8ge">
-                        <rect key="frame" x="70" y="45" width="280" height="98"/>
+                        <rect key="frame" x="70" y="35" width="280" height="108"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
@@ -45,7 +45,7 @@
                     <constraint firstItem="TQe-OB-kVU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0Qc-2N-4Uf"/>
                     <constraint firstItem="TQe-OB-kVU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Cex-Yx-nWV"/>
                     <constraint firstItem="aUW-QR-1E0" firstAttribute="leading" secondItem="TQe-OB-kVU" secondAttribute="trailing" constant="10" id="Fwo-cS-DFP"/>
-                    <constraint firstItem="D6S-dE-8ge" firstAttribute="top" secondItem="aUW-QR-1E0" secondAttribute="bottom" constant="10" id="IcF-Dg-Voc"/>
+                    <constraint firstItem="D6S-dE-8ge" firstAttribute="top" secondItem="aUW-QR-1E0" secondAttribute="bottom" id="IcF-Dg-Voc"/>
                     <constraint firstAttribute="trailing" secondItem="aUW-QR-1E0" secondAttribute="trailing" constant="10" id="Kd5-nl-UDI"/>
                     <constraint firstItem="D6S-dE-8ge" firstAttribute="leading" secondItem="TQe-OB-kVU" secondAttribute="trailing" constant="10" id="Xlc-Yp-zWG"/>
                     <constraint firstItem="aUW-QR-1E0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mnJ-NY-hx9"/>

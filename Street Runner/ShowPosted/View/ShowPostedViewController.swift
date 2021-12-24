@@ -113,14 +113,25 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postedCollectionCell", for: indexPath) as! ShowPostedCollectionCell
          let data = viewModel.getData(indexPath: indexPath)
-        guard let userName = data.userName else {return cell}
-        cell.userNameLabel.text = userName
         guard let requestText = data.requestText else {return cell}
         cell.contentTextLabel.text = requestText
-        guard let iconFileName = data.userObjectID else {return cell}
-        viewModel.getIconImage(fileName: iconFileName, imageView: cell.iconImage)
         guard let requestFileName = data.requestImage else {return cell}
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
+        
+        guard let userObjectId = data.userObjectID else {return cell}
+        viewModel.getUserInfo(userObjectId: userObjectId) { result in
+            switch result{
+            case .success(let datas):
+                DispatchQueue.main.async {
+                    cell.userNameLabel.text = datas.userName
+                }
+                guard let iconImageFile = datas.iconImageFile else {return}
+                self.viewModel.getIconImage(fileName: iconImageFile, imageView: cell.iconImage)
+            case .failure:
+                return
+            }
+        }
+        
         return cell
     }
     
@@ -137,7 +148,7 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let entity = sender as! RequestEntity
         let toDetailPosted = segue.destination as! DetailPostedViewController
-        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userName: entity.userName, userObjectID: entity.userObjectID, className: ncmbClass)
+        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: entity.userObjectID, className: ncmbClass)
         toDetailPosted.entity = data
     }
 }
