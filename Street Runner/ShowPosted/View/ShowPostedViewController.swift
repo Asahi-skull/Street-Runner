@@ -13,6 +13,8 @@ class ShowPostedViewController: UIViewController {
     
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
+    
+    var ncmbClass: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class ShowPostedViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                self.ncmbClass = "request"
             case .failure:
                 DispatchQueue.main.async {
                     self.router.resultAlert(titleText: "読み込みに失敗", messageText: "アプリを再起動してください", titleOK: "OK")
@@ -75,6 +78,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    self.ncmbClass = "request"
                 case .failure:
                     DispatchQueue.main.async{
                         self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
@@ -88,6 +92,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    self.ncmbClass = "recruitment"
                 case .failure:
                     DispatchQueue.main.async{
                         self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
@@ -108,14 +113,25 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postedCollectionCell", for: indexPath) as! ShowPostedCollectionCell
          let data = viewModel.getData(indexPath: indexPath)
-        guard let userName = data.userName else {return cell}
-        cell.userNameLabel.text = userName
         guard let requestText = data.requestText else {return cell}
         cell.contentTextLabel.text = requestText
-        guard let iconFileName = data.userObjectID else {return cell}
-        viewModel.getIconImage(fileName: iconFileName, imageView: cell.iconImage)
         guard let requestFileName = data.requestImage else {return cell}
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
+        
+        guard let userObjectId = data.userObjectID else {return cell}
+        viewModel.getUserInfo(userObjectId: userObjectId) { result in
+            switch result{
+            case .success(let datas):
+                DispatchQueue.main.async {
+                    cell.userNameLabel.text = datas.userName
+                }
+                guard let iconImageFile = datas.iconImageFile else {return}
+                self.viewModel.getIconImage(fileName: iconImageFile, imageView: cell.iconImage)
+            case .failure:
+                return
+            }
+        }
+        
         return cell
     }
     
@@ -132,6 +148,8 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let entity = sender as! RequestEntity
         let toDetailPosted = segue.destination as! DetailPostedViewController
-        toDetailPosted.entity = entity
+        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: entity.userObjectID, className: ncmbClass)
+        toDetailPosted.entity = data
     }
 }
+

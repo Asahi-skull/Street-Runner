@@ -25,9 +25,8 @@ class ShowPostedMBaaSImpl: ShowPostedMBaaS{
                     let objectID: String? = data["objectId"]
                     let requestImage: String? = data["requestImage"]
                     let requestText: String? = data["requestText"]
-                    let userName: String? = data["userName"]
                     let userObjectID: String? = data["userObjectID"]
-                    let requestEntity = RequestEntity(objectID: objectID, requestImage: requestImage, requestText: requestText, userName: userName, userObjectID: userObjectID)
+                    let requestEntity = RequestEntity(objectID: objectID, requestImage: requestImage, requestText: requestText, userObjectID: userObjectID)
                     requestEntitys.append(requestEntity)
                 }
                  completion(Result.success(requestEntitys))

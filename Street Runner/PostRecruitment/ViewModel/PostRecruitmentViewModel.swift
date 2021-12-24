@@ -33,8 +33,7 @@ class PostRecruitmentViewModelImpl: PostRecruitmentViewModel{
     
     func saveRecruitment(requestImageFile: String, requestText: String) -> Result<Void, Error> {
         let userObjectID = profile.getID()
-        let userName = profile.getUser()
-        let result = saveRecruitment.saveRecruitment(recruitmentImageFile: requestImageFile, recruitmentText: requestText, userObjectID: userObjectID, userName: userName)
+        let result = saveRecruitment.saveRecruitment(recruitmentImageFile: requestImageFile, recruitmentText: requestText, userObjectID: userObjectID)
         switch result{
         case .success:
             return Result.success(())

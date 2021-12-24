@@ -49,7 +49,6 @@ class PostRequestViewController: UIViewController {
         switch result{
         case .success(let data):
             let fileName = data
-            print(fileName)
             let res = postRequest.saveRequest(requestImageFile: fileName, requestText: requestText)
             switch res{
             case .success:

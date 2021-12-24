@@ -33,10 +33,7 @@ class PostRequestViewModelImpl: PostRequestViewModel{
     
     func saveRequest(requestImageFile: String, requestText: String) -> Result<Void, Error>{
         let userObjectID = profile.getID()
-        let userName = profile.getUser()
-        print(userName)
-        print(userObjectID)
-        let result = saveRequest.saveRequest(requestImageFile: requestImageFile, requestText: requestText, userObjectID: userObjectID, userName: userName)
+        let result = saveRequest.saveRequest(requestImageFile: requestImageFile, requestText: requestText, userObjectID: userObjectID)
         switch result{
         case .success:
             return Result.success(())
