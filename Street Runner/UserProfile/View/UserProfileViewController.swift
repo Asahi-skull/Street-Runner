@@ -35,8 +35,8 @@ class UserProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.getRequestData(completion: { result in
-            switch result{
+        viewModel?.getRequestData{
+            switch $0{
             case .success:
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -46,11 +46,11 @@ class UserProfileViewController: UIViewController {
                     self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
                 }
             }
-        })
+        }
     }
 }
 
-extension UserProfileViewController: UITableViewDataSource,UITableViewDelegate{
+extension UserProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }
@@ -81,7 +81,42 @@ extension UserProfileViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         }
     }
+    
+    @objc func segmentChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            viewModel?.getRequestData{
+                switch $0{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
+                }
+            }
+        case 1:
+            viewModel?.getRecruitmentData{
+                switch $0{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
+                }
+            }
+        default:
+            break
+        }
+    }
+}
 
+extension UserProfileViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return tableView.bounds.height * 3/14
@@ -95,42 +130,9 @@ extension UserProfileViewController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    @objc func segmentChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            viewModel?.getRequestData(completion: { result in
-                switch result{
-                case .success:
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
-                    }
-                }
-            })
-        case 1:
-            viewModel?.getRecruitmentData(completion: { result in
-                switch result{
-                case .success:
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
-                    }
-                }
-            })
-        default:
-            break
-        }
-    }
 }
 
-extension UserProfileViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension UserProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let count = viewModel?.dataCount() else {return 0}
         return count
@@ -140,12 +142,18 @@ extension UserProfileViewController: UICollectionViewDelegate,UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profilePostedCollectionCell", for: indexPath) as! ProfilePostedCollectionViewCell
         guard let data = viewModel?.getData(indexPath: indexPath) else {return cell}
         guard let fileName = data.requestImage else {return cell}
-        viewModel?.setImage(fileName: fileName, imageView: cell.postedImage)
+        viewModel?.setImage(fileName: fileName,  imageView: cell.postedImage)
         guard let postedText = data.requestText else {return cell}
         cell.commentText.text = postedText
         return cell
     }
+}
 
+extension UserProfileViewController: UICollectionViewDelegate {
+    
+}
+
+extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let horizontalSpace: CGFloat = 5
         let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
