@@ -63,7 +63,6 @@ class CommentMBaaSImpl: CommentMBaaS{
                 completion(Result.success(commentEntity))
             case .failure(let err):
                 completion(Result.failure(err))
-                print(err)
             }
         }
     }
