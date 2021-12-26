@@ -18,8 +18,8 @@ class ShowPostedViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        let segmentedNib = UINib(nibName: "SegmentedTableCell", bundle: nil)
-        tableView.register(segmentedNib, forCellReuseIdentifier: "segmentedCell")
+        let segmentedNib = UINib(nibName: "HomeSegmentedTableViewCell", bundle: nil)
+        tableView.register(segmentedNib, forCellReuseIdentifier: "homeSegmentedCell")
         let postedTableNib = UINib(nibName: "ShowPostedTableCell", bundle: nil)
         tableView.register(postedTableNib, forCellReuseIdentifier: "postedCell")
     }
@@ -49,7 +49,7 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "segmentedCell", for: indexPath) as! SegmentedTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "homeSegmentedCell", for: indexPath) as! HomeSegmentedTableViewCell
             cell.segmented.addTarget(self, action: #selector(self.segmentChanged(_:)), for: .valueChanged)
             return cell
         }else{

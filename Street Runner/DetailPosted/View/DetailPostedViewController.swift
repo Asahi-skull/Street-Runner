@@ -105,8 +105,11 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let entityItem = sender as! detailData
-        let toCommentList = segue.destination as! CommentListViewController
-        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
-        toCommentList.entity = commentData
+        let toUserProfile = segue.destination as! UserProfileViewController
+            toUserProfile.userObjectId = entityItem.userObjectID
+        
+//        let toCommentList = segue.destination as! CommentListViewController
+//        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+//        toCommentList.entity = commentData
     }
 }
