@@ -10,12 +10,17 @@ import UIKit
 
 protocol UserProfileViewModel{
     func getUserObjectId() -> String
+    func getCurrentUserObjectId() -> String
     func getUserProfile(imageView: UIImageView,completion: @escaping (Result<String,Error>) -> Void)
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void)
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> ProfilePostedEntity
     func setImage(fileName: String,imageView: UIImageView)
+    func follow()
+    func unFollow()
+    func checkFollow() -> Result<Void,Error>
+    func boolcheck() -> Bool
 }
 
 class UserProfileViewModelImpl: UserProfileViewModel{
@@ -25,13 +30,19 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     
     let userObjectId: String
     private var datas: [ProfilePostedEntity] = []
+    private var check: Bool = false
     
     let userProfileModel: CommentMBaaS = CommentMBaaSImpl()
     let getImageModel: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
+    let followModel: UserProfileMBaaS = UserProfileMBaaSImpl()
     
     func getUserObjectId() -> String {
         userObjectId
+    }
+    
+    func getCurrentUserObjectId() -> String {
+        profileModel.getID()
     }
     
     func getUserProfile(imageView: UIImageView,completion: @escaping (Result<String,Error>) -> Void) {
@@ -82,5 +93,36 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     
     func setImage(fileName: String,imageView: UIImageView) {
         getImageModel.getIconImage(fileName: fileName, imageView: imageView)
+    }
+    
+    func follow() {
+        let currentUserObjrctId = profileModel.getID()
+        followModel.follow(followedBy: userObjectId, followOn: currentUserObjrctId)
+        check = true
+    }
+    
+    func unFollow(){
+        let currentUserObjrctId = profileModel.getID()
+        followModel.unFollow(followedBy: userObjectId, followOn: currentUserObjrctId)
+        check = false
+    }
+    
+    func checkFollow() -> Result<Void,Error> {
+        let currentUserObjrctId = profileModel.getID()
+        switch followModel.checkFollow(followedBy: userObjectId, followOn: currentUserObjrctId){
+        case .success(let int):
+            if int == 0{
+                check = false
+            }else{
+                check = true
+            }
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
+    }
+    
+    func boolcheck() -> Bool {
+        check
     }
 }
