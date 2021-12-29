@@ -30,8 +30,7 @@ class SignUpViewController: UIViewController {
         case .success:
             router.resultAlert(titleText: "送信完了", messageText: "メールを確認してください", titleOK: "OK")
             break
-        case .failure(let err):
-            print(err.localizedDescription)
+        case .failure:
             router.resultAlert(titleText: "送信失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }

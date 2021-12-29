@@ -47,8 +47,8 @@ extension DetailPostedViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
-            viewModel?.getUserInfo(compltion: { result in
-                switch result{
+            viewModel?.getUserInfo {
+                switch $0{
                 case .success(let data):
                     guard let iconImageFile = data.iconImageFile else {return}
                     self.viewModel?.getImage(fileName: iconImageFile, imageView: cell.iconImage)
@@ -57,12 +57,14 @@ extension DetailPostedViewController: UITableViewDataSource{
                 case .failure:
                     return
                 }
-            })
+            }
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
             guard let imageFileName = entity?.requestImage else {return cell}
-            viewModel?.getImage(fileName: imageFileName, imageView: cell.postedImage)
+            viewModel.map{
+                $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
+            }
             return cell
         }else if indexPath.row == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailPostedCell", for: indexPath) as! DetailPostedTableViewCell

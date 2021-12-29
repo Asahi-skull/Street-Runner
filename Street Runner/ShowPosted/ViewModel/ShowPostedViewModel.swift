@@ -31,8 +31,8 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void) {
-        showPosted.getRequest(className: "request") { result in
-            switch result{
+        showPosted.getRequest(className: "request") {
+            switch $0{
             case .success(let datas):
                 self.datas = datas
                 completion(Result.success(()))
@@ -43,8 +43,8 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        showPosted.getRequest(className: "recruitment") { result in
-            switch result{
+        showPosted.getRequest(className: "recruitment") {
+            switch $0{
             case .success(let datas):
                 self.datas = datas
                 completion(Result.success(()))
@@ -59,8 +59,8 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getUserInfo(userObjectId: String, completion: @escaping (Result<UserData,Error>) -> Void){
-        userInfo.getUserData(userObjectId: userObjectId) { result in
-            switch result{
+        userInfo.getUserData(userObjectId: userObjectId) {
+            switch $0{
             case .success(let data):
                 completion(Result.success(data))
             case .failure(let err):

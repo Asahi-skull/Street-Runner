@@ -46,8 +46,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     }
     
     func getUserProfile(imageView: UIImageView,completion: @escaping (Result<String,Error>) -> Void) {
-        userProfileModel.getUserData(userObjectId: userObjectId) { result in
-            switch result{
+        userProfileModel.getUserData(userObjectId: userObjectId) {
+            switch $0{
             case .success(let data):
                 guard let fileName = data.iconImageFile else {return}
                 self.getImageModel.getIconImage(fileName: fileName, imageView: imageView)
@@ -60,8 +60,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     }
     
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profileModel.getRequest(className: "request", objectID: userObjectId) { result in
-            switch result{
+        profileModel.getRequest(className: "request", objectID: userObjectId) {
+            switch $0{
             case .success(let datas):
                 self.datas = datas
                 completion(Result.success(()))
@@ -72,8 +72,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profileModel.getRequest(className: "recruitment", objectID: userObjectId) { result in
-            switch result{
+        profileModel.getRequest(className: "recruitment", objectID: userObjectId) {
+            switch $0{
             case .success(let datas):
                 self.datas = datas
                 completion(Result.success(()))

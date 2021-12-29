@@ -27,18 +27,20 @@ class CommentListViewController: UIViewController {
             navigationController?.popViewController(animated: true)
             return
         }
-        viewModel?.getComment(completion: { result in
-            switch result{
-            case .success:
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure:
-                DispatchQueue.main.async {
-                    self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+        viewModel.map{
+            $0.getComment {
+                switch $0{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
                 }
             }
-        })
+        }
         tabBarController?.tabBar.isHidden = true
         let nib = UINib(nibName: "CommentTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "commentCell")
@@ -60,19 +62,21 @@ class CommentListViewController: UIViewController {
     
     @IBAction func sendButtton(_ sender: Any) {
         guard let commentText = commentTextView.text else {return}
-        viewModel?.saveComment(commentText: commentText, completion: { result in
-            switch result{
-            case .success:
-                DispatchQueue.main.async {
-                    self.commentTextView.text = ""
-                    self.commentTextView.endEditing(true)
-                }
-            case .failure:
-                DispatchQueue.main.async {
-                    self.router.resultAlert(titleText: "コメントの保存に失敗", messageText: "もう一度送信してください", titleOK: "OK")
+        viewModel.map{
+            $0.saveComment(commentText: commentText) {
+                switch $0{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.commentTextView.text = ""
+                        self.commentTextView.endEditing(true)
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.router.resultAlert(titleText: "コメントの保存に失敗", messageText: "もう一度送信してください", titleOK: "OK")
+                    }
                 }
             }
-        })
+        }
     }
 }
 
@@ -86,18 +90,20 @@ extension CommentListViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentTableViewCell
         guard let data = viewModel?.getData(indexPath: indexPath) else {return cell}
         cell.userCommentText.text = data.commentText
-        viewModel?.getUserData(completion: { result in
-            switch result{
-            case .success(let datas):
-                DispatchQueue.main.async {
-                    cell.userNameLabel.text = datas.userName
+        viewModel.map{
+            $0.getUserData {
+                switch $0{
+                case .success(let datas):
+                    DispatchQueue.main.async {
+                        cell.userNameLabel.text = datas.userName
+                    }
+                    guard let fileName = datas.iconImageFile else {return}
+                    self.viewModel?.getIconImage(fileName: fileName, imageView: cell.iconImage)
+                case .failure:
+                    return
                 }
-                guard let fileName = datas.iconImageFile else {return}
-                self.viewModel?.getIconImage(fileName: fileName, imageView: cell.iconImage)
-            case .failure:
-                return
             }
-        })
+        }
         return cell
     }
 }

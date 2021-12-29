@@ -67,31 +67,31 @@ extension UserProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "userProfileCell", for: indexPath) as! UserProfileTableViewCell
-            let postedUserObjectId = viewModel?.getUserObjectId()
-            let currentUserObjectId = viewModel?.getCurrentUserObjectId()
-            if postedUserObjectId == currentUserObjectId {
-                cell.followButton.isEnabled = false
-            }else{
-                cell.followButton.isEnabled = true
-            }
-            cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(_:)), for: .touchUpInside)
-            viewModel?.getUserProfile(imageView: cell.iconImage, completion: { result in
-                switch result{
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        cell.userNameLabel.text = data
-                    }
-                case .failure:
-                    return
-                }
-            })
             viewModel.map{
+                let postedUserObjectId = $0.getUserObjectId()
+                let currentUserObjectId = $0.getCurrentUserObjectId()
+                if postedUserObjectId == currentUserObjectId {
+                    cell.followButton.isEnabled = false
+                }else{
+                    cell.followButton.isEnabled = true
+                }
+                $0.getUserProfile(imageView: cell.iconImage) {
+                    switch $0{
+                    case .success(let data):
+                        DispatchQueue.main.async {
+                            cell.userNameLabel.text = data
+                        }
+                    case .failure:
+                        return
+                    }
+                }
                 if $0.boolcheck() {
                     cell.alreadyFollowUp()
                 }else{
                     cell.notFollowUp()
                 }
             }
+            cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(_:)), for: .touchUpInside)
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "segmentedCell", for: indexPath) as! SegmentedTableCell

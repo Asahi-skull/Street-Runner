@@ -26,8 +26,8 @@ class ShowPostedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getRequestData { result in
-            switch result{
+        viewModel.getRequestData {
+            switch $0{
             case .success:
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -64,8 +64,8 @@ extension ShowPostedViewController: UITableViewDataSource {
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            viewModel.getRequestData { result in
-                switch result{
+            viewModel.getRequestData {
+                switch $0{
                 case .success:
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -78,8 +78,8 @@ extension ShowPostedViewController: UITableViewDataSource {
                 }
             }
         case 1:
-            viewModel.getRecruitmentData { result in
-                switch result{
+            viewModel.getRecruitmentData {
+                switch $0{
                 case .success:
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -121,8 +121,8 @@ extension ShowPostedViewController: UICollectionViewDataSource{
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
         
         guard let userObjectId = data.userObjectID else {return cell}
-        viewModel.getUserInfo(userObjectId: userObjectId) { result in
-            switch result{
+        viewModel.getUserInfo(userObjectId: userObjectId) {
+            switch $0{
             case .success(let datas):
                 DispatchQueue.main.async {
                     cell.userNameLabel.text = datas.userName

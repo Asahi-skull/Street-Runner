@@ -27,8 +27,8 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profileViewModel.getRequest { iconResult in
-            switch iconResult{
+        profileViewModel.getRequest {
+            switch $0{
             case .success:
                 DispatchQueue.main.async {
                     self.table.reloadData()

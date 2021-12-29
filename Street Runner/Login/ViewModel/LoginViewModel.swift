@@ -14,7 +14,7 @@ protocol LoginViewModel{
 class LoginViewModelimpl: LoginViewModel{
     let login: LoginmBaaS = LoginmBaaSImpl()
     
-    func loginUser(email: String, password: String) -> Result<Void, Error> {
+    func loginUser(email: String, password: String) -> Result<Void,Error> {
         login.loginEmail(emailAddress: email, password: password)
     }
 }

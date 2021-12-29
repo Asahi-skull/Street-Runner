@@ -39,8 +39,8 @@ class CommentListViewModelImpl: CommentListViewModel{
         guard let className = entity.className else {return}
         guard let userObjectId = entity.userObjectId else {return}
         let postedObjectId = objectId + className
-        commentMbaas.saveComment(commentText: commentText, postedObjectId: postedObjectId, userObjectId: userObjectId) { result in
-            switch result{
+        commentMbaas.saveComment(commentText: commentText, postedObjectId: postedObjectId, userObjectId: userObjectId) {
+            switch $0{
             case .success:
                 completion(Result.success(()))
             case .failure(let err):
@@ -54,8 +54,8 @@ class CommentListViewModelImpl: CommentListViewModel{
         guard let className = entity.className else {return}
         let postedObjectId = objectId + className
         print(postedObjectId)
-        commentMbaas.getcomment(postedObjectId: postedObjectId) { result in
-            switch result{
+        commentMbaas.getcomment(postedObjectId: postedObjectId) {
+            switch $0{
             case .success(let data):
                 self.datas = data
                 completion(Result.success(()))
@@ -75,8 +75,8 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     func getUserData(completion: @escaping (Result<UserData,Error>) -> Void){
         guard let userObjectId = entity.userObjectId else {return}
-        commentMbaas.getUserData(userObjectId: userObjectId) { result in
-            switch result{
+        commentMbaas.getUserData(userObjectId: userObjectId) {
+            switch $0{
             case .success(let data):
                 completion(Result.success(data))
             case .failure(let err):

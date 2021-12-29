@@ -37,13 +37,6 @@ class UserProfileMBaaSImpl: UserProfileMBaaS{
         switch result{
         case .success(let datas):
             for data in datas{
-//                let res = data.delete()
-//                switch res {
-//                case .success:
-//                    return Result.success(())
-//                case .failure(let err):
-//                    return Result.failure(err)
-//                }
                 data.deleteInBackground {
                     switch $0 {
                     case .success:

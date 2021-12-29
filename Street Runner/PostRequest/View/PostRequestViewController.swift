@@ -67,7 +67,6 @@ class PostRequestViewController: UIViewController {
 }
 
 extension PostRequestViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editImage = info[.editedImage] as? UIImage {
             requestImage.image = editImage
