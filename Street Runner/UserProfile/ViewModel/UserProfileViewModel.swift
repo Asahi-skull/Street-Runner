@@ -21,6 +21,8 @@ protocol UserProfileViewModel{
     func unFollow(completion: @escaping (Result<Void,Error>) -> Void)
     func checkFollow() -> Result<Void,Error>
     func boolcheck() -> Bool
+    func countFollower(completion: @escaping (Result<Int,Error>) -> Void)
+    func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
 }
 
 class UserProfileViewModelImpl: UserProfileViewModel{
@@ -138,5 +140,27 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     
     func boolcheck() -> Bool {
         check
+    }
+    
+    func countFollower(completion: @escaping (Result<Int,Error>) -> Void){
+        followModel.countFollow(field: "followedBy", userObjectId: userObjectId) {
+            switch $0{
+            case .success(let int):
+                completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func countFollowing(completion: @escaping (Result<Int,Error>) -> Void){
+        followModel.countFollow(field: "followOn", userObjectId: userObjectId) {
+            switch $0{
+            case .success(let int):
+                completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }

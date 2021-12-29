@@ -11,8 +11,8 @@ import NCMB
 protocol UserProfileMBaaS{
     func follow(followedBy: String,followOn: String,comletion: @escaping (Result<Void,Error>) -> Void)
     func unFollow(followedBy: String,followOn: String,completion: @escaping (Result<Void,Error>) -> Void)
-    func checkFollow(followedBy: String,followOn: String) -> Result<Int,Error> 
-}
+    func checkFollow(followedBy: String,followOn: String) -> Result<Int,Error>
+    func countFollow(field: String,userObjectId: String,completion: @escaping (Result<Int,Error>) -> Void)}
 
 class UserProfileMBaaSImpl: UserProfileMBaaS{
     func follow(followedBy: String,followOn: String,comletion: @escaping (Result<Void,Error>) -> Void) {
@@ -61,6 +61,19 @@ class UserProfileMBaaSImpl: UserProfileMBaaS{
             return Result.success(int)
         case .failure(let err):
             return Result.failure(err)
+        }
+    }
+    
+    func countFollow(field: String,userObjectId: String,completion: @escaping (Result<Int,Error>) -> Void) {
+        var quary = NCMBQuery.getQuery(className: "follow")
+        quary.where(field: field, equalTo: userObjectId)
+        quary.countInBackground {
+            switch $0{
+            case .success(let int):
+                completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
         }
     }
 }
