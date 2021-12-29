@@ -17,8 +17,8 @@ protocol UserProfileViewModel{
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> ProfilePostedEntity
     func setImage(fileName: String,imageView: UIImageView)
-    func follow()
-    func unFollow()
+    func follow(completion: @escaping (Result<Void,Error>) -> Void)
+    func unFollow(completion: @escaping (Result<Void,Error>) -> Void)
     func checkFollow() -> Result<Void,Error>
     func boolcheck() -> Bool
 }
@@ -95,16 +95,30 @@ class UserProfileViewModelImpl: UserProfileViewModel{
         getImageModel.getIconImage(fileName: fileName, imageView: imageView)
     }
     
-    func follow() {
+    func follow(completion: @escaping (Result<Void,Error>) -> Void) {
         let currentUserObjrctId = profileModel.getID()
-        followModel.follow(followedBy: userObjectId, followOn: currentUserObjrctId)
-        check = true
+        followModel.follow(followedBy: userObjectId, followOn: currentUserObjrctId) {
+            switch $0{
+            case .success:
+                self.check = true
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
-    func unFollow(){
+    func unFollow(completion: @escaping (Result<Void,Error>) -> Void){
         let currentUserObjrctId = profileModel.getID()
-        followModel.unFollow(followedBy: userObjectId, followOn: currentUserObjrctId)
-        check = false
+        followModel.unFollow(followedBy: userObjectId, followOn: currentUserObjrctId) {
+            switch $0 {
+            case .success:
+                self.check = false
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func checkFollow() -> Result<Void,Error> {
