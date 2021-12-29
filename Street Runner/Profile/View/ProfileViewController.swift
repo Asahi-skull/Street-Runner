@@ -27,8 +27,8 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profileViewModel.getRequest { iconResult in
-            switch iconResult{
+        profileViewModel.getRequest {
+            switch $0{
             case .success:
                 DispatchQueue.main.async {
                     self.table.reloadData()
@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
+extension ProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }
@@ -71,16 +71,6 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
-            return tableView.bounds.height/6
-        }else if indexPath.row == 1{
-            return tableView.bounds.height/18
-        }else{
-            return tableView.bounds.height - tableView.bounds.height/18
         }
     }
     
@@ -118,7 +108,19 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return tableView.bounds.height/6
+        }else if indexPath.row == 1{
+            return tableView.bounds.height/18
+        }else{
+            return tableView.bounds.height - tableView.bounds.height/18
+        }
+    }
+}
+
+extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         profileViewModel.dataCount()
     }
@@ -132,7 +134,13 @@ extension ProfileViewController: UICollectionViewDelegate,UICollectionViewDataSo
         cell.commentText.text = requestText
         return cell
     }
+}
+
+extension ProfileViewController: UICollectionViewDelegate {
     
+}
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let horizontalSpace: CGFloat = 5
         let cellSize: CGFloat = self.table.bounds.width/2 - horizontalSpace

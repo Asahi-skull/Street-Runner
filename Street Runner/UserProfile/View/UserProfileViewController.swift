@@ -15,6 +15,7 @@ class UserProfileViewController: UIViewController {
     lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
     
     var userObjectId: String?
+    var intCheck: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,14 @@ class UserProfileViewController: UIViewController {
             router.resultAlert(titleText: "データの取得に失敗", messageText: "戻ります", titleOK: "OK")
             navigationController?.popViewController(animated: true)
             return
+        }
+        viewModel.map{
+            switch $0.checkFollow(){
+            case .success:
+                break
+            case .failure:
+                return
+            }
         }
         let userNib = UINib(nibName: "UserProfileTableViewCell", bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier: "userProfileCell")
@@ -58,16 +67,31 @@ extension UserProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "userProfileCell", for: indexPath) as! UserProfileTableViewCell
-            viewModel?.getUserProfile(imageView: cell.iconImage, completion: { result in
-                switch result{
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        cell.userNameLabel.text = data
-                    }
-                case .failure:
-                    return
+            viewModel.map{
+                let postedUserObjectId = $0.getUserObjectId()
+                let currentUserObjectId = $0.getCurrentUserObjectId()
+                if postedUserObjectId == currentUserObjectId {
+                    cell.followButton.isEnabled = false
+                }else{
+                    cell.followButton.isEnabled = true
                 }
-            })
+                $0.getUserProfile(imageView: cell.iconImage) {
+                    switch $0{
+                    case .success(let data):
+                        DispatchQueue.main.async {
+                            cell.userNameLabel.text = data
+                        }
+                    case .failure:
+                        return
+                    }
+                }
+                if $0.boolcheck() {
+                    cell.alreadyFollowUp()
+                }else{
+                    cell.notFollowUp()
+                }
+            }
+            cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(_:)), for: .touchUpInside)
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "segmentedCell", for: indexPath) as! SegmentedTableCell
@@ -79,6 +103,40 @@ extension UserProfileViewController: UITableViewDataSource{
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             return cell
+        }
+    }
+    
+    @objc func followButtonTapped(_ sender : UIButton) {
+        viewModel.map{
+            if $0.boolcheck(){
+                $0.unFollow {
+                    switch $0{
+                    case .success:
+                        DispatchQueue.main.async {
+                            sender.backgroundColor = UIColor(named: "blueBack")
+                            sender.setTitle("フォローする", for: .normal)
+                            sender.setTitleColor(UIColor.white, for: .normal)
+                        }
+                    case .failure:
+                        return
+                    }
+                }
+            }else{
+                $0.follow {
+                    switch $0 {
+                    case .success:
+                        DispatchQueue.main.async {
+                            sender.backgroundColor = UIColor(named: "whiteBack")
+                            sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor
+                            sender.layer.borderWidth = 1.0
+                            sender.setTitle("フォロー中", for: .normal)
+                            sender.setTitleColor(UIColor(named: "blackText"), for: .normal)
+                        }
+                    case .failure:
+                        return
+                    }
+                }
+            }
         }
     }
     
@@ -119,7 +177,7 @@ extension UserProfileViewController: UITableViewDataSource{
 extension UserProfileViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return tableView.bounds.height * 3/14
+            return tableView.bounds.height * 2/7
         }else if indexPath.row == 1{
             return tableView.bounds.height/18
         }else{

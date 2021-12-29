@@ -26,5 +26,4 @@ class GuestViewController: UIViewController {
     @IBAction func registerButton(_ sender: Any) {
         router.transition(idetifier: "toSignUp")
     }
-    
 }

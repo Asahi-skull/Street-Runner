@@ -55,7 +55,7 @@ class ProfilemBaaSImpl: ProfilemBaaS{
             switch result{
             case .success(let datas):
                 var profilePostedEntitys: [ProfilePostedEntity] = []
-                for data in datas{
+                for data in datas.reversed(){
                     let objectID: String? = data["objectID"]
                     let requestImage: String? = data["requestImage"]
                     let requestText: String? = data["requestText"]

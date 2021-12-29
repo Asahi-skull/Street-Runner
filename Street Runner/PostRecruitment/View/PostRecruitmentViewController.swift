@@ -65,7 +65,6 @@ class PostRecruitmentViewController: UIViewController {
 }
 
 extension PostRecruitmentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editImage = info[.editedImage] as? UIImage {
             recruitmentImage.image = editImage

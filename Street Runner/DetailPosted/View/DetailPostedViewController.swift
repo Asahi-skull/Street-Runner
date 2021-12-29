@@ -39,7 +39,7 @@ class DetailPostedViewController: UIViewController {
     }
 }
 
-extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
+extension DetailPostedViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         4
     }
@@ -47,8 +47,8 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
-            viewModel?.getUserInfo(compltion: { result in
-                switch result{
+            viewModel?.getUserInfo {
+                switch $0{
                 case .success(let data):
                     guard let iconImageFile = data.iconImageFile else {return}
                     self.viewModel?.getImage(fileName: iconImageFile, imageView: cell.iconImage)
@@ -57,12 +57,14 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
                 case .failure:
                     return
                 }
-            })
+            }
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
             guard let imageFileName = entity?.requestImage else {return cell}
-            viewModel?.getImage(fileName: imageFileName, imageView: cell.postedImage)
+            viewModel.map{
+                $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
+            }
             return cell
         }else if indexPath.row == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailPostedCell", for: indexPath) as! DetailPostedTableViewCell
@@ -77,7 +79,9 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
             return cell
         }
     }
-    
+}
+
+extension DetailPostedViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return tableView.bounds.height/10
@@ -105,11 +109,13 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let entityItem = sender as! detailData
-        let toUserProfile = segue.destination as! UserProfileViewController
+        if segue.identifier == "toUserProfile"{
+            let toUserProfile = segue.destination as! UserProfileViewController
             toUserProfile.userObjectId = entityItem.userObjectID
-        
-//        let toCommentList = segue.destination as! CommentListViewController
-//        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
-//        toCommentList.entity = commentData
+        }else{
+            let toCommentList = segue.destination as! CommentListViewController
+            let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+            toCommentList.entity = commentData
+        }
     }
 }

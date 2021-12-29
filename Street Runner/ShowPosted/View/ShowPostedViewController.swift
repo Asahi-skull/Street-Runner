@@ -26,8 +26,8 @@ class ShowPostedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getRequestData { result in
-            switch result{
+        viewModel.getRequestData {
+            switch $0{
             case .success:
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -42,7 +42,7 @@ class ShowPostedViewController: UIViewController {
     }
 }
 
-extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
+extension ShowPostedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         2
     }
@@ -61,19 +61,11 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
-            return tableView.bounds.height/18
-        }else{
-            return tableView.bounds.height - tableView.bounds.height/18
-        }
-    }
-    
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            viewModel.getRequestData { result in
-                switch result{
+            viewModel.getRequestData {
+                switch $0{
                 case .success:
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -86,8 +78,8 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
                 }
             }
         case 1:
-            viewModel.getRecruitmentData { result in
-                switch result{
+            viewModel.getRecruitmentData {
+                switch $0{
                 case .success:
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -105,7 +97,17 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     }
 }
 
-extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension ShowPostedViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return tableView.bounds.height/18
+        }else{
+            return tableView.bounds.height - tableView.bounds.height/18
+        }
+    }
+}
+
+extension ShowPostedViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.dataCount()
     }
@@ -119,8 +121,8 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
         
         guard let userObjectId = data.userObjectID else {return cell}
-        viewModel.getUserInfo(userObjectId: userObjectId) { result in
-            switch result{
+        viewModel.getUserInfo(userObjectId: userObjectId) {
+            switch $0{
             case .success(let datas):
                 DispatchQueue.main.async {
                     cell.userNameLabel.text = datas.userName
@@ -131,16 +133,11 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
                 return
             }
         }
-        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let horizontalSpace: CGFloat = 5
-        let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
-        return CGSize(width: cellSize, height: cellSize + cellSize * 3/4)
-    }
-    
+}
+
+extension ShowPostedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         router.transition(idetifier: "toDetailPosted", sender: viewModel.getData(indexPath:indexPath))
     }
@@ -153,3 +150,10 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     }
 }
 
+extension ShowPostedViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let horizontalSpace: CGFloat = 5
+        let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
+        return CGSize(width: cellSize, height: cellSize + cellSize * 3/4)
+    }
+}

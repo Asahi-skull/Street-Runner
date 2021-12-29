@@ -20,8 +20,8 @@ class CommentMBaaSImpl: CommentMBaaS{
         object["commentText"] = commentText
         object["postedObjectId"] = postedObjectId
         object["userObjectId"] = userObjectId
-        object.saveInBackground { result in
-            switch result{
+        object.saveInBackground {
+            switch $0{
             case .success:
                 completion(Result.success(()))
             case .failure(let err):
@@ -33,8 +33,8 @@ class CommentMBaaSImpl: CommentMBaaS{
     func getcomment(postedObjectId: String,completion: @escaping (Result<[CommentEntity],Error>) -> Void){
         var query = NCMBQuery.getQuery(className: "comment")
         query.where(field: "postedObjectId", equalTo: postedObjectId)
-        query.findInBackground { result in
-            switch result{
+        query.findInBackground {
+            switch $0{
             case .success(let datas):
                 var commentEntitys: [CommentEntity] = []
                 for data in datas{
@@ -54,8 +54,8 @@ class CommentMBaaSImpl: CommentMBaaS{
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void){
         let user: NCMBUser = NCMBUser()
         user.objectId = userObjectId
-        user.fetchInBackground { result in
-            switch result{
+        user.fetchInBackground {
+            switch $0 {
             case .success:
                 let userName = user.userName
                 let iconImageFile: String? = user["iconImage"]

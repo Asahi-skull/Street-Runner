@@ -42,8 +42,8 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRequest(completion: @escaping (Result<Void,Error>) -> Void) {
-        profile.getRequest(className: "request", objectID: profile.getID()) { result in
-            switch result{
+        profile.getRequest(className: "request", objectID: profile.getID()) {
+            switch $0{
             case .success(let datas):
                 self.datas = datas
                 completion(Result.success(()))
@@ -54,8 +54,8 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profile.getRequest(className: "recruitment", objectID: profile.getID()) { result in
-            switch result{
+        profile.getRequest(className: "recruitment", objectID: profile.getID()) {
+            switch $0{
             case .success(let datas):
                 self.datas = datas
                 completion(Result.success(()))

@@ -33,8 +33,7 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(emailText, forKey:"email")
             UserDefaults.standard.set(passwordText, forKey: "password")
             performSegue(withIdentifier: "toProfile", sender: nil)
-        case .failure(let err):
-            print(err.localizedDescription)
+        case .failure:
             router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }

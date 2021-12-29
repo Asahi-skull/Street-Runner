@@ -33,8 +33,8 @@ class DetailPostedViewModelImpl: DetailPostedViewModel{
     
     func getUserInfo(compltion: @escaping (Result<UserData,Error>) -> Void){
         guard let userObjectId = entity.userObjectID else {return}
-        userInfo.getUserData(userObjectId: userObjectId) { result in
-            switch result{
+        userInfo.getUserData(userObjectId: userObjectId) {
+            switch $0{
             case .success(let data):
                 compltion(Result.success(data))
             case .failure(let err):
