@@ -76,7 +76,7 @@ class CommentListViewController: UIViewController {
     }
 }
 
-extension CommentListViewController: UITableViewDelegate,UITableViewDataSource{
+extension CommentListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = viewModel?.dataCount() else {return 0}
         return count
@@ -100,7 +100,9 @@ extension CommentListViewController: UITableViewDelegate,UITableViewDataSource{
         })
         return cell
     }
-    
+}
+
+extension CommentListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.estimatedRowHeight = 70
         return UITableView.automaticDimension

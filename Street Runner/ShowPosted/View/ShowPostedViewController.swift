@@ -42,7 +42,7 @@ class ShowPostedViewController: UIViewController {
     }
 }
 
-extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
+extension ShowPostedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         2
     }
@@ -58,14 +58,6 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
-            return tableView.bounds.height/18
-        }else{
-            return tableView.bounds.height - tableView.bounds.height/18
         }
     }
     
@@ -105,7 +97,17 @@ extension ShowPostedViewController: UITableViewDataSource,UITableViewDelegate{
     }
 }
 
-extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension ShowPostedViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return tableView.bounds.height/18
+        }else{
+            return tableView.bounds.height - tableView.bounds.height/18
+        }
+    }
+}
+
+extension ShowPostedViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.dataCount()
     }
@@ -131,16 +133,11 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
                 return
             }
         }
-        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let horizontalSpace: CGFloat = 5
-        let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
-        return CGSize(width: cellSize, height: cellSize + cellSize * 3/4)
-    }
-    
+}
+
+extension ShowPostedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         router.transition(idetifier: "toDetailPosted", sender: viewModel.getData(indexPath:indexPath))
     }
@@ -153,3 +150,10 @@ extension ShowPostedViewController: UICollectionViewDelegate,UICollectionViewDat
     }
 }
 
+extension ShowPostedViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let horizontalSpace: CGFloat = 5
+        let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
+        return CGSize(width: cellSize, height: cellSize + cellSize * 3/4)
+    }
+}

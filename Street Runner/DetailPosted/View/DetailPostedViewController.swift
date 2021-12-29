@@ -39,7 +39,7 @@ class DetailPostedViewController: UIViewController {
     }
 }
 
-extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
+extension DetailPostedViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         4
     }
@@ -77,7 +77,9 @@ extension DetailPostedViewController: UITableViewDelegate,UITableViewDataSource{
             return cell
         }
     }
-    
+}
+
+extension DetailPostedViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return tableView.bounds.height/10
