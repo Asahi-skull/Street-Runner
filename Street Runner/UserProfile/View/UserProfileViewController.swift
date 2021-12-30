@@ -90,6 +90,28 @@ extension UserProfileViewController: UITableViewDataSource{
                 }else{
                     cell.notFollowUp()
                 }
+                $0.countFollower {
+                    switch $0{
+                    case .success(let int):
+                        let count = String(int)
+                        DispatchQueue.main.async {
+                            cell.followerLabel.text = count
+                        }
+                    case .failure:
+                        return
+                    }
+                }
+                $0.countFollowing {
+                    switch $0{
+                    case .success(let int):
+                        let count = String(int)
+                        DispatchQueue.main.async {
+                            cell.followingLabel.text = count
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(_:)), for: .touchUpInside)
             return cell
