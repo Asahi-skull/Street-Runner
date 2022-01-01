@@ -15,13 +15,15 @@ protocol CommentListViewModel{
     func getComment(completion: @escaping (Result<Void,Error>) -> Void)
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> CommentEntity
-    func getUserData(completion: @escaping (Result<UserData,Error>) -> Void)
+    func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void)
     func getIconImage(fileName: String,imageView: UIImageView)
+    func getCurrentUserObjectId() -> String
 }
 
 class CommentListViewModelImpl: CommentListViewModel{
     let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
     
     init(entiry: commentData){
         self.entity = entiry
@@ -37,9 +39,8 @@ class CommentListViewModelImpl: CommentListViewModel{
     func saveComment(commentText: String,completion: @escaping (Result<Void,Error>) -> Void){
         guard let objectId = entity.objectId else {return}
         guard let className = entity.className else {return}
-        guard let userObjectId = entity.userObjectId else {return}
-        let postedObjectId = objectId + className
-        commentMbaas.saveComment(commentText: commentText, postedObjectId: postedObjectId, userObjectId: userObjectId) {
+        let userObjectId = profileModel.getID()
+        commentMbaas.saveComment(commentText: commentText,postedClassName: className, postedObjectId: objectId, userObjectId: userObjectId) {
             switch $0{
             case .success:
                 completion(Result.success(()))
@@ -50,11 +51,9 @@ class CommentListViewModelImpl: CommentListViewModel{
     }
     
     func getComment(completion: @escaping (Result<Void,Error>) -> Void){
-        guard let objectId = entity.objectId else {return}
         guard let className = entity.className else {return}
-        let postedObjectId = objectId + className
-        print(postedObjectId)
-        commentMbaas.getcomment(postedObjectId: postedObjectId) {
+        guard let objectId = entity.objectId else {return}
+        commentMbaas.getcomment(postedClassName: className,postedObjectId: objectId) {
             switch $0{
             case .success(let data):
                 self.datas = data
@@ -73,8 +72,7 @@ class CommentListViewModelImpl: CommentListViewModel{
         datas[indexPath.row]
     }
     
-    func getUserData(completion: @escaping (Result<UserData,Error>) -> Void){
-        guard let userObjectId = entity.userObjectId else {return}
+    func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void){
         commentMbaas.getUserData(userObjectId: userObjectId) {
             switch $0{
             case .success(let data):
@@ -87,5 +85,9 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     func getIconImage(fileName: String,imageView: UIImageView){
         iconMbaas.getIconImage(fileName: fileName, imageView: imageView)
+    }
+    
+    func getCurrentUserObjectId() -> String {
+        profileModel.getID()
     }
 }

@@ -9,6 +9,6 @@ import Foundation
 
 struct CommentEntity{
     var commentText: String?
-    var postedObjectId: String?
     var userObjectId: String?
+    var good: Bool?
 }

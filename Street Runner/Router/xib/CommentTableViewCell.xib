@@ -40,14 +40,23 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12a-zd-2Td">
+                        <rect key="frame" x="355" y="112" width="35" height="31"/>
+                        <color key="tintColor" systemColor="systemYellowColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="TQe-OB-kVU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0Qc-2N-4Uf"/>
                     <constraint firstItem="TQe-OB-kVU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Cex-Yx-nWV"/>
                     <constraint firstItem="aUW-QR-1E0" firstAttribute="leading" secondItem="TQe-OB-kVU" secondAttribute="trailing" constant="10" id="Fwo-cS-DFP"/>
                     <constraint firstItem="D6S-dE-8ge" firstAttribute="top" secondItem="aUW-QR-1E0" secondAttribute="bottom" id="IcF-Dg-Voc"/>
+                    <constraint firstAttribute="bottom" secondItem="12a-zd-2Td" secondAttribute="bottom" constant="10" id="JjI-hI-YpU"/>
                     <constraint firstAttribute="trailing" secondItem="aUW-QR-1E0" secondAttribute="trailing" constant="10" id="Kd5-nl-UDI"/>
                     <constraint firstItem="D6S-dE-8ge" firstAttribute="leading" secondItem="TQe-OB-kVU" secondAttribute="trailing" constant="10" id="Xlc-Yp-zWG"/>
+                    <constraint firstAttribute="trailing" secondItem="12a-zd-2Td" secondAttribute="trailing" constant="10" id="Yeg-FS-jB1"/>
+                    <constraint firstItem="12a-zd-2Td" firstAttribute="leading" secondItem="D6S-dE-8ge" secondAttribute="trailing" constant="5" id="aJa-D6-Ugf"/>
                     <constraint firstItem="aUW-QR-1E0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mnJ-NY-hx9"/>
                     <constraint firstAttribute="bottom" secondItem="D6S-dE-8ge" secondAttribute="bottom" constant="10" id="w12-wv-AjH"/>
                     <constraint firstAttribute="trailing" secondItem="D6S-dE-8ge" secondAttribute="trailing" constant="50" id="xix-g1-CFY"/>
@@ -55,6 +64,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="goodButton" destination="12a-zd-2Td" id="OMT-n1-bVx"/>
                 <outlet property="iconImage" destination="TQe-OB-kVU" id="Vwf-cV-sOD"/>
                 <outlet property="userCommentText" destination="D6S-dE-8ge" id="JgC-K5-QGv"/>
                 <outlet property="userNameLabel" destination="aUW-QR-1E0" id="DbQ-Mm-Unz"/>
@@ -64,11 +74,15 @@
     </objects>
     <resources>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

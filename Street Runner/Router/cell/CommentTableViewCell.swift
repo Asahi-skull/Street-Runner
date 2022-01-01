@@ -13,6 +13,7 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userCommentText: UITextView!
+    @IBOutlet weak var goodButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +25,4 @@ class CommentTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }
