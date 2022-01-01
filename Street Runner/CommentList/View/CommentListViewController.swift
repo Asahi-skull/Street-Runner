@@ -91,7 +91,8 @@ extension CommentListViewController: UITableViewDataSource{
         guard let data = viewModel?.getData(indexPath: indexPath) else {return cell}
         cell.userCommentText.text = data.commentText
         viewModel.map{
-            $0.getUserData {
+            guard let userObjectId = data.userObjectId else {return}
+            $0.getUserData(userObjectId: userObjectId) {
                 switch $0{
                 case .success(let datas):
                     DispatchQueue.main.async {
@@ -103,9 +104,30 @@ extension CommentListViewController: UITableViewDataSource{
                     return
                 }
             }
+            guard let good = data.good else {return}
+            if good {
+                cell.goodButton.imageView?.image = UIImage(systemName: "star.fill")
+            }else{
+                cell.goodButton.imageView?.image = UIImage(systemName: "star")
+            }
+//            let currentUserObjectId = $0.getCurrentUserObjectId()
+//            let postedUserObjecId = $0.getObjectId().userObjectId
+//            if userObjectId == currentUserObjectId {
+//                if currentUserObjectId == postedUserObjecId{
+//                    cell.goodButton.isEnabled = false
+//                }else{
+//                    cell.goodButton.isEnabled = true
+//                }
+//            }else{
+//                cell.goodButton.isEnabled = false
+//            }
         }
+//        cell.goodButton.addTarget(self, action: #selector(self.goodButtonTapped(_:)), for: .touchUpInside)
         return cell
     }
+    
+//    @objc func goodButtonTapped(_ sender: UIButton) {
+//    }
 }
 
 extension CommentListViewController: UITableViewDelegate{
