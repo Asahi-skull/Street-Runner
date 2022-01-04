@@ -10,6 +10,7 @@ import NCMB
 
 protocol LoginmBaaS{
     func loginEmail(emailAddress: String,password: String) -> Result<Void,Error>
+    func setAcl(completion: @escaping (Result<Void,Error>) -> Void) 
 }
 
 class LoginmBaaSImpl: LoginmBaaS{
@@ -20,6 +21,21 @@ class LoginmBaaSImpl: LoginmBaaS{
             return Result.success(())
         case .failure(let err):
             return Result.failure(err)
+        }
+    }
+    
+    func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
+        var acl = NCMBACL.empty
+        acl.put(key: "*", readable: true, writable: false)
+        let user = NCMBUser.currentUser
+        user?.acl = acl
+        user?.saveInBackground{
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
         }
     }
 }

@@ -32,7 +32,18 @@ class LoginViewController: UIViewController {
         case .success:
             UserDefaults.standard.set(emailText, forKey:"email")
             UserDefaults.standard.set(passwordText, forKey: "password")
-            performSegue(withIdentifier: "toProfile", sender: nil)
+            loginViewModel.setAcl {
+                switch $0 {
+                case .success:
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "toProfile", sender: nil)
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "toProfile", sender: nil)
+                    }
+                }
+            }
         case .failure:
             router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }

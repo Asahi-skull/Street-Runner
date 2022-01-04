@@ -9,6 +9,7 @@ import Foundation
 
 protocol LoginViewModel{
     func loginUser(email: String,password: String) -> Result<Void,Error>
+    func setAcl(completion: @escaping (Result<Void,Error>) -> Void)
 }
 
 class LoginViewModelimpl: LoginViewModel{
@@ -16,5 +17,16 @@ class LoginViewModelimpl: LoginViewModel{
     
     func loginUser(email: String, password: String) -> Result<Void,Error> {
         login.loginEmail(emailAddress: email, password: password)
+    }
+    
+    func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
+        login.setAcl {
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }
