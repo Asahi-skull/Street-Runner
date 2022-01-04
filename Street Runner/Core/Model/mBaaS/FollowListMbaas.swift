@@ -41,14 +41,13 @@ class FollowListMbaasImpl: FollowListMbaas {
         quary.findInBackground {
             switch $0 {
             case .success(let datas):
-                var IDs: [String] = []
+                var userIDs: [String] = []
                 for data in datas {
                     let userId: String? = data["followedBy"]
                     guard let userId = userId else {return}
-                    let Id = userId
-                    IDs.append(Id)
+                    userIDs.append(userId)
                 }
-                completion(Result.success(IDs))
+                completion(Result.success(userIDs))
             case .failure(let err):
                 completion(Result.failure(err))
             }

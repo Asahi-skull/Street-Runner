@@ -370,8 +370,8 @@
                                     <constraint firstAttribute="height" constant="40" id="KhE-yj-H2Q"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="フォロワー"/>
+                                    <segment title="フォロー中"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
