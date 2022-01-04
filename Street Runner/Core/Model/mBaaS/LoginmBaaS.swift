@@ -27,15 +27,18 @@ class LoginmBaaSImpl: LoginmBaaS{
     func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
         var acl = NCMBACL.empty
         acl.put(key: "*", readable: true, writable: false)
-        let user = NCMBUser.currentUser
-        user?.acl = acl
-        user?.saveInBackground{
-            switch $0 {
-            case .success:
-                completion(Result.success(()))
-            case .failure(let err):
-                completion(Result.failure(err))
+        if let user = NCMBUser.currentUser{
+            user.acl = acl
+            user.saveInBackground{
+                switch $0 {
+                case .success:
+                    completion(Result.success(()))
+                case .failure(let err):
+                    completion(Result.failure(err))
+                }
             }
+        }else{
+            return
         }
     }
 }
