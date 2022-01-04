@@ -9,24 +9,24 @@ import Foundation
 
 protocol LoginViewModel{
     func loginUser(email: String,password: String) -> Result<Void,Error>
-    func setAcl(completion: @escaping (Result<Void,Error>) -> Void)
 }
 
 class LoginViewModelimpl: LoginViewModel{
     let login: LoginmBaaS = LoginmBaaSImpl()
     
     func loginUser(email: String, password: String) -> Result<Void,Error> {
-        login.loginEmail(emailAddress: email, password: password)
-    }
-    
-    func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
-        login.setAcl {
-            switch $0 {
+        let result = login.loginEmail(emailAddress: email, password: password)
+        switch result {
+        case .success:
+            let res = login.setAcl()
+            switch res {
             case .success:
-                completion(Result.success(()))
+                return Result.success(())
             case .failure(let err):
-                completion(Result.failure(err))
+                return Result.failure(err)
             }
+        case .failure(let err):
+            return Result.failure(err)
         }
     }
 }

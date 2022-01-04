@@ -8,9 +8,19 @@
 import Foundation
 import NCMB
 
+enum LoginModelError: Error,LocalizedError{
+    case loseUser
+    var errorDescription:String?{
+        switch self {
+        case .loseUser:
+            return "currentUser取得失敗"
+        }
+    }
+}
+
 protocol LoginmBaaS{
     func loginEmail(emailAddress: String,password: String) -> Result<Void,Error>
-    func setAcl(completion: @escaping (Result<Void,Error>) -> Void) 
+    func setAcl() -> Result<Void,Error>
 }
 
 class LoginmBaaSImpl: LoginmBaaS{
@@ -24,21 +34,20 @@ class LoginmBaaSImpl: LoginmBaaS{
         }
     }
     
-    func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
+    func setAcl() -> Result<Void,Error> {
         var acl = NCMBACL.empty
         acl.put(key: "*", readable: true, writable: false)
         if let user = NCMBUser.currentUser{
             user.acl = acl
-            user.saveInBackground{
-                switch $0 {
-                case .success:
-                    completion(Result.success(()))
-                case .failure(let err):
-                    completion(Result.failure(err))
-                }
+            let result = user.save()
+            switch result {
+            case .success:
+                return Result.success(())
+            case .failure(let err):
+                return Result.failure(err)
             }
         }else{
-            return
+            return Result.failure(LoginModelError.loseUser)
         }
     }
 }
