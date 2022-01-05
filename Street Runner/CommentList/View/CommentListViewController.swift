@@ -12,6 +12,7 @@ class CommentListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var commentBottom: NSLayoutConstraint!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel: CommentListViewModel?
     lazy var router: CommentListRouter = CommentListRouterImpl(viewController: self)
@@ -47,6 +48,7 @@ class CommentListViewController: UIViewController {
         commentTextView.layer.borderColor = UIColor.black.cgColor
         commentTextView.layer.borderWidth = 0.5
         commentTextView.layer.cornerRadius = 10.0
+        closeButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
@@ -54,8 +56,10 @@ class CommentListViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if commentBottom.constant == 15{
                 commentBottom.constant = keyboardSize.height - 30
+                closeButton.isHidden = false
             }else{
                 commentBottom.constant = 15
+                closeButton.isHidden = true
             }
         }
     }
@@ -77,6 +81,10 @@ class CommentListViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func closeKeyBoardButton(_ sender: Any) {
+        commentTextView.endEditing(true)
     }
 }
 

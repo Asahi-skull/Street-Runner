@@ -797,8 +797,21 @@
                             <constraint firstItem="zgC-5O-b6Y" firstAttribute="top" secondItem="Fqp-Cx-sIt" secondAttribute="top" id="zyf-H9-lx8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dyv-D7-iyU"/>
+                    <navigationItem key="navigationItem" id="dyv-D7-iyU">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="HW3-15-ILu">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="iJ0-He-ZAG">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="完了"/>
+                                <connections>
+                                    <action selector="closeKeyBoardButton:" destination="yEb-lx-6dV" eventType="touchUpInside" id="4nM-Xd-pP5"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="closeButton" destination="iJ0-He-ZAG" id="IHc-37-sQB"/>
                         <outlet property="commentBottom" destination="sW3-me-sng" id="MFX-pl-Lmt"/>
                         <outlet property="commentTextView" destination="KFA-0b-tIW" id="zy1-Mt-prP"/>
                         <outlet property="tableView" destination="zgC-5O-b6Y" id="QGe-s6-VfD"/>
