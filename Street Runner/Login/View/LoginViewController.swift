@@ -27,14 +27,19 @@ class LoginViewController: UIViewController {
     @IBAction func loginButton(_ sender: Any) {
         guard let emailText = emailTextField.text else {return}
         guard let passwordText = passwordTextField.text else {return}
-        let result = loginViewModel.loginUser(email: emailText, password: passwordText)
-        switch result {
-        case .success:
-            UserDefaults.standard.set(emailText, forKey:"email")
-            UserDefaults.standard.set(passwordText, forKey: "password")
-            performSegue(withIdentifier: "toProfile", sender: nil)
-        case .failure:
-            router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+        loginViewModel.loginUser(email: emailText, password: passwordText) {
+            switch $0 {
+            case .success:
+                UserDefaults.standard.set(emailText, forKey:"email")
+                UserDefaults.standard.set(passwordText, forKey: "password")
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "toProfile", sender: nil)
+                }
+            case .failure:
+                DispatchQueue.main.async {
+                    self.router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
+                }
+            }
         }
     }
 }
