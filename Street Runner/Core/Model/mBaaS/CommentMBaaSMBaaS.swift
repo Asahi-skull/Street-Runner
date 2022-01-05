@@ -12,6 +12,7 @@ protocol CommentMBaaS{
     func saveComment(commentText: String,postedClassName: String,postedObjectId: String,userObjectId: String,completion: @escaping (Result<Void,Error>) -> Void)
     func getcomment(postedClassName: String,postedObjectId: String,completion: @escaping (Result<[CommentEntity],Error>) -> Void)
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void)
+    func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void) 
 }
 
 class CommentMBaaSImpl: CommentMBaaS{
@@ -41,10 +42,11 @@ class CommentMBaaSImpl: CommentMBaaS{
             case .success(let datas):
                 var commentEntitys: [CommentEntity] = []
                 for data in datas{
+                    let objectId: String? = data.objectId
                     let commentText: String? = data["commentText"]
                     let userObjectId: String? = data["userObjectId"]
                     let good: Bool? = data["good"]
-                    let commentEntity = CommentEntity(commentText: commentText,userObjectId: userObjectId,good: good)
+                    let commentEntity = CommentEntity(objectId: objectId,commentText: commentText,userObjectId: userObjectId,good: good)
                     commentEntitys.append(commentEntity)
                 }
                 completion(Result.success(commentEntitys))
@@ -64,6 +66,20 @@ class CommentMBaaSImpl: CommentMBaaS{
                 let iconImageFile: String? = user["iconImage"]
                 let commentEntity = UserData(userName: userName, iconImageFile: iconImageFile)
                 completion(Result.success(commentEntity))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void) {
+        let object = NCMBObject.init(className: "comment")
+        object.objectId = objectId
+        object["good"] = value
+        object.saveInBackground {
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
             case .failure(let err):
                 completion(Result.failure(err))
             }

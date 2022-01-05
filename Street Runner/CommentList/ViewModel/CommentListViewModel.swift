@@ -14,10 +14,11 @@ protocol CommentListViewModel{
     func saveComment(commentText: String,completion: @escaping (Result<Void,Error>) -> Void)
     func getComment(completion: @escaping (Result<Void,Error>) -> Void)
     func dataCount() -> Int
-    func getData(indexPath: IndexPath) -> CommentEntity
+    func getData() -> [CommentEntity]
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void)
     func getIconImage(fileName: String,imageView: UIImageView)
     func getCurrentUserObjectId() -> String
+    func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void)
 }
 
 class CommentListViewModelImpl: CommentListViewModel{
@@ -68,8 +69,8 @@ class CommentListViewModelImpl: CommentListViewModel{
         datas.count
     }
     
-    func getData(indexPath: IndexPath) -> CommentEntity{
-        datas[indexPath.row]
+    func getData() -> [CommentEntity] {
+        datas
     }
     
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void){
@@ -89,5 +90,16 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     func getCurrentUserObjectId() -> String {
         profileModel.getID()
+    }
+    
+    func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void) {
+        commentMbaas.changeGoodValue(objectId: objectId, value: value) {
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }

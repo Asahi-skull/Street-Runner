@@ -96,7 +96,7 @@ extension CommentListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentTableViewCell
-        guard let data = viewModel?.getData(indexPath: indexPath) else {return cell}
+        guard let data = viewModel?.getData()[indexPath.row] else {return cell}
         cell.userCommentText.text = data.commentText
         viewModel.map{
             guard let userObjectId = data.userObjectId else {return}
@@ -118,24 +118,51 @@ extension CommentListViewController: UITableViewDataSource{
             }else{
                 cell.goodButton.imageView?.image = UIImage(systemName: "star")
             }
-//            let currentUserObjectId = $0.getCurrentUserObjectId()
-//            let postedUserObjecId = $0.getObjectId().userObjectId
-//            if userObjectId == currentUserObjectId {
-//                if currentUserObjectId == postedUserObjecId{
-//                    cell.goodButton.isEnabled = false
-//                }else{
-//                    cell.goodButton.isEnabled = true
-//                }
-//            }else{
-//                cell.goodButton.isEnabled = false
-//            }
         }
-//        cell.goodButton.addTarget(self, action: #selector(self.goodButtonTapped(_:)), for: .touchUpInside)
+        cell.goodButton.tag = indexPath.row
+        cell.goodButton.addTarget(self, action: #selector(self.goodButtonTapped(_:)), for: .touchUpInside)
         return cell
     }
     
-//    @objc func goodButtonTapped(_ sender: UIButton) {
-//    }
+    @objc func goodButtonTapped(_ sender: UIButton) {
+        guard let data = viewModel?.getData()[sender.tag] else {return}
+        guard let good = data.good else {return}
+        guard let objectId = data.objectId else {return}
+        guard let commentUserObjectId = data.userObjectId else {return}
+        let currentUserObjectId = viewModel?.getCurrentUserObjectId()
+        let postedUserObjecId = viewModel?.getObjectId().userObjectId
+        if postedUserObjecId == currentUserObjectId {
+            if currentUserObjectId == commentUserObjectId{
+                router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
+            }else{
+                if good {
+                    viewModel?.changeGoodValue(objectId: objectId, value: false) {
+                        switch $0 {
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.setImage(UIImage(systemName: "star"), for: .normal)
+                            }
+                        case .failure:
+                            return
+                        }
+                    }
+                }else{
+                    viewModel?.changeGoodValue(objectId: objectId, value: true) {
+                        switch $0 {
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                            }
+                        case .failure:
+                            return
+                        }
+                    }
+                }
+            }
+        }else{
+            router.resultAlert(titleText: "投稿者しか押せません", messageText: "", titleOK: "OK")
+        }
+    }
 }
 
 extension CommentListViewController: UITableViewDelegate{
