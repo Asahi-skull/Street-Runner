@@ -19,6 +19,8 @@ protocol CommentListViewModel{
     func getIconImage(fileName: String,imageView: UIImageView)
     func getCurrentUserObjectId() -> String
     func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void)
+    func changeToTrue(cellRow: Int)
+    func changeTofalse(cellRow: Int)
 }
 
 class CommentListViewModelImpl: CommentListViewModel{
@@ -101,5 +103,13 @@ class CommentListViewModelImpl: CommentListViewModel{
                 completion(Result.failure(err))
             }
         }
+    }
+    
+    func changeToTrue(cellRow: Int) {
+        datas[cellRow].good = true
+    }
+    
+    func changeTofalse(cellRow: Int) {
+        datas[cellRow].good = false
     }
 }

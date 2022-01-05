@@ -141,6 +141,7 @@ extension CommentListViewController: UITableViewDataSource{
                         case .success:
                             DispatchQueue.main.async {
                                 sender.setImage(UIImage(systemName: "star"), for: .normal)
+                                self.viewModel?.changeTofalse(cellRow: sender.tag)
                             }
                         case .failure:
                             return
@@ -152,6 +153,7 @@ extension CommentListViewController: UITableViewDataSource{
                         case .success:
                             DispatchQueue.main.async {
                                 sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                                self.viewModel?.changeToTrue(cellRow: sender.tag)
                             }
                         case .failure:
                             return
