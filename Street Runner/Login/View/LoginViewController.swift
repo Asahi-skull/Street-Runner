@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -32,7 +31,8 @@ class LoginViewController: UIViewController {
         case .success:
             UserDefaults.standard.set(emailText, forKey:"email")
             UserDefaults.standard.set(passwordText, forKey: "password")
-            loginViewModel.setAcl {
+            loginViewModel.setAcl { [weak self] in
+                guard let self = self else {return}
                 switch $0 {
                 case .success:
                     DispatchQueue.main.async {

@@ -16,8 +16,8 @@ protocol EditProfileViewModel{
 }
 
 class EditProfileViewModelImpl: EditProfileViewModel{
-    let editProfile: EditProfilemBaaSImpl = EditProfilemBaaSImpl()
-    let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    private let editProfile: EditProfilemBaaSImpl = EditProfilemBaaSImpl()
+    private let profile: ProfilemBaaS = ProfilemBaaSImpl()
     
     func saveImage(img: UIImage) -> Result<Void,Error> {
         let fileName = profile.getID()

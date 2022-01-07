@@ -30,14 +30,14 @@ class UserProfileViewModelImpl: UserProfileViewModel{
         self.userObjectId = userObjectId
     }
     
-    let userObjectId: String
+    private let userObjectId: String
     private var datas: [ProfilePostedEntity] = []
     private var check: Bool = false
     
-    let userProfileModel: CommentMBaaS = CommentMBaaSImpl()
-    let getImageModel: ShowPostedMBaaS = ShowPostedMBaaSImpl()
-    let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
-    let followModel: UserProfileMBaaS = UserProfileMBaaSImpl()
+    private let userProfileModel: CommentMBaaS = CommentMBaaSImpl()
+    private let getImageModel: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
+    private let followModel: UserProfileMBaaS = UserProfileMBaaSImpl()
     
     func getUserObjectId() -> String {
         userObjectId
@@ -48,7 +48,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     }
     
     func getUserProfile(imageView: UIImageView,completion: @escaping (Result<String,Error>) -> Void) {
-        userProfileModel.getUserData(userObjectId: userObjectId) {
+        userProfileModel.getUserData(userObjectId: userObjectId) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let data):
                 guard let fileName = data.iconImageFile else {return}
@@ -62,7 +63,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     }
     
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profileModel.getRequest(className: "request", objectID: userObjectId) {
+        profileModel.getRequest(className: "request", objectID: userObjectId) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 self.datas = datas
@@ -74,7 +76,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profileModel.getRequest(className: "recruitment", objectID: userObjectId) {
+        profileModel.getRequest(className: "recruitment", objectID: userObjectId) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 self.datas = datas
@@ -99,7 +102,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     
     func follow(completion: @escaping (Result<Void,Error>) -> Void) {
         let currentUserObjrctId = profileModel.getID()
-        followModel.follow(followedBy: userObjectId, followOn: currentUserObjrctId) {
+        followModel.follow(followedBy: userObjectId, followOn: currentUserObjrctId) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success:
                 self.check = true
@@ -112,7 +116,8 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     
     func unFollow(completion: @escaping (Result<Void,Error>) -> Void){
         let currentUserObjrctId = profileModel.getID()
-        followModel.unFollow(followedBy: userObjectId, followOn: currentUserObjrctId) {
+        followModel.unFollow(followedBy: userObjectId, followOn: currentUserObjrctId) { [weak self] in
+            guard let self = self else {return}
             switch $0 {
             case .success:
                 self.check = false

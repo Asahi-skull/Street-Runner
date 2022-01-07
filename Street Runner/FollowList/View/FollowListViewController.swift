@@ -24,7 +24,8 @@ class FollowListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getFollowerData {
+        viewModel.getFollowerData { [weak self] in
+            guard let self = self else {return}
             switch $0 {
             case .success:
                 DispatchQueue.main.async {
@@ -41,7 +42,8 @@ class FollowListViewController: UIViewController {
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            viewModel.getFollowerData {
+            viewModel.getFollowerData { [weak self] in
+                guard let self = self else {return}
                 switch $0 {
                 case .success:
                     DispatchQueue.main.async {
@@ -54,7 +56,8 @@ class FollowListViewController: UIViewController {
                 }
             }
         case 1:
-            viewModel.getFollowingData {
+            viewModel.getFollowingData { [weak self] in
+                guard let self = self else {return}
                 switch $0 {
                 case .success:
                     DispatchQueue.main.async {

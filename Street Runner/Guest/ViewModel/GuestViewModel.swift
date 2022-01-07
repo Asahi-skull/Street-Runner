@@ -13,8 +13,8 @@ protocol GuestViewModel{
 }
 
 class GuestViewModelImpl: GuestViewModel{
-    let autoLoginModel: AutologinModel = AutologinModelImpl()
-    let loginmBaaS: LoginmBaaS = LoginmBaaSImpl()
+    private let autoLoginModel: AutologinModel = AutologinModelImpl()
+    private let loginmBaaS: LoginmBaaS = LoginmBaaSImpl()
     
     func autoLogin() -> Bool{
         if let user = autoLoginModel.autoLogin(){

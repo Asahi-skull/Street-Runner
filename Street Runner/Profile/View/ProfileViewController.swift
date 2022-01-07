@@ -27,7 +27,8 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profileViewModel.getRequest {
+        profileViewModel.getRequest { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success:
                 DispatchQueue.main.async {
@@ -77,8 +78,9 @@ extension ProfileViewController: UITableViewDataSource{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            profileViewModel.getRequest { result in
-                switch result{
+            profileViewModel.getRequest { [weak self] in
+                guard let self = self else {return}
+                switch $0 {
                 case.success:
                     DispatchQueue.main.async {
                         self.table.reloadData()
@@ -90,8 +92,9 @@ extension ProfileViewController: UITableViewDataSource{
                 }
             }
         case 1:
-            profileViewModel.getRecruitmentData { result in
-                switch result{
+            profileViewModel.getRecruitmentData { [weak self] in
+                guard let self = self else {return}
+                switch $0 {
                 case.success:
                     DispatchQueue.main.async {
                         self.table.reloadData()

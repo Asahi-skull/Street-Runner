@@ -14,7 +14,7 @@ class ShowPostedViewController: UIViewController {
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
     
-    var ncmbClass: String?
+    private  var ncmbClass: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,8 @@ class ShowPostedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getRequestData {
+        viewModel.getRequestData { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success:
                 DispatchQueue.main.async {
@@ -64,7 +65,8 @@ extension ShowPostedViewController: UITableViewDataSource {
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            viewModel.getRequestData {
+            viewModel.getRequestData { [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success:
                     DispatchQueue.main.async {
@@ -78,7 +80,8 @@ extension ShowPostedViewController: UITableViewDataSource {
                 }
             }
         case 1:
-            viewModel.getRecruitmentData {
+            viewModel.getRecruitmentData { [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success:
                     DispatchQueue.main.async {
@@ -121,7 +124,8 @@ extension ShowPostedViewController: UICollectionViewDataSource{
         viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
         
         guard let userObjectId = data.userObjectID else {return cell}
-        viewModel.getUserInfo(userObjectId: userObjectId) {
+        viewModel.getUserInfo(userObjectId: userObjectId) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 DispatchQueue.main.async {
