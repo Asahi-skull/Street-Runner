@@ -24,16 +24,16 @@ protocol CommentListViewModel{
 }
 
 class CommentListViewModelImpl: CommentListViewModel{
-    let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
-    let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
-    let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
-    
     init(entiry: commentData){
         self.entity = entiry
     }
     
-    let entity: commentData
+    private let entity: commentData
     private var datas: [CommentEntity] = []
+    
+    private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
+    private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
     
     func getObjectId() -> commentData {
         entity
@@ -56,7 +56,8 @@ class CommentListViewModelImpl: CommentListViewModel{
     func getComment(completion: @escaping (Result<Void,Error>) -> Void){
         guard let className = entity.className else {return}
         guard let objectId = entity.objectId else {return}
-        commentMbaas.getcomment(postedClassName: className,postedObjectId: objectId) {
+        commentMbaas.getcomment(postedClassName: className,postedObjectId: objectId) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let data):
                 self.datas = data

@@ -15,10 +15,10 @@ protocol PostRequestViewModel{
 }
 
 class PostRequestViewModelImpl: PostRequestViewModel{
-    let postRequest: PostRequestModel = PostRequestModelImpl()
-    let profile: ProfilemBaaS = ProfilemBaaSImpl()
-    let saveImage: EditProfilemBaaS = EditProfilemBaaSImpl()
-    let saveRequest: PostRequestMBaaS = PostRequestMBaaSImpl()
+    private let postRequest: PostRequestModel = PostRequestModelImpl()
+    private let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    private let saveImage: EditProfilemBaaS = EditProfilemBaaSImpl()
+    private let saveRequest: PostRequestMBaaS = PostRequestMBaaSImpl()
     
     func saveImageFile(img: UIImage) -> Result<String,Error>{
         let fileName = postRequest.getUUID()

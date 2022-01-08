@@ -19,8 +19,8 @@ protocol ProfileViewModel{
 }
 
 class ProfileViewModelImpl: ProfileViewModel{
-    let profile: ProfilemBaaS = ProfilemBaaSImpl()
-    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    private let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private var datas: [ProfilePostedEntity] = []
     
     func setUser() -> String {
@@ -42,7 +42,8 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRequest(completion: @escaping (Result<Void,Error>) -> Void) {
-        profile.getRequest(className: "request", objectID: profile.getID()) {
+        profile.getRequest(className: "request", objectID: profile.getID()) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 self.datas = datas
@@ -54,7 +55,8 @@ class ProfileViewModelImpl: ProfileViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        profile.getRequest(className: "recruitment", objectID: profile.getID()) {
+        profile.getRequest(className: "recruitment", objectID: profile.getID()) { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 self.datas = datas

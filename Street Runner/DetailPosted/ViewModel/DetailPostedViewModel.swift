@@ -19,9 +19,9 @@ class DetailPostedViewModelImpl: DetailPostedViewModel{
         self.entity = entity
     }
     
-    let entity: detailData
-    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
-    let userInfo: CommentMBaaS = CommentMBaaSImpl()
+    private let entity: detailData
+    private let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let userInfo: CommentMBaaS = CommentMBaaSImpl()
     
     func getImage(fileName: String, imageView: UIImageView) {
         showPosted.getIconImage(fileName: fileName, imageView: imageView)

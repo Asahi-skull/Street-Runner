@@ -18,16 +18,17 @@ protocol FollowListViewModel {
 }
 
 class FollowListViewModelImpl: FollowListViewModel {
-    let followListMbaas: FollowListMbaas = FollowListMbaasImpl()
-    let profileMbaas: ProfilemBaaS = ProfilemBaaSImpl()
-    let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
-    let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let followListMbaas: FollowListMbaas = FollowListMbaasImpl()
+    private let profileMbaas: ProfilemBaaS = ProfilemBaaSImpl()
+    private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
+    private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     
     private var datas: [String] = []
     
     func getFollowerData(completion: @escaping (Result<Void,Error>) -> Void) {
         let currentUserObjectId = profileMbaas.getID()
-        followListMbaas.getFollower(userObjectId: currentUserObjectId) {
+        followListMbaas.getFollower(userObjectId: currentUserObjectId) { [weak self] in
+            guard let self = self else {return}
             switch $0 {
             case .success(let datas):
                 self.datas = datas
@@ -40,7 +41,8 @@ class FollowListViewModelImpl: FollowListViewModel {
     
     func getFollowingData(completion: @escaping (Result<Void,Error>) -> Void) {
         let currentUserObjectId = profileMbaas.getID()
-        followListMbaas.getFollowing(userObjectId: currentUserObjectId) {
+        followListMbaas.getFollowing(userObjectId: currentUserObjectId) { [weak self] in
+            guard let self = self else {return}
             switch $0 {
             case .success(let datas):
                 self.datas = datas

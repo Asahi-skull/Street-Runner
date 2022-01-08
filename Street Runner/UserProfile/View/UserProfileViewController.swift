@@ -15,7 +15,6 @@ class UserProfileViewController: UIViewController {
     lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
     
     var userObjectId: String?
-    var intCheck: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +43,8 @@ class UserProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.getRequestData{
+        viewModel?.getRequestData{ [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success:
                 DispatchQueue.main.async {
@@ -165,7 +165,8 @@ extension UserProfileViewController: UITableViewDataSource{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            viewModel?.getRequestData{
+            viewModel?.getRequestData{ [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success:
                     DispatchQueue.main.async {
@@ -178,7 +179,8 @@ extension UserProfileViewController: UITableViewDataSource{
                 }
             }
         case 1:
-            viewModel?.getRecruitmentData{
+            viewModel?.getRecruitmentData{ [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success:
                     DispatchQueue.main.async {

@@ -15,10 +15,10 @@ protocol PostRecruitmentViewModel{
 }
 
 class PostRecruitmentViewModelImpl: PostRecruitmentViewModel{
-    let postRecruitment: PostRecruitmentModel = PostRecruitmentModelImpl()
-    let profile: ProfilemBaaS = ProfilemBaaSImpl()
-    let saveImage: EditProfilemBaaS = EditProfilemBaaSImpl()
-    let saveRecruitment: PostRecruitmentMBaaS = PostRecruitmentMBaaSImpl()
+    private let postRecruitment: PostRecruitmentModel = PostRecruitmentModelImpl()
+    private let profile: ProfilemBaaS = ProfilemBaaSImpl()
+    private let saveImage: EditProfilemBaaS = EditProfilemBaaSImpl()
+    private let saveRecruitment: PostRecruitmentMBaaS = PostRecruitmentMBaaSImpl()
     
     func saveImageFile(img: UIImage) -> Result<String, Error> {
         let fileName = postRecruitment.getUUID()

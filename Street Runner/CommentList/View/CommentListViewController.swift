@@ -29,7 +29,8 @@ class CommentListViewController: UIViewController {
             return
         }
         viewModel.map{
-            $0.getComment {
+            $0.getComment { [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success:
                     DispatchQueue.main.async {
@@ -67,7 +68,8 @@ class CommentListViewController: UIViewController {
     @IBAction func sendButtton(_ sender: Any) {
         guard let commentText = commentTextView.text else {return}
         viewModel.map{
-            $0.saveComment(commentText: commentText) {
+            $0.saveComment(commentText: commentText) { [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success:
                     DispatchQueue.main.async {
@@ -100,7 +102,8 @@ extension CommentListViewController: UITableViewDataSource{
         cell.userCommentText.text = data.commentText
         viewModel.map{
             guard let userObjectId = data.userObjectId else {return}
-            $0.getUserData(userObjectId: userObjectId) {
+            $0.getUserData(userObjectId: userObjectId) { [weak self] in
+                guard let self = self else {return}
                 switch $0{
                 case .success(let datas):
                     DispatchQueue.main.async {
@@ -136,7 +139,8 @@ extension CommentListViewController: UITableViewDataSource{
                 router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
             }else{
                 if good {
-                    viewModel?.changeGoodValue(objectId: objectId, value: false) {
+                    viewModel?.changeGoodValue(objectId: objectId, value: false) { [weak self] in
+                        guard let self = self else {return}
                         switch $0 {
                         case .success:
                             DispatchQueue.main.async {
@@ -148,7 +152,8 @@ extension CommentListViewController: UITableViewDataSource{
                         }
                     }
                 }else{
-                    viewModel?.changeGoodValue(objectId: objectId, value: true) {
+                    viewModel?.changeGoodValue(objectId: objectId, value: true) { [weak self] in
+                        guard let self = self else {return}
                         switch $0 {
                         case .success:
                             DispatchQueue.main.async {

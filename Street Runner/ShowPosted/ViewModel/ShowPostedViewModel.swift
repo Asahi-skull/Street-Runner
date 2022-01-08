@@ -18,8 +18,9 @@ protocol ShowPostedViewModel{
 }
 
 class ShowPostedViewModelImpl: ShowPostedViewModel{
-    let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
-    let userInfo: CommentMBaaS = CommentMBaaSImpl()
+    private let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let userInfo: CommentMBaaS = CommentMBaaSImpl()
+    
     private var datas: [RequestEntity] = []
     
     func dataCount() -> Int {
@@ -31,7 +32,8 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void) {
-        showPosted.getRequest(className: "request") {
+        showPosted.getRequest(className: "request") { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 self.datas = datas
@@ -43,7 +45,8 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
     }
     
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void) {
-        showPosted.getRequest(className: "recruitment") {
+        showPosted.getRequest(className: "recruitment") { [weak self] in
+            guard let self = self else {return}
             switch $0{
             case .success(let datas):
                 self.datas = datas
