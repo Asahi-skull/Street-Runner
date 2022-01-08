@@ -14,7 +14,7 @@ class ShowPostedViewController: UIViewController {
     let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
     lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
     
-    private  var ncmbClass: String?
+    private var ncmbClass: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
