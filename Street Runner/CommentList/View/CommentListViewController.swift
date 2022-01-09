@@ -180,5 +180,20 @@ extension CommentListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let userObjectId = viewModel?.getData()[indexPath.row].userObjectId {
+            router.transition(idetifier: "commentToUser", sender: userObjectId)
+        }else{
+            router.transition(idetifier: "commentToUser", sender: "")
+        }
+        
+//        viewModel.map{
+//            router.transition(idetifier: "commentToUser", sender: $0.getData()[indexPath.row].userObjectId)
+//        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let userObjectId = sender as! String
+        let commentToUser = segue.destination as! UserProfileViewController
+        commentToUser.userObjectId = userObjectId
     }
 }

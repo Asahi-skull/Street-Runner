@@ -15,6 +15,7 @@ class UserProfileViewController: UIViewController {
     lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
     
     var userObjectId: String?
+    private var ncmbClass: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,7 @@ class UserProfileViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                self.ncmbClass = "request"
             case .failure:
                 DispatchQueue.main.async {
                     self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
@@ -172,6 +174,7 @@ extension UserProfileViewController: UITableViewDataSource{
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    self.ncmbClass = "request"
                 case .failure:
                     DispatchQueue.main.async {
                         self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
@@ -186,6 +189,7 @@ extension UserProfileViewController: UITableViewDataSource{
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
+                    self.ncmbClass = "recruitment"
                 case .failure:
                     DispatchQueue.main.async {
                         self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
@@ -232,7 +236,16 @@ extension UserProfileViewController: UICollectionViewDataSource {
 }
 
 extension UserProfileViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        router.transition(idetifier: "toUserDetail", sender: viewModel?.getData(indexPath:indexPath))
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let entity = sender as! ProfilePostedEntity
+        let toUserDetail = segue.destination as! UserDetailViewController
+        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: viewModel?.getUserObjectId(), className: ncmbClass)
+        toUserDetail.entity = data
+    }
 }
 
 extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
