@@ -47,31 +47,34 @@ extension DetailPostedViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
-            viewModel?.getUserInfo {
-                switch $0{
-                case .success(let data):
-                    guard let iconImageFile = data.iconImageFile else {return}
-                    self.viewModel?.getImage(fileName: iconImageFile, imageView: cell.iconImage)
-                    guard let userName = data.userName else {return}
-                    cell.setData(userName: userName)
-                case .failure:
-                    return
+            viewModel.map{
+                $0.getUserInfo {
+                    switch $0{
+                    case .success(let data):
+                        guard let iconImageFile = data.iconImageFile else {return}
+                        self.viewModel.map{
+                            $0.getImage(fileName: iconImageFile, imageView: cell.iconImage)
+                        }
+                        guard let userName = data.userName else {return}
+                        cell.setData(userName: userName)
+                    case .failure:
+                        return
+                    }
                 }
             }
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
-            guard let imageFileName = entity?.requestImage else {return cell}
             viewModel.map{
+                guard let imageFileName = $0.getEntity().requestImage else {return}
                 $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
             }
             return cell
         }else if indexPath.row == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailPostedCell", for: indexPath) as! DetailPostedTableViewCell
-            if let entityData = viewModel?.getEntity(){
-                guard let postedText = entityData.requestText else {return cell}
+            viewModel.map{
+                guard let postedText = $0.getEntity().requestText else {return}
                 cell.postedText.text = postedText
-                cell.setData(entity: entityData)
             }
             return cell
         }else{
@@ -96,14 +99,16 @@ extension DetailPostedViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 0{
-            router.transition(idetifier: "toUserProfile", sender: entity)
-        }else if indexPath.row == 1{
-            
-        }else if indexPath.row == 2{
-            
-        }else{
-            router.transition(idetifier: "toCommentList", sender: entity)
+        viewModel.map{
+            if indexPath.row == 0{
+                router.transition(idetifier: "toUserProfile", sender: $0.getEntity())
+            }else if indexPath.row == 1{
+                
+            }else if indexPath.row == 2{
+                
+            }else{
+                router.transition(idetifier: "toCommentList", sender: $0.getEntity())
+            }
         }
     }
     

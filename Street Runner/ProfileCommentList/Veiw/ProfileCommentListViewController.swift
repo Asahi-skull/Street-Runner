@@ -1,28 +1,28 @@
 //
-//  UserCommentListViewController.swift
+//  ProfileCommentListViewController.swift
 //  Street Runner
 //
-//  Created by 木本朝陽 on 2022/01/09.
+//  Created by 木本朝陽 on 2022/01/10.
 //
 
 import UIKit
 
-class UserCommentListViewController: UIViewController {
-
+class ProfileCommentListViewController: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var commentBottom: NSLayoutConstraint!
     @IBOutlet weak var closeButton: UIButton!
     
-    var viewModel: UserCommentListViewModel?
-    lazy var router: UserCommentListRouter = UserCommentListRouterImpl(viewController: self)
+    var viewModel: ProfileCommentListViewModel?
+    lazy var router: ProfileCommentListRouter = ProfileCommentListRouterImpl(viewController: self)
     
-    var entity: commentData?
+    var entity: ProfileCommentData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let entity = entity {
-            viewModel = UserCommentListViewModelImpl(entiry: entity)
+            viewModel = ProfileCommentListViewModelImpl(entity: entity)
         }else{
             router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             navigationController?.popViewController(animated: true)
@@ -52,11 +52,11 @@ class UserCommentListViewController: UIViewController {
         closeButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if commentBottom.constant == 15{
-                commentBottom.constant = keyboardSize.height - 20
+                commentBottom.constant = keyboardSize.height - 30
                 closeButton.isHidden = false
             }else{
                 commentBottom.constant = 15
@@ -85,12 +85,12 @@ class UserCommentListViewController: UIViewController {
         }
     }
     
-    @IBAction func closeAct(_ sender: Any) {
+    @IBAction func closeKeyBoardButton(_ sender: Any) {
         commentTextView.endEditing(true)
     }
 }
 
-extension UserCommentListViewController: UITableViewDataSource{
+extension ProfileCommentListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int?
         viewModel.map{
@@ -102,12 +102,9 @@ extension UserCommentListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentTableViewCell
-//        guard let data = viewModel?.getData()[indexPath.row] else {return cell}
-//        cell.userCommentText.text = data.commentText
         viewModel.map{
             let data = $0.getData()[indexPath.row]
-            guard let commentText = data.commentText else {return}
-            cell.userCommentText.text = commentText
+            cell.userCommentText.text = data.commentText
             guard let userObjectId = data.userObjectId else {return}
             $0.getUserData(userObjectId: userObjectId) { [weak self] in
                 guard let self = self else {return}
@@ -143,51 +140,46 @@ extension UserCommentListViewController: UITableViewDataSource{
             guard let objectId = data.objectId else {return}
             guard let commentUserObjectId = data.userObjectId else {return}
             let currentUserObjectId = $0.getCurrentUserObjectId()
-            let postedUserObjectId = $0.getObjectId().userObjectId
-            if postedUserObjectId == currentUserObjectId {
-                if currentUserObjectId == commentUserObjectId{
-                    router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
-                }else{
-                    if good {
-                        $0.changeGoodValue(objectId: objectId, value: false) { [weak self] in
-                            guard let self = self else {return}
-                            switch $0 {
-                            case .success:
-                                DispatchQueue.main.async {
-                                    sender.setImage(UIImage(systemName: "star"), for: .normal)
-                                    self.viewModel.map{
-                                        $0.changeTofalse(cellRow: sender.tag)
-                                    }
+            if currentUserObjectId == commentUserObjectId{
+                router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
+            }else{
+                if good {
+                    $0.changeGoodValue(objectId: objectId, value: false) { [weak self] in
+                        guard let self = self else {return}
+                        switch $0 {
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.setImage(UIImage(systemName: "star"), for: .normal)
+                                self.viewModel.map{
+                                    $0.changeTofalse(cellRow: sender.tag)
                                 }
-                            case .failure:
-                                return
                             }
+                        case .failure:
+                            return
                         }
-                    }else{
-                        $0.changeGoodValue(objectId: objectId, value: true) { [weak self] in
-                            guard let self = self else {return}
-                            switch $0 {
-                            case .success:
-                                DispatchQueue.main.async {
-                                    sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                                    self.viewModel.map{
-                                        $0.changeToTrue(cellRow: sender.tag)
-                                    }
+                    }
+                }else{
+                    $0.changeGoodValue(objectId: objectId, value: true) { [weak self] in
+                        guard let self = self else {return}
+                        switch $0 {
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                                self.viewModel.map{
+                                    $0.changeToTrue(cellRow: sender.tag)
                                 }
-                            case .failure:
-                                return
                             }
+                        case .failure:
+                            return
                         }
                     }
                 }
-            }else{
-                router.resultAlert(titleText: "投稿者しか押せません", messageText: "", titleOK: "OK")
             }
         }
     }
 }
 
-extension UserCommentListViewController: UITableViewDelegate{
+extension ProfileCommentListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.estimatedRowHeight = 70
         return UITableView.automaticDimension
@@ -197,3 +189,4 @@ extension UserCommentListViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+

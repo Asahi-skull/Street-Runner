@@ -44,17 +44,19 @@ class UserProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.getRequestData{ [weak self] in
-            guard let self = self else {return}
-            switch $0{
-            case .success:
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                self.ncmbClass = "request"
-            case .failure:
-                DispatchQueue.main.async {
-                    self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+        viewModel.map{
+            $0.getRequestData{ [weak self] in
+                guard let self = self else {return}
+                switch $0{
+                case .success:
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    self.ncmbClass = "request"
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+                    }
                 }
             }
         }
@@ -167,32 +169,36 @@ extension UserProfileViewController: UITableViewDataSource{
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            viewModel?.getRequestData{ [weak self] in
-                guard let self = self else {return}
-                switch $0{
-                case .success:
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    self.ncmbClass = "request"
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+            viewModel.map{
+                $0.getRequestData{ [weak self] in
+                    guard let self = self else {return}
+                    switch $0{
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        self.ncmbClass = "request"
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+                        }
                     }
                 }
             }
         case 1:
-            viewModel?.getRecruitmentData{ [weak self] in
-                guard let self = self else {return}
-                switch $0{
-                case .success:
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    self.ncmbClass = "recruitment"
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+            viewModel.map{
+                $0.getRecruitmentData{ [weak self] in
+                    guard let self = self else {return}
+                    switch $0{
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        self.ncmbClass = "recruitment"
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.router.resultAlert(titleText: "データの取得に失敗", messageText: "再試行してください", titleOK: "OK")
+                        }
                     }
                 }
             }
@@ -220,24 +226,32 @@ extension UserProfileViewController: UITableViewDelegate{
 
 extension UserProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = viewModel?.dataCount() else {return 0}
+        var count: Int?
+        viewModel.map{
+            count = $0.dataCount()
+        }
+        guard let count = count else {return 0}
         return count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profilePostedCollectionCell", for: indexPath) as! ProfilePostedCollectionViewCell
-        guard let data = viewModel?.getData(indexPath: indexPath) else {return cell}
-        guard let fileName = data.requestImage else {return cell}
-        viewModel?.setImage(fileName: fileName,  imageView: cell.postedImage)
-        guard let postedText = data.requestText else {return cell}
-        cell.commentText.text = postedText
+        viewModel.map{
+            let data = $0.getData(indexPath: indexPath)
+            guard let fileName = data.requestImage else {return}
+            $0.setImage(fileName: fileName,  imageView: cell.postedImage)
+            guard let postedText = data.requestText else {return}
+            cell.commentText.text = postedText
+        }
         return cell
     }
 }
 
 extension UserProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        router.transition(idetifier: "toUserDetail", sender: viewModel?.getData(indexPath:indexPath))
+        viewModel.map{
+            router.transition(idetifier: "toUserDetail", sender: $0.getData(indexPath:indexPath))
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
