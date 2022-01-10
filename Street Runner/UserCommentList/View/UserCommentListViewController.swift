@@ -92,15 +92,22 @@ class UserCommentListViewController: UIViewController {
 
 extension UserCommentListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = viewModel?.dataCount() else {return 0}
+        var count: Int?
+        viewModel.map{
+            count = $0.dataCount()
+        }
+        guard let count = count else {return 0}
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentTableViewCell
-        guard let data = viewModel?.getData()[indexPath.row] else {return cell}
-        cell.userCommentText.text = data.commentText
+//        guard let data = viewModel?.getData()[indexPath.row] else {return cell}
+//        cell.userCommentText.text = data.commentText
         viewModel.map{
+            let data = $0.getData()[indexPath.row]
+            guard let commentText = data.commentText else {return}
+            cell.userCommentText.text = commentText
             guard let userObjectId = data.userObjectId else {return}
             $0.getUserData(userObjectId: userObjectId) { [weak self] in
                 guard let self = self else {return}
@@ -110,7 +117,9 @@ extension UserCommentListViewController: UITableViewDataSource{
                         cell.userNameLabel.text = data.userName
                     }
                     guard let fileName = data.iconImageFile else {return}
-                    self.viewModel?.getIconImage(fileName: fileName, imageView: cell.iconImage)
+                    self.viewModel.map{
+                        $0.getIconImage(fileName: fileName, imageView: cell.iconImage)
+                    }
                 case .failure:
                     return
                 }
@@ -128,46 +137,52 @@ extension UserCommentListViewController: UITableViewDataSource{
     }
     
     @objc func goodButtonTapped(_ sender: UIButton) {
-        guard let data = viewModel?.getData()[sender.tag] else {return}
-        guard let good = data.good else {return}
-        guard let objectId = data.objectId else {return}
-        guard let commentUserObjectId = data.userObjectId else {return}
-        let currentUserObjectId = viewModel?.getCurrentUserObjectId()
-        let postedUserObjectId = viewModel?.getObjectId().userObjectId
-        if postedUserObjectId == currentUserObjectId {
-            if currentUserObjectId == commentUserObjectId{
-                router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
-            }else{
-                if good {
-                    viewModel?.changeGoodValue(objectId: objectId, value: false) { [weak self] in
-                        guard let self = self else {return}
-                        switch $0 {
-                        case .success:
-                            DispatchQueue.main.async {
-                                sender.setImage(UIImage(systemName: "star"), for: .normal)
-                                self.viewModel?.changeTofalse(cellRow: sender.tag)
-                            }
-                        case .failure:
-                            return
-                        }
-                    }
+        viewModel.map{
+            let data = $0.getData()[sender.tag]
+            guard let good = data.good else {return}
+            guard let objectId = data.objectId else {return}
+            guard let commentUserObjectId = data.userObjectId else {return}
+            let currentUserObjectId = $0.getCurrentUserObjectId()
+            let postedUserObjectId = $0.getObjectId().userObjectId
+            if postedUserObjectId == currentUserObjectId {
+                if currentUserObjectId == commentUserObjectId{
+                    router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
                 }else{
-                    viewModel?.changeGoodValue(objectId: objectId, value: true) { [weak self] in
-                        guard let self = self else {return}
-                        switch $0 {
-                        case .success:
-                            DispatchQueue.main.async {
-                                sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                                self.viewModel?.changeToTrue(cellRow: sender.tag)
+                    if good {
+                        $0.changeGoodValue(objectId: objectId, value: false) { [weak self] in
+                            guard let self = self else {return}
+                            switch $0 {
+                            case .success:
+                                DispatchQueue.main.async {
+                                    sender.setImage(UIImage(systemName: "star"), for: .normal)
+                                    self.viewModel.map{
+                                        $0.changeTofalse(cellRow: sender.tag)
+                                    }
+                                }
+                            case .failure:
+                                return
                             }
-                        case .failure:
-                            return
+                        }
+                    }else{
+                        $0.changeGoodValue(objectId: objectId, value: true) { [weak self] in
+                            guard let self = self else {return}
+                            switch $0 {
+                            case .success:
+                                DispatchQueue.main.async {
+                                    sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                                    self.viewModel.map{
+                                        $0.changeToTrue(cellRow: sender.tag)
+                                    }
+                                }
+                            case .failure:
+                                return
+                            }
                         }
                     }
                 }
+            }else{
+                router.resultAlert(titleText: "投稿者しか押せません", messageText: "", titleOK: "OK")
             }
-        }else{
-            router.resultAlert(titleText: "投稿者しか押せません", messageText: "", titleOK: "OK")
         }
     }
 }
