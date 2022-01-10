@@ -102,11 +102,16 @@ extension ProfileDetailViewController: UITableViewDelegate{
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
-//            router.transition(idetifier: "", sender: entity)
+            viewModel.map{
+                router.transition(idetifier: "profileToComment", sender: $0.getEntity())
+            }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        let detailData = sender as! ProfileDetailData
+        let profileToComment = segue.destination as! ProfileCommentListViewController
+        let data = ProfileCommentData(objectId: detailData.objectID, className: detailData.className)
+        profileToComment.entity = data
     }
 }

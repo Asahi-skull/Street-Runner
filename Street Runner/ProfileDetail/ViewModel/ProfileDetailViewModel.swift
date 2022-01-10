@@ -12,6 +12,7 @@ protocol ProfileDetailViewModel{
     func getImage(fileName: String, imageView: UIImageView)
     func getEntity() -> ProfileDetailData
     func getUserInfo(compltion: @escaping (Result<UserData,Error>) -> Void)
+    func getCurrentUserId() -> String
 }
 
 class ProfileDetailViewModelImpl: ProfileDetailViewModel {
@@ -42,5 +43,9 @@ class ProfileDetailViewModelImpl: ProfileDetailViewModel {
                 compltion(Result.failure(err))
             }
         }
+    }
+    
+    func getCurrentUserId() -> String {
+        profile.getID()
     }
 }
