@@ -105,11 +105,11 @@ extension UserCommentListViewController: UITableViewDataSource{
             $0.getUserData(userObjectId: userObjectId) { [weak self] in
                 guard let self = self else {return}
                 switch $0{
-                case .success(let datas):
+                case .success(let data):
                     DispatchQueue.main.async {
-                        cell.userNameLabel.text = datas.userName
+                        cell.userNameLabel.text = data.userName
                     }
-                    guard let fileName = datas.iconImageFile else {return}
+                    guard let fileName = data.iconImageFile else {return}
                     self.viewModel?.getIconImage(fileName: fileName, imageView: cell.iconImage)
                 case .failure:
                     return
@@ -133,8 +133,8 @@ extension UserCommentListViewController: UITableViewDataSource{
         guard let objectId = data.objectId else {return}
         guard let commentUserObjectId = data.userObjectId else {return}
         let currentUserObjectId = viewModel?.getCurrentUserObjectId()
-        let postedUserObjecId = viewModel?.getObjectId().userObjectId
-        if postedUserObjecId == currentUserObjectId {
+        let postedUserObjectId = viewModel?.getObjectId().userObjectId
+        if postedUserObjectId == currentUserObjectId {
             if currentUserObjectId == commentUserObjectId{
                 router.resultAlert(titleText: "自分のコメントには押せません", messageText: "", titleOK: "OK")
             }else{
