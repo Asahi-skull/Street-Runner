@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController {
     lazy var router: ProfileRouter = ProfileRouterImpl(viewController: self)
     let profileViewModel: ProfileViewModel = ProfileViewModelImpl()
     
+    private var className: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let profileNib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
@@ -34,6 +36,7 @@ class ProfileViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.table.reloadData()
                 }
+                self.className = "request"
             case .failure:
                 return
             }
@@ -41,7 +44,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func editButton(_ sender: Any) {
-        router.transition(idetifier: "toEdit")
+        router.transition(idetifier: "toEdit",sender: nil)
     }
 }
 
@@ -85,6 +88,7 @@ extension ProfileViewController: UITableViewDataSource{
                     DispatchQueue.main.async {
                         self.table.reloadData()
                     }
+                    self.className = "request"
                 case .failure:
                     DispatchQueue.main.async{
                         self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
@@ -99,6 +103,7 @@ extension ProfileViewController: UITableViewDataSource{
                     DispatchQueue.main.async {
                         self.table.reloadData()
                     }
+                    self.className = "recruitment"
                 case .failure:
                     DispatchQueue.main.async{
                         self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
@@ -121,6 +126,10 @@ extension ProfileViewController: UITableViewDelegate {
             return tableView.bounds.height - tableView.bounds.height/18
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension ProfileViewController: UICollectionViewDataSource {
@@ -140,7 +149,16 @@ extension ProfileViewController: UICollectionViewDataSource {
 }
 
 extension ProfileViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        router.transition(idetifier: "profileToDetail", sender: profileViewModel.getData(indexPath:indexPath))
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let data = sender as! ProfilePostedEntity
+        let profileToDetail = segue.destination as! ProfileDetailViewController
+        let detailData = ProfileDetailData(objectID: data.objectID, requestImage: data.requestImage, requestText: data.requestText, className: className)
+        profileToDetail.entity = detailData
+    }
 }
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout{
