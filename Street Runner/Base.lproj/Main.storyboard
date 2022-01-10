@@ -242,11 +242,47 @@
                     <connections>
                         <outlet property="table" destination="u5S-jb-13T" id="xm8-yq-EWZ"/>
                         <segue destination="36G-pW-9Cy" kind="presentation" identifier="toEdit" modalPresentationStyle="fullScreen" id="zHi-oJ-2kG"/>
+                        <segue destination="scQ-Ny-Wn7" kind="show" identifier="profileToDetail" id="3W2-T0-3oN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHf-OG-uvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2306" y="1623"/>
+            <point key="canvasLocation" x="2306" y="2326"/>
+        </scene>
+        <!--Profile Detail View Controller-->
+        <scene sceneID="gOv-mQ-jFO">
+            <objects>
+                <viewController id="scQ-Ny-Wn7" customClass="ProfileDetailViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X6S-Mh-GI6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aJW-ME-97Q">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="scQ-Ny-Wn7" id="Zb7-vw-98f"/>
+                                    <outlet property="delegate" destination="scQ-Ny-Wn7" id="dCg-mt-TaR"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bqx-aP-lSP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aJW-ME-97Q" firstAttribute="top" secondItem="bqx-aP-lSP" secondAttribute="top" id="2uO-bP-CTl"/>
+                            <constraint firstItem="bqx-aP-lSP" firstAttribute="trailing" secondItem="aJW-ME-97Q" secondAttribute="trailing" id="QVd-zT-oM9"/>
+                            <constraint firstItem="aJW-ME-97Q" firstAttribute="leading" secondItem="bqx-aP-lSP" secondAttribute="leading" id="VOS-vo-gtr"/>
+                            <constraint firstItem="bqx-aP-lSP" firstAttribute="bottom" secondItem="aJW-ME-97Q" secondAttribute="bottom" id="tuR-rh-nIF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2y3-Th-sCJ"/>
+                    <connections>
+                        <outlet property="tableView" destination="aJW-ME-97Q" id="pRJ-dM-aY8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j08-8a-aDo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3070" y="2326"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="cI6-HT-6dz">
