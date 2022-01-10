@@ -187,6 +187,15 @@ extension ProfileCommentListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.map{
+            router.transition(idetifier: "commentToProfile", sender: $0.getData()[indexPath.row].userObjectId)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let userId = sender as! String
+        let commentToProfile = segue.destination as! FollowUserProfileViewController
+        commentToProfile.userObjectId = userId
     }
 }
 
