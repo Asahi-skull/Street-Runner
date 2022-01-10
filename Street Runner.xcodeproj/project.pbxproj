@@ -97,6 +97,9 @@
 		419E3C8A275CA93500059CB9 /* ShowPostedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */; };
 		419E3C8C275CADBD00059CB9 /* ShowPostedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */; };
 		41A3283A2779A22F005F290B /* UserProfileMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A328392779A22F005F290B /* UserProfileMBaaS.swift */; };
+		41AD8694278B0E38008D6E14 /* UserCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD8693278B0E38008D6E14 /* UserCommentListViewController.swift */; };
+		41AD8696278B1072008D6E14 /* UserCommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD8695278B1072008D6E14 /* UserCommentListViewModel.swift */; };
+		41AD8698278B12E6008D6E14 /* UserCommentListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD8697278B12E6008D6E14 /* UserCommentListRouter.swift */; };
 		41C3746E276C84BE00264C46 /* DetailPostedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */; };
 		41C37471276DD85F00264C46 /* DetailImagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3746F276DD85F00264C46 /* DetailImagTableViewCell.swift */; };
 		41C37472276DD85F00264C46 /* DetailImagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C37470276DD85F00264C46 /* DetailImagTableViewCell.xib */; };
@@ -218,6 +221,9 @@
 		419E3C89275CA93500059CB9 /* ShowPostedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPostedViewModel.swift; sourceTree = "<group>"; };
 		419E3C8B275CADBD00059CB9 /* ShowPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShowPostedRouter.swift; path = "Street Runner/ShowPosted/Router/ShowPostedRouter.swift"; sourceTree = SOURCE_ROOT; };
 		41A328392779A22F005F290B /* UserProfileMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileMBaaS.swift; sourceTree = "<group>"; };
+		41AD8693278B0E38008D6E14 /* UserCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentListViewController.swift; sourceTree = "<group>"; };
+		41AD8695278B1072008D6E14 /* UserCommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentListViewModel.swift; sourceTree = "<group>"; };
+		41AD8697278B12E6008D6E14 /* UserCommentListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentListRouter.swift; sourceTree = "<group>"; };
 		41C3746D276C84BE00264C46 /* DetailPostedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostedRouter.swift; sourceTree = "<group>"; };
 		41C3746F276DD85F00264C46 /* DetailImagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImagTableViewCell.swift; sourceTree = "<group>"; };
 		41C37470276DD85F00264C46 /* DetailImagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailImagTableViewCell.xib; sourceTree = "<group>"; };
@@ -396,6 +402,7 @@
 				415B0FB027672CB100211118 /* DetailPosted */,
 				41C3747B276DEA3E00264C46 /* UserProfile */,
 				415CDEE0278998CC000EB7E4 /* UserDetail */,
+				41AD868F278B0DE4008D6E14 /* UserCommentList */,
 				41C3747C276DEA5D00264C46 /* CommentList */,
 				415CDECC2782EEC2000EB7E4 /* FollowList */,
 				4188120727563B3600DE9280 /* SelectPost */,
@@ -877,6 +884,40 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		41AD868F278B0DE4008D6E14 /* UserCommentList */ = {
+			isa = PBXGroup;
+			children = (
+				41AD8692278B0E21008D6E14 /* View */,
+				41AD8691278B0E16008D6E14 /* ViewModel */,
+				41AD8690278B0E0F008D6E14 /* Router */,
+			);
+			path = UserCommentList;
+			sourceTree = "<group>";
+		};
+		41AD8690278B0E0F008D6E14 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				41AD8697278B12E6008D6E14 /* UserCommentListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		41AD8691278B0E16008D6E14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				41AD8695278B1072008D6E14 /* UserCommentListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		41AD8692278B0E21008D6E14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41AD8693278B0E38008D6E14 /* UserCommentListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		41C3747B276DEA3E00264C46 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1097,6 +1138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				415CDEE927899FB0000EB7E4 /* UserDetailRouter.swift in Sources */,
+				41AD8696278B1072008D6E14 /* UserCommentListViewModel.swift in Sources */,
 				419E3C72275B679E00059CB9 /* SegmentedTableCell.swift in Sources */,
 				4188121E2758BD0900DE9280 /* PostRequestRouter.swift in Sources */,
 				418811F7274FCF0000DE9280 /* EditProfilemBaaS.swift in Sources */,
@@ -1132,9 +1174,11 @@
 				4180F08827736C620014ED18 /* UserData.swift in Sources */,
 				415CDED727843BCD000EB7E4 /* FollowListMbaas.swift in Sources */,
 				4188121A2757999700DE9280 /* PostRequestViewModel.swift in Sources */,
+				41AD8698278B12E6008D6E14 /* UserCommentListRouter.swift in Sources */,
 				4180F08E27770C770014ED18 /* UserProfileViewModel.swift in Sources */,
 				418811E8274F6DCD00DE9280 /* ProfileRouter.swift in Sources */,
 				419E3C6B275B63DD00059CB9 /* ShowPostedViewController.swift in Sources */,
+				41AD8694278B0E38008D6E14 /* UserCommentListViewController.swift in Sources */,
 				4180F082277196AC0014ED18 /* DetailData.swift in Sources */,
 				418811D0274E0BDA00DE9280 /* SignUpRouter.swift in Sources */,
 				41C37481276DEB3800264C46 /* UserProfileViewController.swift in Sources */,

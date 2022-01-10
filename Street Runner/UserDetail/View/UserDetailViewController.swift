@@ -101,14 +101,16 @@ extension UserDetailViewController: UITableViewDelegate{
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
-            
+            viewModel.map{
+                router.transition(idetifier: "userToComment", sender: $0.getEntity())
+            }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let entityItem = sender as! detailData
-//        let detailToComment = segue.destination as! CommentListViewController
-//        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
-//        detailToComment.entity = commentData
+        let entityItem = sender as! detailData
+        let userToComment = segue.destination as! UserCommentListViewController
+        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+        userToComment.entity = commentData
     }
 }
