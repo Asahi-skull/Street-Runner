@@ -370,11 +370,47 @@
                         <outlet property="commentBottom" destination="ARD-uY-Z0f" id="Min-jb-l0U"/>
                         <outlet property="commentTextView" destination="njA-cU-kbs" id="RIq-XW-aNm"/>
                         <outlet property="tableView" destination="IpF-5d-Zsw" id="Qdd-Wr-lE5"/>
+                        <segue destination="7B9-lh-Q2l" kind="show" identifier="commentToProfile" id="0tL-Og-tQQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cb1-XB-P4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3853.6231884057975" y="2325.6696428571427"/>
+        </scene>
+        <!--Follow User Profile View Controller-->
+        <scene sceneID="79K-JM-gWK">
+            <objects>
+                <viewController id="7B9-lh-Q2l" customClass="FollowUserProfileViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FIg-eB-Zk3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QsT-7h-wLo">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="7B9-lh-Q2l" id="aNe-U9-4BC"/>
+                                    <outlet property="delegate" destination="7B9-lh-Q2l" id="d8U-37-8ZF"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="E6v-BZ-aOp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="E6v-BZ-aOp" firstAttribute="trailing" secondItem="QsT-7h-wLo" secondAttribute="trailing" id="98w-qH-1hE"/>
+                            <constraint firstItem="QsT-7h-wLo" firstAttribute="top" secondItem="E6v-BZ-aOp" secondAttribute="top" id="X8G-6D-iLf"/>
+                            <constraint firstItem="E6v-BZ-aOp" firstAttribute="bottom" secondItem="QsT-7h-wLo" secondAttribute="bottom" id="l2b-Uj-waN"/>
+                            <constraint firstItem="QsT-7h-wLo" firstAttribute="leading" secondItem="E6v-BZ-aOp" secondAttribute="leading" id="xdF-MK-cY1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bVn-f6-d1F"/>
+                    <connections>
+                        <outlet property="tableView" destination="QsT-7h-wLo" id="ala-fP-t0r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qvB-O4-YVn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4616" y="2827"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="cI6-HT-6dz">
