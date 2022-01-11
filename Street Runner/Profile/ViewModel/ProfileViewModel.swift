@@ -16,11 +16,14 @@ protocol ProfileViewModel{
     func getRequest(completion: @escaping (Result<Void,Error>) -> Void)
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
     func getImage(fileName: String,imageView: UIImageView)
+    func countFollower(completion: @escaping (Result<Int,Error>) -> Void)
+    func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
 }
 
 class ProfileViewModelImpl: ProfileViewModel{
     private let profile: ProfilemBaaS = ProfilemBaaSImpl()
     private let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
+    private let followModel: UserProfileMBaaS = UserProfileMBaaSImpl()
     private var datas: [ProfilePostedEntity] = []
     
     func setUser() -> String {
@@ -69,5 +72,29 @@ class ProfileViewModelImpl: ProfileViewModel{
     
     func getImage(fileName: String,imageView: UIImageView){
         showPosted.getIconImage(fileName: fileName, imageView: imageView)
+    }
+    
+    func countFollower(completion: @escaping (Result<Int,Error>) -> Void) {
+        let userId = profile.getID()
+        followModel.countFollow(field: "followedBy", userObjectId: userId) {
+            switch $0{
+            case .success(let int):
+                completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func countFollowing(completion: @escaping (Result<Int,Error>) -> Void) {
+        let userId = profile.getID()
+        followModel.countFollow(field: "followOn", userObjectId: userId) {
+            switch $0{
+            case .success(let int):
+                completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }
