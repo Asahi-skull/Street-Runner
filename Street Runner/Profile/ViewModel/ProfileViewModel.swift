@@ -78,8 +78,8 @@ class ProfileViewModelImpl: ProfileViewModel{
         let userId = profile.getID()
         followModel.countFollow(field: "followedBy", userObjectId: userId) {
             switch $0{
-            case .success(let int):
-                completion(Result.success(int))
+            case .success(let data):
+                completion(Result.success(data))
             case .failure(let err):
                 completion(Result.failure(err))
             }

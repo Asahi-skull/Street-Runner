@@ -182,10 +182,11 @@ extension ProfileViewController: UICollectionViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profileToDetail"{
-            let data = sender as! ProfilePostedEntity
-            let profileToDetail = segue.destination as! ProfileDetailViewController
-            let detailData = ProfileDetailData(objectID: data.objectID, requestImage: data.requestImage, requestText: data.requestText, className: className)
-            profileToDetail.entity = detailData
+            if let data = sender as? ProfilePostedEntity {
+                let profileToDetail = segue.destination as! ProfileDetailViewController
+                let detailData = ProfileDetailData(objectID: data.objectID, requestImage: data.requestImage, requestText: data.requestText, className: className)
+                profileToDetail.entity = detailData
+            }
         }
     }
 }
