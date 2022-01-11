@@ -406,11 +406,47 @@
                     <navigationItem key="navigationItem" id="bVn-f6-d1F"/>
                     <connections>
                         <outlet property="tableView" destination="QsT-7h-wLo" id="ala-fP-t0r"/>
+                        <segue destination="2O6-rk-Dee" kind="show" identifier="followToDetail" id="pvJ-OP-AAw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvB-O4-YVn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4616" y="2827"/>
+        </scene>
+        <!--Follow Detail View Controller-->
+        <scene sceneID="sqD-jk-7Lj">
+            <objects>
+                <viewController id="2O6-rk-Dee" customClass="FollowDetailViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FtY-o4-sP0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eVs-Jh-q2h">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="2O6-rk-Dee" id="boi-WU-e7B"/>
+                                    <outlet property="delegate" destination="2O6-rk-Dee" id="FLa-NH-K4s"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BE9-3o-XlS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BE9-3o-XlS" firstAttribute="bottom" secondItem="eVs-Jh-q2h" secondAttribute="bottom" id="5c9-XS-GLz"/>
+                            <constraint firstItem="eVs-Jh-q2h" firstAttribute="top" secondItem="BE9-3o-XlS" secondAttribute="top" id="X54-2W-QWT"/>
+                            <constraint firstItem="eVs-Jh-q2h" firstAttribute="leading" secondItem="BE9-3o-XlS" secondAttribute="leading" id="jJh-c0-dMo"/>
+                            <constraint firstItem="BE9-3o-XlS" firstAttribute="trailing" secondItem="eVs-Jh-q2h" secondAttribute="trailing" id="mny-uR-gfk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CoV-g7-ZFL"/>
+                    <connections>
+                        <outlet property="tableView" destination="eVs-Jh-q2h" id="p5s-vq-RAF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l0u-6e-ehp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5409" y="2827"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="cI6-HT-6dz">

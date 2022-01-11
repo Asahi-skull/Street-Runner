@@ -249,16 +249,16 @@ extension FollowUserProfileViewController: UICollectionViewDataSource {
 
 extension FollowUserProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.map{
-//            router.transition(idetifier: "toUserDetail", sender: $0.getData(indexPath:indexPath))
-//        }
+        viewModel.map{
+            router.transition(idetifier: "followToDetail", sender: $0.getData(indexPath:indexPath))
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let entity = sender as! ProfilePostedEntity
-//        let toUserDetail = segue.destination as! UserDetailViewController
-//        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: viewModel?.getUserObjectId(), className: ncmbClass)
-//        toUserDetail.entity = data
+        let entity = sender as! ProfilePostedEntity
+        let followToDetail = segue.destination as! FollowDetailViewController
+        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: viewModel?.getUserObjectId(), className: ncmbClass)
+        followToDetail.entity = data
     }
 }
 
