@@ -104,17 +104,17 @@ extension FollowDetailViewController: UITableViewDelegate{
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
-//            viewModel.map{
-//                router.transition(idetifier: "userToComment", sender: $0.getEntity())
-//            }
+            viewModel.map{
+                router.transition(idetifier: "followToComment", sender: $0.getEntity())
+            }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let entityItem = sender as! detailData
-//        let userToComment = segue.destination as! UserCommentListViewController
-//        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
-//        userToComment.entity = commentData
+        let entityItem = sender as! detailData
+        let followToComment = segue.destination as! FollowCommentListViewController
+        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+        followToComment.entity = commentData
     }
 }
 

@@ -442,11 +442,102 @@
                     <navigationItem key="navigationItem" id="CoV-g7-ZFL"/>
                     <connections>
                         <outlet property="tableView" destination="eVs-Jh-q2h" id="p5s-vq-RAF"/>
+                        <segue destination="BHa-eH-QcI" kind="show" identifier="followToComment" id="p71-If-wpt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0u-6e-ehp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5409" y="2827"/>
+        </scene>
+        <!--Follow Comment List View Controller-->
+        <scene sceneID="SOD-ef-2Sn">
+            <objects>
+                <viewController id="BHa-eH-QcI" customClass="FollowCommentListViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z5j-mG-ju7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bOw-pd-6yv">
+                                <rect key="frame" x="0.0" y="88" width="414" height="675"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BHa-eH-QcI" id="0Mo-Ew-UPk"/>
+                                    <outlet property="delegate" destination="BHa-eH-QcI" id="iTZ-dE-rtJ"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6z-SS-pZf">
+                                <rect key="frame" x="0.0" y="763" width="414" height="35"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mRQ-Bl-doj">
+                                        <rect key="frame" x="10" y="0.0" width="324" height="35"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="gza-js-9dM"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiB-ii-4Fo">
+                                        <rect key="frame" x="344" y="0.0" width="60" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="l1Q-rc-YwW"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="送信"/>
+                                        <connections>
+                                            <action selector="sendButton:" destination="BHa-eH-QcI" eventType="touchUpInside" id="2cH-MV-a7F"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="mRQ-Bl-doj" firstAttribute="leading" secondItem="s6z-SS-pZf" secondAttribute="leading" constant="10" id="5oG-d1-fB3"/>
+                                    <constraint firstItem="eiB-ii-4Fo" firstAttribute="leading" secondItem="mRQ-Bl-doj" secondAttribute="trailing" constant="10" id="JCJ-Yd-o7D"/>
+                                    <constraint firstAttribute="bottom" secondItem="mRQ-Bl-doj" secondAttribute="bottom" id="Ndw-t8-npz"/>
+                                    <constraint firstAttribute="trailing" secondItem="eiB-ii-4Fo" secondAttribute="trailing" constant="10" id="Qef-tf-EEy"/>
+                                    <constraint firstAttribute="bottom" secondItem="eiB-ii-4Fo" secondAttribute="bottom" id="WIN-4r-iLc"/>
+                                    <constraint firstItem="eiB-ii-4Fo" firstAttribute="top" secondItem="s6z-SS-pZf" secondAttribute="top" id="fqh-Wo-ojs"/>
+                                    <constraint firstItem="mRQ-Bl-doj" firstAttribute="top" secondItem="s6z-SS-pZf" secondAttribute="top" id="jxV-Ey-vBP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gZq-bf-JPB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="s6z-SS-pZf" firstAttribute="top" secondItem="bOw-pd-6yv" secondAttribute="bottom" id="0ez-kO-XQW"/>
+                            <constraint firstItem="bOw-pd-6yv" firstAttribute="leading" secondItem="gZq-bf-JPB" secondAttribute="leading" id="IW1-dR-TTE"/>
+                            <constraint firstItem="gZq-bf-JPB" firstAttribute="bottom" secondItem="s6z-SS-pZf" secondAttribute="bottom" constant="15" id="Pwp-U8-KvA"/>
+                            <constraint firstItem="gZq-bf-JPB" firstAttribute="trailing" secondItem="s6z-SS-pZf" secondAttribute="trailing" id="blW-Az-JXh"/>
+                            <constraint firstItem="gZq-bf-JPB" firstAttribute="bottom" secondItem="bOw-pd-6yv" secondAttribute="bottom" constant="50" id="f31-XQ-BFX"/>
+                            <constraint firstItem="gZq-bf-JPB" firstAttribute="trailing" secondItem="bOw-pd-6yv" secondAttribute="trailing" id="pAJ-JL-DOq"/>
+                            <constraint firstItem="s6z-SS-pZf" firstAttribute="leading" secondItem="gZq-bf-JPB" secondAttribute="leading" id="rJg-dZ-I5k"/>
+                            <constraint firstItem="bOw-pd-6yv" firstAttribute="top" secondItem="gZq-bf-JPB" secondAttribute="top" id="yeZ-EE-8af"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="yWJ-Yk-Sqw">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="jpc-o8-mPc">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DW5-Ms-c8N">
+                                <rect key="frame" x="335" y="5" width="59" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="完了"/>
+                                <connections>
+                                    <action selector="closeKeyBoardButton:" destination="BHa-eH-QcI" eventType="touchUpInside" id="C3V-sB-TYi"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="closeButton" destination="DW5-Ms-c8N" id="ngi-kR-pXQ"/>
+                        <outlet property="commentBottom" destination="Pwp-U8-KvA" id="c2E-rg-0pu"/>
+                        <outlet property="commentTextView" destination="mRQ-Bl-doj" id="5II-5y-QJa"/>
+                        <outlet property="tableView" destination="bOw-pd-6yv" id="Gt4-ms-hUd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0LZ-Ew-ooD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6208.6956521739139" y="2826.5625"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="cI6-HT-6dz">
