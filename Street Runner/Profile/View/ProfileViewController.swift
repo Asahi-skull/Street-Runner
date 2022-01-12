@@ -56,13 +56,7 @@ extension ProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileTableViewCell
-           let result = profileViewModel.getIconImage()
-            switch result{
-            case .success(let uiImage):
-                cell.iconImage.image = uiImage
-            case .failure:
-                return cell
-            }
+            profileViewModel.getIconImage(imageView: cell.iconImage)
             cell.userNameLabel.text = profileViewModel.setUser()
             profileViewModel.countFollower {
                 switch $0 {

@@ -10,7 +10,7 @@ import UIKit
 
 protocol ProfileViewModel{
     func setUser() -> String
-    func getIconImage() -> Result<UIImage,Error>
+    func getIconImage(imageView: UIImageView)
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> ProfilePostedEntity
     func getRequest(completion: @escaping (Result<Void,Error>) -> Void)
@@ -30,10 +30,8 @@ class ProfileViewModelImpl: ProfileViewModel{
         profile.getUser()
     }
     
-    func getIconImage() -> Result<UIImage,Error>{
-        let fileName = profile.getID()
-        let imageResult = profile.getIconImage(fileName: fileName)
-        return imageResult
+    func getIconImage(imageView: UIImageView) {
+        showPosted.getIconImage(fileName: profile.getID(), imageView: imageView)
     }
     
     func dataCount() -> Int {
