@@ -620,7 +620,6 @@
 				415CDEE0278998CC000EB7E4 /* UserDetail */,
 				41AD868F278B0DE4008D6E14 /* UserCommentList */,
 				41C3747C276DEA5D00264C46 /* CommentList */,
-				415CDECC2782EEC2000EB7E4 /* FollowList */,
 				4188120727563B3600DE9280 /* SelectPost */,
 				41881212275765C200DE9280 /* PostRequest */,
 				41902CF32765CCD200130C3B /* PostRecruitment */,
@@ -629,6 +628,7 @@
 				418811D5274E0D9000DE9280 /* Login */,
 				4188119927489F5700DE9280 /* Profile */,
 				418811E9274F769800DE9280 /* EditProfile */,
+				415CDECC2782EEC2000EB7E4 /* FollowList */,
 				415F038B278BE29900FE8568 /* ProfileDetail */,
 				415F0398278C1A0000FE8568 /* ProfileCommentList */,
 				415F03A6278C66B200FE8568 /* FollowUserProfile */,
@@ -754,11 +754,11 @@
 				415B0FC1276743F600211118 /* CommentMBaaSMBaaS.swift */,
 				4188120C27563D5E00DE9280 /* PostRequestMBaaS.swift */,
 				415B0FA82765DBCB00211118 /* PostRecruitmentMBaaS.swift */,
-				415CDED627843BCD000EB7E4 /* FollowListMbaas.swift */,
 				418811A8274A211000DE9280 /* SignUpmBaaS.swift */,
 				418811AC274A33DB00DE9280 /* LoginmBaaS.swift */,
 				418811B6274B809600DE9280 /* ProfilemBaaS.swift */,
 				418811F6274FCF0000DE9280 /* EditProfilemBaaS.swift */,
+				415CDED627843BCD000EB7E4 /* FollowListMbaas.swift */,
 			);
 			path = mBaaS;
 			sourceTree = "<group>";

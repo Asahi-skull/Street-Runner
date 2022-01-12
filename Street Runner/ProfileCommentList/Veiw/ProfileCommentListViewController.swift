@@ -193,9 +193,10 @@ extension ProfileCommentListViewController: UITableViewDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let userId = sender as! String
-        let commentToProfile = segue.destination as! FollowUserProfileViewController
-        commentToProfile.userObjectId = userId
+        if let userId = sender as? String{
+            let commentToProfile = segue.destination as! FollowUserProfileViewController
+            commentToProfile.userObjectId = userId
+        }
     }
 }
 

@@ -11,6 +11,9 @@ class ProfileTableViewCell: UITableViewCell {
 
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var followerLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var detailFollowButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +23,4 @@ class ProfileTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

@@ -255,10 +255,11 @@ extension FollowUserProfileViewController: UICollectionViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let entity = sender as! ProfilePostedEntity
-        let followToDetail = segue.destination as! FollowDetailViewController
-        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: viewModel?.getUserObjectId(), className: ncmbClass)
-        followToDetail.entity = data
+        if let entity = sender as? ProfilePostedEntity{
+            let followToDetail = segue.destination as! FollowDetailViewController
+            let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: viewModel?.getUserObjectId(), className: ncmbClass)
+            followToDetail.entity = data
+        }
     }
 }
 

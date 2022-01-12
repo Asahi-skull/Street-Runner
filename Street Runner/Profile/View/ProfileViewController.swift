@@ -56,14 +56,31 @@ extension ProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileTableViewCell
-           let result = profileViewModel.getIconImage()
-            switch result{
-            case .success(let uiImage):
-                cell.iconImage.image = uiImage
-            case .failure:
-                return cell
-            }
+            profileViewModel.getIconImage(imageView: cell.iconImage)
             cell.userNameLabel.text = profileViewModel.setUser()
+            profileViewModel.countFollower {
+                switch $0 {
+                case .success(let int):
+                    let count = String(int)
+                    DispatchQueue.main.async {
+                        cell.followerLabel.text = count
+                    }
+                case .failure:
+                    return
+                }
+            }
+            profileViewModel.countFollowing {
+                switch $0 {
+                case .success(let int):
+                    let count = String(int)
+                    DispatchQueue.main.async {
+                        cell.followingLabel.text = count
+                    }
+                case .failure:
+                    return
+                }
+            }
+            cell.detailFollowButton.addTarget(self, action: #selector(self.detailFollowButtonTapped(_:)), for: .touchUpInside)
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "segmentedCell", for: indexPath) as! SegmentedTableCell
@@ -76,6 +93,10 @@ extension ProfileViewController: UITableViewDataSource{
             cell.collectionView.dataSource = self
             return cell
         }
+    }
+    
+    @objc func detailFollowButtonTapped(_ sender: UIButton) {
+        router.transition(idetifier: "toFollow", sender: nil)
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
@@ -154,10 +175,13 @@ extension ProfileViewController: UICollectionViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let data = sender as! ProfilePostedEntity
-        let profileToDetail = segue.destination as! ProfileDetailViewController
-        let detailData = ProfileDetailData(objectID: data.objectID, requestImage: data.requestImage, requestText: data.requestText, className: className)
-        profileToDetail.entity = detailData
+        if segue.identifier == "profileToDetail"{
+            if let data = sender as? ProfilePostedEntity {
+                let profileToDetail = segue.destination as! ProfileDetailViewController
+                let detailData = ProfileDetailData(objectID: data.objectID, requestImage: data.requestImage, requestText: data.requestText, className: className)
+                profileToDetail.entity = detailData
+            }
+        }
     }
 }
 

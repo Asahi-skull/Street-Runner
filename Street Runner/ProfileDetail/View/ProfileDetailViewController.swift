@@ -109,9 +109,10 @@ extension ProfileDetailViewController: UITableViewDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailData = sender as! ProfileDetailData
-        let profileToComment = segue.destination as! ProfileCommentListViewController
-        let data = ProfileCommentData(objectId: detailData.objectID, className: detailData.className)
-        profileToComment.entity = data
+        if let detailData = sender as? ProfileDetailData{
+            let profileToComment = segue.destination as! ProfileCommentListViewController
+            let data = ProfileCommentData(objectId: detailData.objectID, className: detailData.className)
+            profileToComment.entity = data
+        }
     }
 }

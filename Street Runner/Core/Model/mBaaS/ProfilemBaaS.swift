@@ -11,7 +11,6 @@ import UIKit
 
 protocol ProfilemBaaS{
     func getUser() -> String
-    func getIconImage(fileName: String) -> Result<UIImage,Error>
     func getID() -> String
     func getRequest(className: String,objectID: String,completion: @escaping (Result<[ProfilePostedEntity],Error>) -> Void)
 }
@@ -21,25 +20,6 @@ class ProfilemBaaSImpl: ProfilemBaaS{
         guard let user = NCMBUser.currentUser else {return ""}
         guard let userName = user.userName else {return ""}
         return userName
-    }
-    
-    func getIconImage(fileName: String) -> Result<UIImage,Error> {
-        let file: NCMBFile = NCMBFile(fileName: fileName)
-        let result = file.fetch()
-        switch result{
-        case .success(let data):
-            if let imageData = data{
-                if let image = UIImage(data: imageData){
-                    return Result.success(image)
-                }else{
-                    return Result.failure(Error.self as! Error)
-                }
-            }else{
-                return Result.failure(Error.self as! Error)
-            }
-        case .failure(let err):
-            return Result.failure(err)
-        }        
     }
     
     func getID() -> String {

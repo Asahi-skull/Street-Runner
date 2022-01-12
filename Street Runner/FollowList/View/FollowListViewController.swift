@@ -107,5 +107,13 @@ extension FollowListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        router.transition(idetifier: "followToProfile", sender: viewModel.getData(indexPath:indexPath))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let userId = sender as? String{
+            let followToProfile = segue.destination as!  FollowUserProfileViewController
+            followToProfile.userObjectId = userId
+        }
     }
 }

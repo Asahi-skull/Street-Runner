@@ -112,9 +112,10 @@ extension UserDetailViewController: UITableViewDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let entityItem = sender as! detailData
-        let userToComment = segue.destination as! UserCommentListViewController
-        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
-        userToComment.entity = commentData
+        if let entityItem = sender as? detailData{
+            let userToComment = segue.destination as! UserCommentListViewController
+            let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+            userToComment.entity = commentData
+        }
     }
 }
