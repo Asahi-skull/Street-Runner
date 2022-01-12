@@ -111,8 +111,9 @@ extension FollowListViewController: UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let userId = sender as! String
-        let followToProfile = segue.destination as!  FollowUserProfileViewController
-        followToProfile.userObjectId = userId
+        if let userId = sender as? String{
+            let followToProfile = segue.destination as!  FollowUserProfileViewController
+            followToProfile.userObjectId = userId
+        }
     }
 }

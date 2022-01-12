@@ -111,10 +111,11 @@ extension FollowDetailViewController: UITableViewDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let entityItem = sender as! detailData
-        let followToComment = segue.destination as! FollowCommentListViewController
-        let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
-        followToComment.entity = commentData
+        if let entityItem = sender as? detailData{
+            let followToComment = segue.destination as! FollowCommentListViewController
+            let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
+            followToComment.entity = commentData
+        }
     }
 }
 

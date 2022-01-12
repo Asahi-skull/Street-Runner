@@ -147,10 +147,11 @@ extension ShowPostedViewController: UICollectionViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let entity = sender as! RequestEntity
-        let toDetailPosted = segue.destination as! DetailPostedViewController
-        let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: entity.userObjectID, className: ncmbClass)
-        toDetailPosted.entity = data
+        if let entity = sender as? RequestEntity{
+            let toDetailPosted = segue.destination as! DetailPostedViewController
+            let data = detailData(objectID: entity.objectID, requestImage: entity.requestImage, requestText: entity.requestText, userObjectID: entity.userObjectID, className: ncmbClass)
+            toDetailPosted.entity = data
+        }
     }
 }
 
