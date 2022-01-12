@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     lazy var router: ProfileRouter = ProfileRouterImpl(viewController: self)
-    let profileViewModel: ProfileViewModel = ProfileViewModelImpl()
+    private let profileViewModel: ProfileViewModel = ProfileViewModelImpl()
     
     private var className: String?
     
@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController {
                 }
                 self.className = "request"
             case .failure:
+                    self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
                 return
             }
         }

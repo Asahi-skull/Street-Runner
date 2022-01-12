@@ -15,14 +15,6 @@ class SelectPostViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    @IBAction func requestButton(_ sender: Any) {
-        router.transition(idetifier: "toPostRequest")
-    }
-    
-    @IBAction func RecruitmentButton(_ sender: Any) {
-        router.transition(idetifier: "toPostRecruitment")
-    }
 }
 
 extension SelectPostViewController: UITableViewDataSource{

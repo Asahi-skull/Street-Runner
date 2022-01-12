@@ -14,7 +14,7 @@ class UserCommentListViewController: UIViewController {
     @IBOutlet weak var commentBottom: NSLayoutConstraint!
     @IBOutlet weak var closeButton: UIButton!
     
-    var viewModel: UserCommentListViewModel?
+    private var viewModel: UserCommentListViewModel?
     lazy var router: UserCommentListRouter = UserCommentListRouterImpl(viewController: self)
     
     var entity: commentData?
@@ -102,8 +102,6 @@ extension UserCommentListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentTableViewCell
-//        guard let data = viewModel?.getData()[indexPath.row] else {return cell}
-//        cell.userCommentText.text = data.commentText
         viewModel.map{
             let data = $0.getData()[indexPath.row]
             guard let commentText = data.commentText else {return}

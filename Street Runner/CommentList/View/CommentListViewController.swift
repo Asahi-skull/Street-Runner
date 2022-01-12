@@ -14,7 +14,7 @@ class CommentListViewController: UIViewController {
     @IBOutlet weak var commentBottom: NSLayoutConstraint!
     @IBOutlet weak var closeButton: UIButton!
     
-    var viewModel: CommentListViewModel?
+    private var viewModel: CommentListViewModel?
     lazy var router: CommentListRouter = CommentListRouterImpl(viewController: self)
     
     var entity: commentData?

@@ -11,7 +11,7 @@ class ProfileDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: ProfileDetailViewModel?
+    private var viewModel: ProfileDetailViewModel?
     lazy var router: ProfileDetailRouter = ProfileDetailRouterImpl(viewController: self)
     
     var entity: ProfileDetailData?
@@ -21,7 +21,9 @@ class ProfileDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = ProfileDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "読み込み失敗", messageText: "再起動してください", titleOK: "OK")
+            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
+            navigationController?.popViewController(animated: true)
+            return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier: "detailUserCell")

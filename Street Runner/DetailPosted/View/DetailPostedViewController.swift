@@ -11,7 +11,7 @@ class DetailPostedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: DetailPostedViewModel?
+    private var viewModel: DetailPostedViewModel?
     lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
     
     var entity: detailData?
@@ -21,7 +21,9 @@ class DetailPostedViewController: UIViewController {
         if let entity = entity {
             viewModel = DetailPostedViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "読み込み失敗", messageText: "再起動してください", titleOK: "OK")
+            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
+            navigationController?.popViewController(animated: true)
+            return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier: "detailUserCell")
