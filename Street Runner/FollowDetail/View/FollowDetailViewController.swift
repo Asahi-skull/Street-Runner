@@ -12,8 +12,7 @@ class FollowDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: FollowDetailViewModel?
-    lazy var router: FollowDetailRouter = FollowDetailRouterImpl(viewController: self)
-
+    private lazy var router: FollowDetailRouter = FollowDetailRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {

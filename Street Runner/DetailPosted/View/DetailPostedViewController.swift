@@ -12,8 +12,7 @@ class DetailPostedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: DetailPostedViewModel?
-    lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
-    
+    private lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {

@@ -14,7 +14,7 @@ protocol FollowCommentListRouter {
 }
 
 class FollowCommentListRouterImpl: FollowCommentListRouter {
-    let viewController: UIViewController
+    private let viewController: UIViewController
     init(viewController :UIViewController){
         self.viewController = viewController
     }

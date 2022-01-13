@@ -12,8 +12,7 @@ class FollowUserProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: FollowUserProfileViewModel?
-    lazy var router: FollowUserProfileRouter = FollowUserProfileRouterImpl(viewController: self)
-    
+    private lazy var router: FollowUserProfileRouter = FollowUserProfileRouterImpl(viewController: self)
     var userObjectId: String?
     private var ncmbClass: String?
     

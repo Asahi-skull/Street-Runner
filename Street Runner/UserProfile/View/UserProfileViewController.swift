@@ -12,8 +12,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: UserProfileViewModel?
-    lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
-    
+    private lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
     var userObjectId: String?
     private var ncmbClass: String?
     

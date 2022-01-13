@@ -12,7 +12,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     private let signUpViewModel: SignUpViewModel = SignUpViewModelImpl()
-    lazy var router: SignUpRouter = SignUpRouterImpl(viewController: self)
+    private lazy var router: SignUpRouter = SignUpRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,8 +12,7 @@ class ShowPostedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
-    lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
-    
+    private lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
     private var ncmbClass: String?
         
     override func viewDidLoad() {

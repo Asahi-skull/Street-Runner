@@ -13,7 +13,7 @@ class EditProfileViewController: UIViewController{
     @IBOutlet weak var userNameTextField: UITextField!
     
     private let editProfile: EditProfileViewModel = EditProfileViewModelImpl()
-    lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
+    private lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

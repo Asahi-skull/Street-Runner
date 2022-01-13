@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     private let loginViewModel: LoginViewModel = LoginViewModelimpl()
-    lazy var router: LoginRouter = LoginRouterImpl(viewController: self)
+    private lazy var router: LoginRouter = LoginRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

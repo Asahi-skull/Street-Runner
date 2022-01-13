@@ -10,7 +10,7 @@ import UIKit
 class SelectPostViewController: UIViewController{
     
     private let viewModel: SelectPostViewModel = SelectPostViewModelImpl()
-    lazy var router: SelectPostRouter = SelectPostRouterImpl(viewController: self)
+    private lazy var router: SelectPostRouter = SelectPostRouterImpl(viewController: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()

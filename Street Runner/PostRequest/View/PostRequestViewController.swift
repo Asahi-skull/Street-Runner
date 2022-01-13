@@ -13,7 +13,7 @@ class PostRequestViewController: UIViewController {
     @IBOutlet weak var requestTextView: UITextView!
     
     private let postRequest: PostRequestViewModel = PostRequestViewModelImpl()
-    lazy var router: PostRequestRouter = PostRequestRouterImpl(viewController: self)
+    private lazy var router: PostRequestRouter = PostRequestRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

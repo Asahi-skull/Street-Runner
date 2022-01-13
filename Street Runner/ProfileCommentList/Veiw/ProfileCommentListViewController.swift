@@ -15,8 +15,7 @@ class ProfileCommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: ProfileCommentListViewModel?
-    lazy var router: ProfileCommentListRouter = ProfileCommentListRouterImpl(viewController: self)
-    
+    private lazy var router: ProfileCommentListRouter = ProfileCommentListRouterImpl(viewController: self)
     var entity: ProfileCommentData?
     
     override func viewDidLoad() {

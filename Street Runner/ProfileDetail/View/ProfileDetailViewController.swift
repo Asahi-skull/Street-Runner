@@ -12,8 +12,7 @@ class ProfileDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: ProfileDetailViewModel?
-    lazy var router: ProfileDetailRouter = ProfileDetailRouterImpl(viewController: self)
-    
+    private lazy var router: ProfileDetailRouter = ProfileDetailRouterImpl(viewController: self)
     var entity: ProfileDetailData?
     
     override func viewDidLoad() {

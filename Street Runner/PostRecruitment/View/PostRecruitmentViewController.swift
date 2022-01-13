@@ -13,7 +13,7 @@ class PostRecruitmentViewController: UIViewController {
     @IBOutlet weak var recruitmentText: UITextView!
     
     private let viewModel: PostRecruitmentViewModel = PostRecruitmentViewModelImpl()
-    lazy var router: PostRecruitmentRouter = PostRecruitmentRouterImpl(viewController: self)
+    private lazy var router: PostRecruitmentRouter = PostRecruitmentRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

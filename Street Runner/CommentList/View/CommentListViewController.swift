@@ -15,8 +15,7 @@ class CommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: CommentListViewModel?
-    lazy var router: CommentListRouter = CommentListRouterImpl(viewController: self)
-    
+    private lazy var router: CommentListRouter = CommentListRouterImpl(viewController: self)
     var entity: commentData?
     
     override func viewDidLoad() {

@@ -11,9 +11,8 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var table: UITableView!
     
-    lazy var router: ProfileRouter = ProfileRouterImpl(viewController: self)
+    private lazy var router: ProfileRouter = ProfileRouterImpl(viewController: self)
     private let profileViewModel: ProfileViewModel = ProfileViewModelImpl()
-    
     private var className: String?
     
     override func viewDidLoad() {

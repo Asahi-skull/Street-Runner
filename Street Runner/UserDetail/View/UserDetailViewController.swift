@@ -12,8 +12,7 @@ class UserDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: UserDetailViewModel?
-    lazy var router: UserDetailRouter = UserDetailRouterImpl(viewController: self)
-    
+    private lazy var router: UserDetailRouter = UserDetailRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
