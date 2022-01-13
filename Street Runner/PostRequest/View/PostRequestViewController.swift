@@ -12,8 +12,8 @@ class PostRequestViewController: UIViewController {
     @IBOutlet weak var requestImage: UIImageView!
     @IBOutlet weak var requestTextView: UITextView!
     
-    let postRequest: PostRequestViewModel = PostRequestViewModelImpl()
-    lazy var router: PostRequestRouter = PostRequestRouterImpl(viewController: self)
+    private let postRequest: PostRequestViewModel = PostRequestViewModelImpl()
+    private lazy var router: PostRequestRouter = PostRequestRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

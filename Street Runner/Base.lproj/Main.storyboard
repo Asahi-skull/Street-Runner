@@ -737,31 +737,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiB-9o-KQl">
-                                <rect key="frame" x="129" y="222" width="157" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="依頼する"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="C6i-oq-VAB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectCell" rowHeight="321" id="WSV-cL-UEl">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="321"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WSV-cL-UEl" id="3pJ-8z-7u8">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="321"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krE-lk-iht">
+                                                    <rect key="frame" x="70" y="111" width="274" height="99"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="krE-lk-iht" firstAttribute="top" secondItem="3pJ-8z-7u8" secondAttribute="topMargin" constant="100" id="Jaq-fk-NFT"/>
+                                                <constraint firstItem="krE-lk-iht" firstAttribute="leading" secondItem="3pJ-8z-7u8" secondAttribute="leadingMargin" constant="50" id="Moc-kI-9h3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="krE-lk-iht" secondAttribute="trailing" constant="50" id="Qo5-EO-Pu6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="krE-lk-iht" secondAttribute="bottom" constant="100" id="emK-LW-hq8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <action selector="requestButton:" destination="Ee1-LG-d6f" eventType="touchUpInside" id="fjO-Yt-r0Z"/>
+                                    <outlet property="dataSource" destination="Ee1-LG-d6f" id="pwc-YG-h11"/>
+                                    <outlet property="delegate" destination="Ee1-LG-d6f" id="eHX-kG-47f"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOp-qh-HNB">
-                                <rect key="frame" x="96" y="414" width="222" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="募集"/>
-                                <connections>
-                                    <action selector="RecruitmentButton:" destination="Ee1-LG-d6f" eventType="touchUpInside" id="iSf-1T-C4P"/>
-                                </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ACx-VP-Qge"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ACx-VP-Qge" firstAttribute="bottom" secondItem="C6i-oq-VAB" secondAttribute="bottom" id="5at-XC-q3J"/>
+                            <constraint firstItem="ACx-VP-Qge" firstAttribute="trailing" secondItem="C6i-oq-VAB" secondAttribute="trailing" id="7uJ-EY-lY3"/>
+                            <constraint firstItem="C6i-oq-VAB" firstAttribute="top" secondItem="ACx-VP-Qge" secondAttribute="top" id="Fsd-W1-ZQm"/>
+                            <constraint firstItem="C6i-oq-VAB" firstAttribute="leading" secondItem="ACx-VP-Qge" secondAttribute="leading" id="Tmd-5Y-iVx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5v6-k5-jdi"/>
                     <connections>

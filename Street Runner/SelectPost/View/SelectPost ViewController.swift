@@ -9,18 +9,49 @@ import UIKit
 
 class SelectPostViewController: UIViewController{
     
-    lazy var router: SelectPostRouter = SelectPostRouterImpl(viewController: self)
+    private let viewModel: SelectPostViewModel = SelectPostViewModelImpl()
+    private lazy var router: SelectPostRouter = SelectPostRouterImpl(viewController: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    @IBAction func requestButton(_ sender: Any) {
-        router.transition(idetifier: "toPostRequest")
+}
+
+extension SelectPostViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        2
     }
     
-    @IBAction func RecruitmentButton(_ sender: Any) {
-        router.transition(idetifier: "toPostRecruitment")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "selectCell", for: indexPath)
+        let selectLabel = cell.viewWithTag(1) as! UILabel
+        if indexPath.row == 0{
+            selectLabel.text = "依頼を投稿する　＞"
+            return cell
+        }else{
+            selectLabel.text = "募集を投稿する　＞"
+            return cell
+        }
     }
 }
 
+extension SelectPostViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableView.bounds.height/2
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if viewModel.checkUserExist() {
+            if indexPath.row == 0{
+                router.transition(idetifier: "toPostRequest")
+            }else{
+                router.transition(idetifier: "toPostRecruitment")
+            }
+        }else{
+            router.resultAlert(titleText: "ログインしないと投稿できません", messageText: "", titleOK: "OK")
+            let guestView = tabBarController?.viewControllers?[2]
+            tabBarController?.selectedViewController = guestView
+        }
+    }
+}

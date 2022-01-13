@@ -9,8 +9,8 @@ import UIKit
 
 class GuestViewController: UIViewController {
     
-    let viewModel: GuestViewModel = GuestViewModelImpl()
-    lazy var router: GuestRouter = GuestRouterImpl(viewController: self)
+    private let viewModel: GuestViewModel = GuestViewModelImpl()
+    private lazy var router: GuestRouter = GuestRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

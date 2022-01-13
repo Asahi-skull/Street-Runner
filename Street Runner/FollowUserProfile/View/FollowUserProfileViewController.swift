@@ -11,9 +11,8 @@ class FollowUserProfileViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: FollowUserProfileViewModel?
-    lazy var router: FollowUserProfileRouter = FollowUserProfileRouterImpl(viewController: self)
-    
+    private var viewModel: FollowUserProfileViewModel?
+    private lazy var router: FollowUserProfileRouter = FollowUserProfileRouterImpl(viewController: self)
     var userObjectId: String?
     private var ncmbClass: String?
     
@@ -22,7 +21,7 @@ class FollowUserProfileViewController: UIViewController {
         if let userObjectId = userObjectId {
             viewModel = FollowUserProfileViewModelImpl(userObjectId: userObjectId)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻ります", titleOK: "OK")
+            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             navigationController?.popViewController(animated: true)
             return
         }

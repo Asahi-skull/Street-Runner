@@ -11,9 +11,8 @@ class ShowPostedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
-    lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
-    
+    private let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
+    private lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
     private var ncmbClass: String?
         
     override func viewDidLoad() {
@@ -36,7 +35,7 @@ class ShowPostedViewController: UIViewController {
                 self.ncmbClass = "request"
             case .failure:
                 DispatchQueue.main.async {
-                    self.router.resultAlert(titleText: "読み込みに失敗", messageText: "アプリを再起動してください", titleOK: "OK")
+                    self.router.resultAlert(titleText: "読み込みに失敗", messageText: "再試行してください", titleOK: "OK")
                 }
             }
         }

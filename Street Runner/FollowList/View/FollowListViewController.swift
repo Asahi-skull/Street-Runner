@@ -12,8 +12,8 @@ class FollowListViewController: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    let viewModel: FollowListViewModel = FollowListViewModelImpl()
-    lazy var router: FollowListRouter = FollowListRouterImpl(viewController: self)
+    private let viewModel: FollowListViewModel = FollowListViewModelImpl()
+    private lazy var router: FollowListRouter = FollowListRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

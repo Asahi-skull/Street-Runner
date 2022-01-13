@@ -11,9 +11,8 @@ class UserDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: UserDetailViewModel?
-    lazy var router: UserDetailRouter = UserDetailRouterImpl(viewController: self)
-    
+    private var viewModel: UserDetailViewModel?
+    private lazy var router: UserDetailRouter = UserDetailRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -21,7 +20,9 @@ class UserDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = UserDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "読み込み失敗", messageText: "再起動してください", titleOK: "OK")
+            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
+            navigationController?.popViewController(animated: true)
+            return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier: "detailUserCell")
@@ -65,7 +66,6 @@ extension UserDetailViewController: UITableViewDataSource{
             return cell
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
-//            guard let imageFileName = entity?.requestImage else {return cell}
             viewModel.map{
                 guard let imageFileName = $0.getEntity().requestImage else {return}
                 $0.getImage(fileName: imageFileName, imageView: cell.postedImage)

@@ -6,14 +6,13 @@
 //
 
 import UIKit
-import NCMB
 
 class SignUpViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     
-    let signUpViewModel: SignUpViewModel = SignUpViewModelImpl()
-    lazy var router: SignUpRouter = SignUpRouterImpl(viewController: self)
+    private let signUpViewModel: SignUpViewModel = SignUpViewModelImpl()
+    private lazy var router: SignUpRouter = SignUpRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

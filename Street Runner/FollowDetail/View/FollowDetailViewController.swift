@@ -11,9 +11,8 @@ class FollowDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: FollowDetailViewModel?
-    lazy var router: FollowDetailRouter = FollowDetailRouterImpl(viewController: self)
-
+    private var viewModel: FollowDetailViewModel?
+    private lazy var router: FollowDetailRouter = FollowDetailRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -21,7 +20,9 @@ class FollowDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = FollowDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "読み込み失敗", messageText: "再起動してください", titleOK: "OK")
+            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
+            navigationController?.popViewController(animated: true)
+            return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
         tableView.register(userNib, forCellReuseIdentifier: "detailUserCell")

@@ -14,7 +14,7 @@ protocol LoginRouter{
 }
 
 class LoginRouterImpl: LoginRouter{
-    let viewController:UIViewController
+    private let viewController:UIViewController
     init(viewController:UIViewController){
         self.viewController = viewController
     }

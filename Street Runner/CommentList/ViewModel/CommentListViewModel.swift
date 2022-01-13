@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreText
 import UIKit
 
 protocol CommentListViewModel{

@@ -14,7 +14,7 @@ protocol UserProfileRouter{
 }
 
 class UserProfileRouterImpl: UserProfileRouter{
-    let viewController: UIViewController
+    private let viewController: UIViewController
     init(viewController :UIViewController){
         self.viewController = viewController
     }

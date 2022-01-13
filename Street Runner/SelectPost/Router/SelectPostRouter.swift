@@ -10,15 +10,22 @@ import UIKit
 
 protocol SelectPostRouter{
     func transition(idetifier: String)
+    func resultAlert(titleText: String, messageText: String, titleOK: String)
 }
 
 class SelectPostRouterImpl: SelectPostRouter{
-    let viewController:UIViewController
+    private let viewController:UIViewController
     init(viewController:UIViewController){
         self.viewController = viewController
     }
     
     func transition(idetifier: String) {
         viewController.performSegue(withIdentifier: idetifier, sender: nil)
+    }
+    
+    func resultAlert(titleText: String, messageText: String, titleOK: String) {
+        let alertController = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: titleOK, style: .default, handler: nil))
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }

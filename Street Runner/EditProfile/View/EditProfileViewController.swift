@@ -12,8 +12,8 @@ class EditProfileViewController: UIViewController{
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var userNameTextField: UITextField!
     
-    let editProfile: EditProfileViewModel = EditProfileViewModelImpl()
-    lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
+    private let editProfile: EditProfileViewModel = EditProfileViewModelImpl()
+    private lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

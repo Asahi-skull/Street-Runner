@@ -14,9 +14,8 @@ class ProfileCommentListViewController: UIViewController {
     @IBOutlet weak var commentBottom: NSLayoutConstraint!
     @IBOutlet weak var closeButton: UIButton!
     
-    var viewModel: ProfileCommentListViewModel?
-    lazy var router: ProfileCommentListRouter = ProfileCommentListRouterImpl(viewController: self)
-    
+    private var viewModel: ProfileCommentListViewModel?
+    private lazy var router: ProfileCommentListRouter = ProfileCommentListRouterImpl(viewController: self)
     var entity: ProfileCommentData?
     
     override func viewDidLoad() {
