@@ -6,10 +6,9 @@
 //
 
 import Foundation
-import UIKit
 
 protocol UserDetailViewModel{
-    func getImage(fileName: String, imageView: UIImageView)
+    func getImage(fileName: String,compltion: @escaping (Result<Data,Error>) -> Void)
     func getEntity() -> detailData
     func getUserInfo(compltion: @escaping (Result<UserData,Error>) -> Void)
 }
@@ -23,8 +22,15 @@ class UserDetailViewModelImpl: UserDetailViewModel{
     private let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let userInfo: CommentMBaaS = CommentMBaaSImpl()
     
-    func getImage(fileName: String, imageView: UIImageView) {
-        showPosted.getIconImage(fileName: fileName, imageView: imageView)
+    func getImage(fileName: String,compltion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                compltion(Result.success(imageData))
+            case .failure(let err):
+                compltion(Result.failure(err))
+            }
+        }
     }
     
     func getEntity() -> detailData {

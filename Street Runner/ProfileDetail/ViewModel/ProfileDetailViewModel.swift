@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import UIKit
 
 protocol ProfileDetailViewModel{
-    func getImage(fileName: String, imageView: UIImageView)
+    func getImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func getEntity() -> ProfileDetailData
-    func getUserInfo(compltion: @escaping (Result<UserData,Error>) -> Void)
+    func getUserInfo(completion: @escaping (Result<UserData,Error>) -> Void)
     func getCurrentUserId() -> String
 }
 
@@ -25,22 +24,29 @@ class ProfileDetailViewModelImpl: ProfileDetailViewModel {
     private let userInfo: CommentMBaaS = CommentMBaaSImpl()
     private let profile: ProfilemBaaS = ProfilemBaaSImpl()
     
-    func getImage(fileName: String, imageView: UIImageView) {
-        showPosted.getIconImage(fileName: fileName, imageView: imageView)
+    func getImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func getEntity() -> ProfileDetailData {
         entity
     }
     
-    func getUserInfo(compltion: @escaping (Result<UserData,Error>) -> Void){
+    func getUserInfo(completion: @escaping (Result<UserData,Error>) -> Void){
         let userObjectId = profile.getID()
         userInfo.getUserData(userObjectId: userObjectId) {
             switch $0{
             case .success(let data):
-                compltion(Result.success(data))
+                completion(Result.success(data))
             case .failure(let err):
-                compltion(Result.failure(err))
+                completion(Result.failure(err))
             }
         }
     }

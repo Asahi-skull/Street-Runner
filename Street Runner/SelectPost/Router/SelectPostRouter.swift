@@ -14,7 +14,7 @@ protocol SelectPostRouter{
 }
 
 class SelectPostRouterImpl: SelectPostRouter{
-    private let viewController:UIViewController
+    private let viewController: UIViewController
     init(viewController:UIViewController){
         self.viewController = viewController
     }
@@ -24,8 +24,17 @@ class SelectPostRouterImpl: SelectPostRouter{
     }
     
     func resultAlert(titleText: String, messageText: String, titleOK: String) {
-        let alertController = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: titleOK, style: .default, handler: nil))
-        viewController.present(alertController, animated: true, completion: nil)
+        (viewController as? RouterResult).map{ selectPostViewController in
+            let alertController = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: titleOK, style: .default) {_ in
+                selectPostViewController.ok()
+            })
+            viewController.present(alertController, animated: true) {
+//                selectPostViewController.toGuestView()
+            }
+        }
     }
+//        let alertController = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
+//        alertController.addAction(UIAlertAction(title: titleOK, style: .default, handler: nil))
+//        viewController.present(alertController, animated: true, completion: nil)
 }

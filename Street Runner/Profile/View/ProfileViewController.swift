@@ -56,7 +56,17 @@ extension ProfileViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileTableViewCell
-            profileViewModel.getIconImage(imageView: cell.iconImage)
+            profileViewModel.getIconImage {
+                switch $0 {
+                case .success(let imageData):
+                    let uiImage = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        cell.iconImage.image = uiImage
+                    }
+                case .failure:
+                    return
+                }
+            }
             cell.userNameLabel.text = profileViewModel.setUser()
             profileViewModel.countFollower {
                 switch $0 {
@@ -162,7 +172,17 @@ extension ProfileViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profilePostedCollectionCell", for: indexPath) as! ProfilePostedCollectionViewCell
         let data = profileViewModel.getData(indexPath: indexPath)
         guard let requestImage = data.requestImage else {return cell}
-        profileViewModel.getImage(fileName: requestImage, imageView: cell.postedImage)
+        profileViewModel.getImage(fileName: requestImage) {
+            switch $0 {
+            case .success(let imageData):
+                let uiImage = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    cell.postedImage.image = uiImage
+                }
+            case .failure:
+                return
+            }
+        }
         guard let requestText = data.requestText else {return cell}
         cell.commentText.text = requestText
         return cell

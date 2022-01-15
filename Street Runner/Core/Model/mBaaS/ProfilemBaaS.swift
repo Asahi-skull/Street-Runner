@@ -7,7 +7,6 @@
 
 import Foundation
 import NCMB
-import UIKit
 
 protocol ProfilemBaaS{
     func getUser() -> String

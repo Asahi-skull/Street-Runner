@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import UIKit
 
 protocol ShowPostedViewModel{
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> RequestEntity
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void)
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
-    func getIconImage(fileName: String,imageView: UIImageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func getUserInfo(userObjectId: String, completion: @escaping (Result<UserData,Error>) -> Void)
 }
 
@@ -57,8 +56,15 @@ class ShowPostedViewModelImpl: ShowPostedViewModel{
         }
     }
     
-    func getIconImage(fileName: String,imageView: UIImageView){
-        showPosted.getIconImage(fileName: fileName, imageView: imageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func getUserInfo(userObjectId: String, completion: @escaping (Result<UserData,Error>) -> Void){

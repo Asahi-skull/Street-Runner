@@ -78,11 +78,27 @@ extension UserProfileViewController: UITableViewDataSource{
                 }else{
                     cell.followButton.isEnabled = true
                 }
-                $0.getUserProfile(imageView: cell.iconImage) {
-                    switch $0{
-                    case .success(let data):
+                $0.getUserProfile { [weak self] in
+                    guard let self = self else {return}
+                    switch $0 {
+                    case .success(let userData):
+                        guard let userName = userData.userName else {return}
                         DispatchQueue.main.async {
-                            cell.userNameLabel.text = data
+                            cell.userNameLabel.text = userName
+                        }
+                        self.viewModel.map{
+                            guard let iconImageFile = userData.iconImageFile else {return}
+                            $0.setImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                     case .failure:
                         return
@@ -238,7 +254,17 @@ extension UserProfileViewController: UICollectionViewDataSource {
         viewModel.map{
             let data = $0.getData(indexPath: indexPath)
             guard let fileName = data.requestImage else {return}
-            $0.setImage(fileName: fileName,  imageView: cell.postedImage)
+            $0.setImage(fileName: fileName) {
+                switch $0 {
+                case .success(let imageData):
+                    let uiImage = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        cell.postedImage.image = uiImage
+                    }
+                case .failure:
+                    return
+                }
+            }
             guard let postedText = data.requestText else {return}
             cell.commentText.text = postedText
         }

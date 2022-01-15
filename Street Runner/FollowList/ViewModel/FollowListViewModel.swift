@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol FollowListViewModel {
     func getFollowerData(completion: @escaping (Result<Void,Error>) -> Void)
@@ -14,7 +13,7 @@ protocol FollowListViewModel {
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> String
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void)
-    func setIconImage(fileName: String, imageView: UIImageView) 
+    func setIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
 }
 
 class FollowListViewModelImpl: FollowListViewModel {
@@ -72,7 +71,14 @@ class FollowListViewModelImpl: FollowListViewModel {
         }
     }
     
-    func setIconImage(fileName: String, imageView: UIImageView) {
-        iconMbaas.getIconImage(fileName: fileName, imageView: imageView)
+    func setIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        iconMbaas.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }

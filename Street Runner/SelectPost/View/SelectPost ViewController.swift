@@ -15,6 +15,11 @@ class SelectPostViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+//    func toGuestView() {
+//        let guestView = tabBarController?.viewControllers?[2]
+//        tabBarController?.selectedViewController = guestView
+//    }
 }
 
 extension SelectPostViewController: UITableViewDataSource{
@@ -50,8 +55,26 @@ extension SelectPostViewController: UITableViewDelegate{
             }
         }else{
             router.resultAlert(titleText: "ログインしないと投稿できません", messageText: "", titleOK: "OK")
-            let guestView = tabBarController?.viewControllers?[2]
-            tabBarController?.selectedViewController = guestView
+//            let guestView = tabBarController?.viewControllers?[2]
+//            tabBarController?.selectedViewController = guestView
         }
     }
+}
+
+extension SelectPostViewController: RouterResult {
+    func ok() {
+        let guestView = tabBarController?.viewControllers?[2]
+        tabBarController?.selectedViewController = guestView
+    }
+    
+    func cancel() {
+//        let guestView = tabBarController?.viewControllers?[2]
+//        tabBarController?.selectedViewController = guestView
+    }
+}
+
+//別ファイルに実装
+protocol RouterResult{
+    func ok()
+    func cancel()
 }

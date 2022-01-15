@@ -7,11 +7,10 @@
 
 import Foundation
 import NCMB
-import UIKit
 
 protocol ShowPostedMBaaS{
     func getRequest(className: String,completion: @escaping (Result<[RequestEntity],Error>) -> Void)
-    func getIconImage(fileName: String,imageView: UIImageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
 }
 
 class ShowPostedMBaaSImpl: ShowPostedMBaaS{
@@ -36,21 +35,15 @@ class ShowPostedMBaaSImpl: ShowPostedMBaaS{
         }
     }
     
-    func getIconImage(fileName: String,imageView: UIImageView) {
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
         let file: NCMBFile = NCMBFile(fileName: fileName)
         file.fetchInBackground(callback: {result in
             switch result{
             case .success(let data):
-                if let imageData = data{
-                    let image = UIImage(data: imageData)
-                    DispatchQueue.main.async{
-                        imageView.image = image
-                    }
-                }else{
-                    return
-                }
-            case .failure:
-                return
+                guard let data = data else {return}
+                completion(Result.success(data))
+            case .failure(let err):
+                completion(Result.failure(err))
             }
         })
     }

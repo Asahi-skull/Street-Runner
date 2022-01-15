@@ -114,7 +114,17 @@ extension ProfileCommentListViewController: UITableViewDataSource{
                     }
                     guard let fileName = data.iconImageFile else {return}
                     self.viewModel.map{
-                        $0.getIconImage(fileName: fileName, imageView: cell.iconImage)
+                        $0.getIconImage(fileName: fileName) {
+                            switch $0 {
+                            case .success(let imageData):
+                                let uiImage = UIImage(data: imageData)
+                                DispatchQueue.main.async {
+                                    cell.iconImage.image = uiImage
+                                }
+                            case .failure:
+                                return
+                            }
+                        }
                     }
                 case .failure:
                     return

@@ -34,34 +34,6 @@ class LoginmBaaSImpl: LoginmBaaS{
         }
     }
     
-//    func loginEmail(emailAddress: String, password: String,completion: @escaping (Result<Void, Error>) -> Void) {
-//        NCMBUser.logInInBackground(mailAddress: emailAddress, password: password) {
-//            switch $0 {
-//            case .success:
-//                completion(Result.success(()))
-//            case .failure(let err):
-//                completion(Result.failure(err))
-//            }
-//        }
-//    }
-    
-//    func setAcl() -> Result<Void,Error> {
-//        var acl = NCMBACL.empty
-//        acl.put(key: "*", readable: true, writable: false)
-//        if let user = NCMBUser.currentUser{
-//            user.acl = acl
-//            let result = user.save()
-//            switch result {
-//            case .success:
-//                return Result.success(())
-//            case .failure(let err):
-//                return Result.failure(err)
-//            }
-//        }else{
-//            return Result.failure(LoginModelError.loseUser)
-//        }
-//    }
-    
     func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
         var acl = NCMBACL.empty
         acl.put(key: "*", readable: true, writable: false)

@@ -49,12 +49,23 @@ extension UserDetailViewController: UITableViewDataSource{
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
             viewModel.map{
-                $0.getUserInfo {
+                $0.getUserInfo {  [weak self] in
+                    guard let self = self else {return}
                     switch $0{
                     case .success(let data):
                         guard let iconImageFile = data.iconImageFile else {return}
                         self.viewModel.map{
-                            $0.getImage(fileName: iconImageFile, imageView: cell.iconImage)
+                            $0.getImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                         guard let userName = data.userName else {return}
                         cell.setData(userName: userName)
@@ -68,7 +79,17 @@ extension UserDetailViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
             viewModel.map{
                 guard let imageFileName = $0.getEntity().requestImage else {return}
-                $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
+                $0.getImage(fileName: imageFileName) {
+                    switch $0 {
+                    case .success(let imageData):
+                        let uiImage = UIImage(data: imageData)
+                        DispatchQueue.main.async {
+                            cell.postedImage.image = uiImage
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             return cell
         }else if indexPath.row == 2{

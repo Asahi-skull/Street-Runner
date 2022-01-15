@@ -19,7 +19,18 @@ class EditProfileViewController: UIViewController{
         super.viewDidLoad()
         iconImage.layer.cornerRadius = 60
         userNameTextField.text = editProfile.getUserName()
-        editProfile.getIconImage(imageView: iconImage)
+        editProfile.getIconImage { [weak self] in
+            guard let self = self else {return}
+            switch $0 {
+            case .success(let imageData):
+                let uiImage = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    self.iconImage.image = uiImage
+                }
+            case .failure:
+                return
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

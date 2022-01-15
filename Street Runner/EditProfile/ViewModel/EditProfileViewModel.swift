@@ -10,7 +10,7 @@ import UIKit
 
 protocol EditProfileViewModel{
     func saveImage(img: UIImage) -> Result<Void,Error>
-    func getIconImage(imageView: UIImageView)
+    func getIconImage(completion: @escaping (Result<Data,Error>) -> Void)
     func getUserName() -> String
     func saveUserName(userName: String) ->  Result<Void,Error>
 }
@@ -38,8 +38,15 @@ class EditProfileViewModelImpl: EditProfileViewModel{
         }
     }
     
-    func getIconImage(imageView: UIImageView) {
-        showPosted.getIconImage(fileName: profile.getID(), imageView: imageView)
+    func getIconImage(completion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: profile.getID()) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func getUserName() -> String {
