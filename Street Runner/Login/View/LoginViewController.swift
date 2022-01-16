@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     private let loginViewModel: LoginViewModel = LoginViewModelimpl()
-    private lazy var router: LoginRouter = LoginRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +36,11 @@ class LoginViewController: UIViewController {
                 switch $0 {
                 case .success:
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "toProfile", sender: nil)
+                        self.router.transition(idetifier: "toProfile", sender: nil)
                     }
                 case .failure:
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "toProfile", sender: nil)
+                        self.router.transition(idetifier: "toProfile", sender: nil)
                     }
                 }
             }

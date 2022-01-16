@@ -15,7 +15,7 @@ class ProfileCommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: ProfileCommentListViewModel?
-    private lazy var router: ProfileCommentListRouter = ProfileCommentListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: ProfileCommentData?
     
     override func viewDidLoad() {
@@ -23,8 +23,7 @@ class ProfileCommentListViewController: UIViewController {
         if let entity = entity {
             viewModel = ProfileCommentListViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -209,3 +208,8 @@ extension ProfileCommentListViewController: UITableViewDelegate{
     }
 }
 
+extension ProfileCommentListViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
+    }
+}

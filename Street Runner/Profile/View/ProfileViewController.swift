@@ -11,7 +11,7 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var table: UITableView!
     
-    private lazy var router: ProfileRouter = ProfileRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     private let profileViewModel: ProfileViewModel = ProfileViewModelImpl()
     private var className: String?
     

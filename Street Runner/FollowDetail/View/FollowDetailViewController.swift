@@ -12,7 +12,7 @@ class FollowDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: FollowDetailViewModel?
-    private lazy var router: FollowDetailRouter = FollowDetailRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -20,8 +20,7 @@ class FollowDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = FollowDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
@@ -121,7 +120,7 @@ extension FollowDetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0{
-            navigationController?.popViewController(animated: true)
+            router.popBackView()
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
@@ -140,3 +139,8 @@ extension FollowDetailViewController: UITableViewDelegate{
     }
 }
 
+extension FollowDetailViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
+    }
+}

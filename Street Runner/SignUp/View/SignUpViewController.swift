@@ -12,8 +12,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     private let signUpViewModel: SignUpViewModel = SignUpViewModelImpl()
-    private lazy var router: SignUpRouter = SignUpRouterImpl(viewController: self)
-    
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func toLoginButon(_ sender: Any) {
-        router.transition(idetifier: "toLogin")
+        router.transition(idetifier: "toLogin",sender: nil)
     }
     
 }

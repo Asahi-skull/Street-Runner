@@ -12,7 +12,7 @@ class DetailPostedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: DetailPostedViewModel?
-    private lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -20,8 +20,7 @@ class DetailPostedViewController: UIViewController {
         if let entity = entity {
             viewModel = DetailPostedViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
@@ -144,5 +143,11 @@ extension DetailPostedViewController: UITableViewDelegate{
                 toCommentList.entity = commentData
             }
         }
+    }
+}
+
+extension DetailPostedViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

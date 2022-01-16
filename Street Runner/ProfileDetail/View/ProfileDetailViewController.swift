@@ -12,7 +12,7 @@ class ProfileDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: ProfileDetailViewModel?
-    private lazy var router: ProfileDetailRouter = ProfileDetailRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: ProfileDetailData?
     
     override func viewDidLoad() {
@@ -20,8 +20,7 @@ class ProfileDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = ProfileDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
@@ -119,7 +118,7 @@ extension ProfileDetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0{
-            navigationController?.popViewController(animated: true)
+            router.popBackView()
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
@@ -135,5 +134,11 @@ extension ProfileDetailViewController: UITableViewDelegate{
             let data = ProfileCommentData(objectId: detailData.objectID, className: detailData.className)
             profileToComment.entity = data
         }
+    }
+}
+
+extension ProfileDetailViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

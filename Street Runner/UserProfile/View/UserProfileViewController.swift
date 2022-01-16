@@ -12,7 +12,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: UserProfileViewModel?
-    private lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var userObjectId: String?
     private var ncmbClass: String?
     
@@ -21,8 +21,7 @@ class UserProfileViewController: UIViewController {
         if let userObjectId = userObjectId {
             viewModel = UserProfileViewModelImpl(userObjectId: userObjectId)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -293,5 +292,11 @@ extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
         let horizontalSpace: CGFloat = 5
         let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
         return CGSize(width: cellSize, height: cellSize + cellSize/3)
+    }
+}
+
+extension UserProfileViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

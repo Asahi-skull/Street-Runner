@@ -15,7 +15,7 @@ class UserCommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: UserCommentListViewModel?
-    private lazy var router: UserCommentListRouter = UserCommentListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: commentData?
     
     override func viewDidLoad() {
@@ -23,8 +23,7 @@ class UserCommentListViewController: UIViewController {
         if let entity = entity {
             viewModel = UserCommentListViewModelImpl(entiry: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -202,5 +201,11 @@ extension UserCommentListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension UserCommentListViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

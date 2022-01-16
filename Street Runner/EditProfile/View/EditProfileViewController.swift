@@ -13,7 +13,7 @@ class EditProfileViewController: UIViewController{
     @IBOutlet weak var userNameTextField: UITextField!
     
     private let editProfile: EditProfileViewModel = EditProfileViewModelImpl()
-    private lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class EditProfileViewController: UIViewController{
             let res = editProfile.saveUserName(userName: userName)
             switch res{
             case .success:
-                router.backView()
+                router.dismiss()
             case .failure:
                 router.resultAlert(titleText: "すでに使われているユーザーネーム", messageText: "別の名前を入力してください", titleOK: "OK")
                 return
@@ -66,7 +66,7 @@ class EditProfileViewController: UIViewController{
     }
     
     @IBAction func cancelButton(_ sender: Any) {
-        router.backView()
+        router.dismiss()
     }
 }
 
@@ -77,6 +77,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else if let originalImage = info[.originalImage] as? UIImage {
             iconImage.image = originalImage
         }
-        router.backView()
+        router.dismiss()
     }
 }

@@ -15,7 +15,7 @@ class FollowCommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: FollowCommentListViewModel?
-    private lazy var router: FollowCommentListRouter = FollowCommentListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: commentData?
     
     override func viewDidLoad() {
@@ -23,8 +23,7 @@ class FollowCommentListViewController: UIViewController {
         if let entity = entity {
             viewModel = FollowCommentListViewModelImpl(entiry: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -205,3 +204,8 @@ extension FollowCommentListViewController: UITableViewDelegate{
     }
 }
 
+extension FollowCommentListViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
+    }
+}

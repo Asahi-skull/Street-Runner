@@ -13,7 +13,7 @@ class PostRequestViewController: UIViewController {
     @IBOutlet weak var requestTextView: UITextView!
     
     private let postRequest: PostRequestViewModel = PostRequestViewModelImpl()
-    private lazy var router: PostRequestRouter = PostRequestRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class PostRequestViewController: UIViewController {
             let res = postRequest.saveRequest(requestImageFile: fileName, requestText: requestText)
             switch res{
             case .success:
-                navigationController?.popViewController(animated: true)
+                router.popBackView()
             case .failure:
                 router.resultAlert(titleText: "投稿内容の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
                 postRequest.deleteImageFile(fileName: fileName)
@@ -73,6 +73,6 @@ extension PostRequestViewController: UIImagePickerControllerDelegate, UINavigati
         } else if let originalImage = info[.originalImage] as? UIImage {
             requestImage.image = originalImage
         }
-        router.backView()
+        router.dismiss()
     }
 }

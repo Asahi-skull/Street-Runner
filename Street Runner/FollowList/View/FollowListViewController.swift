@@ -13,7 +13,7 @@ class FollowListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel: FollowListViewModel = FollowListViewModelImpl()
-    private lazy var router: FollowListRouter = FollowListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

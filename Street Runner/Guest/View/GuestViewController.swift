@@ -10,7 +10,7 @@ import UIKit
 class GuestViewController: UIViewController {
     
     private let viewModel: GuestViewModel = GuestViewModelImpl()
-    private lazy var router: GuestRouter = GuestRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +19,11 @@ class GuestViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if viewModel.autoLogin(){
-            router.transition(idetifier: "fromGuest")
+            router.transition(idetifier: "fromGuest",sender: nil)
         }
     }
 
     @IBAction func registerButton(_ sender: Any) {
-        router.transition(idetifier: "toSignUp")
+        router.transition(idetifier: "toSignUp",sender: nil)
     }
 }
