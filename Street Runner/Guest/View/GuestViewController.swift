@@ -26,4 +26,7 @@ class GuestViewController: UIViewController {
     @IBAction func registerButton(_ sender: Any) {
         router.transition(idetifier: "toSignUp",sender: nil)
     }
+    
+    @IBAction func unwindToGuest(_ unwindSegue: UIStoryboardSegue) {
+    }
 }

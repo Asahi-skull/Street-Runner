@@ -36,7 +36,7 @@ class LoginmBaaSImpl: LoginmBaaS{
     
     func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
         var acl = NCMBACL.empty
-        acl.put(key: "*", readable: true, writable: false)
+        acl.put(key: "*", readable: true, writable: true)
         if let user = NCMBUser.currentUser{
             user.acl = acl
             user.saveInBackground {

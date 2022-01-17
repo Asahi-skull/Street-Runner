@@ -15,6 +15,7 @@ protocol PerformAlertRouter{
     func dismiss()
     func popBackView()
     func changeTabBar(tabNum: Int)
+    func checkActAfterAlert(titleText: String,messageText: String)
 }
 
 class PerformAlertRouterImpl: PerformAlertRouter{
@@ -55,5 +56,16 @@ class PerformAlertRouterImpl: PerformAlertRouter{
     func changeTabBar(tabNum: Int) {
         let guestView = viewController.tabBarController?.viewControllers?[tabNum]
         viewController.tabBarController?.selectedViewController = guestView
+    }
+    
+    func checkActAfterAlert(titleText: String,messageText: String) {
+        (viewController as? AlertResult).map{ AlertResultProtcol in
+            let alertController = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default) {_ in
+                AlertResultProtcol.changeView()
+            })
+            alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+            viewController.present(alertController, animated: true, completion: nil)
+        }
     }
 }

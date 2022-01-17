@@ -13,6 +13,7 @@ protocol EditProfileViewModel{
     func getIconImage(completion: @escaping (Result<Data,Error>) -> Void)
     func getUserName() -> String
     func saveUserName(userName: String) ->  Result<Void,Error>
+    func userLogOut() -> Result<Void,Error>
 }
 
 class EditProfileViewModelImpl: EditProfileViewModel{
@@ -55,5 +56,17 @@ class EditProfileViewModelImpl: EditProfileViewModel{
     
     func saveUserName(userName: String) ->  Result<Void,Error>{
         editProfile.saveUserName(userName: userName)
+    }
+    
+    func userLogOut() -> Result<Void,Error> {
+        let result = editProfile.userLogOut()
+        switch result {
+        case .success:
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "password")
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
     }
 }

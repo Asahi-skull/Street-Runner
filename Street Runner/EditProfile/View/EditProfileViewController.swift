@@ -68,6 +68,10 @@ class EditProfileViewController: UIViewController{
     @IBAction func cancelButton(_ sender: Any) {
         router.dismiss()
     }
+    
+    @IBAction func logoutButton(_ sender: Any) {
+        router.checkActAfterAlert(titleText: "ログアウトしますか？", messageText: "")
+    }
 }
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -78,5 +82,17 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             iconImage.image = originalImage
         }
         router.dismiss()
+    }
+}
+
+extension EditProfileViewController: AlertResult{
+    func changeView() {
+        let result = editProfile.userLogOut()
+        switch result {
+        case .success:
+            router.transition(idetifier: "toGuest", sender: nil)
+        case .failure:
+            return
+        }
     }
 }

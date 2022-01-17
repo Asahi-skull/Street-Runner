@@ -612,6 +612,20 @@
                                     <action selector="cancelButton:" destination="36G-pW-9Cy" eventType="touchUpInside" id="7Vi-nk-0z8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4W-Zl-6Aw">
+                                <rect key="frame" x="107" y="693" width="200" height="69"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="AkU-KP-b4A"/>
+                                    <constraint firstAttribute="height" constant="69" id="Jzn-fI-IyR"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="ログアウト"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="36G-pW-9Cy" eventType="touchUpInside" id="hOQ-no-Kcv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oKi-cw-dPD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -620,6 +634,7 @@
                             <constraint firstItem="IqU-15-DWV" firstAttribute="centerX" secondItem="xgt-w1-qtq" secondAttribute="centerX" id="5qt-Sb-cHb"/>
                             <constraint firstItem="uuG-qi-g6v" firstAttribute="leading" secondItem="dqT-AA-V6Q" secondAttribute="trailing" id="6l4-qI-iJD"/>
                             <constraint firstItem="dqT-AA-V6Q" firstAttribute="top" secondItem="gVs-bX-upC" secondAttribute="bottom" constant="30" id="7BS-Kp-xCJ"/>
+                            <constraint firstItem="O4W-Zl-6Aw" firstAttribute="centerX" secondItem="xgt-w1-qtq" secondAttribute="centerX" id="7tD-fs-SvA"/>
                             <constraint firstItem="L81-XZ-SGa" firstAttribute="leading" secondItem="oKi-cw-dPD" secondAttribute="leading" constant="20" id="HUw-LR-akh"/>
                             <constraint firstItem="L81-XZ-SGa" firstAttribute="top" secondItem="oKi-cw-dPD" secondAttribute="top" id="Q8d-lo-L2l"/>
                             <constraint firstItem="gVs-bX-upC" firstAttribute="top" secondItem="IqU-15-DWV" secondAttribute="bottom" constant="10" id="TTo-zl-vUo"/>
@@ -627,6 +642,7 @@
                             <constraint firstItem="dqT-AA-V6Q" firstAttribute="leading" secondItem="oKi-cw-dPD" secondAttribute="leading" constant="20" id="Vas-Vf-3n4"/>
                             <constraint firstItem="oKi-cw-dPD" firstAttribute="trailing" secondItem="uuG-qi-g6v" secondAttribute="trailing" constant="20" id="VuO-sc-IvK"/>
                             <constraint firstItem="oKi-cw-dPD" firstAttribute="trailing" secondItem="nqP-qa-LZ1" secondAttribute="trailing" constant="20" id="gHV-7f-cJD"/>
+                            <constraint firstItem="oKi-cw-dPD" firstAttribute="bottom" secondItem="O4W-Zl-6Aw" secondAttribute="bottom" constant="100" id="iuv-yP-W99"/>
                             <constraint firstItem="uuG-qi-g6v" firstAttribute="top" secondItem="gVs-bX-upC" secondAttribute="bottom" constant="30" id="l3d-d6-sct"/>
                             <constraint firstItem="IqU-15-DWV" firstAttribute="top" secondItem="oKi-cw-dPD" secondAttribute="top" constant="50" id="wK4-f3-yjq"/>
                         </constraints>
@@ -634,11 +650,13 @@
                     <connections>
                         <outlet property="iconImage" destination="IqU-15-DWV" id="WTf-8S-nY8"/>
                         <outlet property="userNameTextField" destination="uuG-qi-g6v" id="9Z7-Y7-asn"/>
+                        <segue destination="i9O-IL-zo7" kind="unwind" identifier="toGuest" unwindAction="unwindToGuest:" id="Sdb-DL-LxJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBa-Z3-RYy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="i9O-IL-zo7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3833" y="1057"/>
+            <point key="canvasLocation" x="3831.884057971015" y="1056.0267857142858"/>
         </scene>
         <!--Follow List View Controller-->
         <scene sceneID="hAr-jb-K8Q">
@@ -1349,6 +1367,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
