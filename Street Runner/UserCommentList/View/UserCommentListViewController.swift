@@ -66,19 +66,23 @@ class UserCommentListViewController: UIViewController {
     @IBAction func sendButton(_ sender: Any) {
         guard let commentText = commentTextView.text else {return}
         viewModel.map{
-            $0.saveComment(commentText: commentText) { [weak self] in
-                guard let self = self else {return}
-                switch $0{
-                case .success:
-                    DispatchQueue.main.async {
-                        self.commentTextView.text = ""
-                        self.commentTextView.endEditing(true)
-                    }
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.router.resultAlert(titleText: "コメントの保存に失敗", messageText: "もう一度送信してください", titleOK: "OK")
+            if $0.checkUserExit() {
+                $0.saveComment(commentText: commentText) { [weak self] in
+                    guard let self = self else {return}
+                    switch $0{
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.commentTextView.text = ""
+                            self.commentTextView.endEditing(true)
+                        }
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.router.resultAlert(titleText: "コメントの保存に失敗", messageText: "もう一度送信してください", titleOK: "OK")
+                        }
                     }
                 }
+            }else{
+                router.resultAlert(titleText: "ログインしないとコメントできません", messageText: "", titleOK: "OK")
             }
         }
     }

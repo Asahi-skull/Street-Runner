@@ -22,13 +22,12 @@ protocol FollowCommentListViewModel{
 }
 
 class FollowCommentListViewModelImpl: FollowCommentListViewModel{
-    init(entiry: commentData){
-        self.entity = entiry
+    init(entity: commentData){
+        self.entity = entity
     }
     
     private let entity: commentData
     private var datas: [CommentEntity] = []
-    
     private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()

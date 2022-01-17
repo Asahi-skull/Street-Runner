@@ -21,7 +21,6 @@ class FollowListViewModelImpl: FollowListViewModel {
     private let profileMbaas: ProfilemBaaS = ProfilemBaaSImpl()
     private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
-    
     private var datas: [String] = []
     
     func getFollowerData(completion: @escaping (Result<Void,Error>) -> Void) {

@@ -21,7 +21,7 @@ class FollowCommentListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let entity = entity {
-            viewModel = FollowCommentListViewModelImpl(entiry: entity)
+            viewModel = FollowCommentListViewModelImpl(entity: entity)
         }else{
             router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return

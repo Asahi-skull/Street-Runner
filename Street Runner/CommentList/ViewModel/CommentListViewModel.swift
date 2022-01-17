@@ -19,6 +19,7 @@ protocol CommentListViewModel{
     func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void)
     func changeToTrue(cellRow: Int)
     func changeTofalse(cellRow: Int)
+    func checkUserExist() -> Bool
 }
 
 class CommentListViewModelImpl: CommentListViewModel{
@@ -28,10 +29,10 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     private let entity: commentData
     private var datas: [CommentEntity] = []
-    
     private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
+    private let checkUserExistModel: SelectPostMbaas = SelectPostMbaasImpl()
     
     func getObjectId() -> commentData {
         entity
@@ -117,5 +118,9 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     func changeTofalse(cellRow: Int) {
         datas[cellRow].good = false
+    }
+    
+    func checkUserExist() -> Bool {
+        checkUserExistModel.checkUserExist()
     }
 }

@@ -32,7 +32,6 @@ class FollowUserProfileViewModelImpl: FollowUserProfileViewModel{
     private let userObjectId: String
     private var datas: [ProfilePostedEntity] = []
     private var check: Bool = false
-    
     private let userProfileModel: CommentMBaaS = CommentMBaaSImpl()
     private let getImageModel: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()

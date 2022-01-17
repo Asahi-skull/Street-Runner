@@ -19,7 +19,6 @@ protocol ShowPostedViewModel{
 class ShowPostedViewModelImpl: ShowPostedViewModel{
     private let showPosted: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let userInfo: CommentMBaaS = CommentMBaaSImpl()
-    
     private var datas: [RequestEntity] = []
     
     func dataCount() -> Int {

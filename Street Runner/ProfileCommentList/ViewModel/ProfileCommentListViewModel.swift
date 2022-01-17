@@ -28,7 +28,6 @@ class ProfileCommentListViewModelImpl: ProfileCommentListViewModel{
     
     private let entity: ProfileCommentData
     private var datas: [CommentEntity] = []
-    
     private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()

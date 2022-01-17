@@ -63,8 +63,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="YAH-NA-0QX"/>
                     <connections>
-                        <segue destination="Kpb-bu-OeS" kind="show" identifier="toSignUp" id="PXC-FV-8HX"/>
-                        <segue destination="yEa-dl-yCA" kind="show" identifier="fromGuest" id="hOr-6L-6dl"/>
+                        <segue destination="Kpb-bu-OeS" kind="show" identifier="toSignUp" id="5PM-yN-pmp"/>
+                        <segue destination="yEa-dl-yCA" kind="show" identifier="fromGuest" id="h9J-al-GeQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -129,7 +129,7 @@
                     <navigationItem key="navigationItem" id="c3V-P2-yAj"/>
                     <connections>
                         <outlet property="emailTextField" destination="MFS-AD-3Bt" id="eCL-JW-MDf"/>
-                        <segue destination="7pE-LW-pMb" kind="show" identifier="toLogin" id="hgb-2h-Cd2"/>
+                        <segue destination="7pE-LW-pMb" kind="show" identifier="toLogin" id="UUi-zk-Krk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsk-00-pKf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -192,7 +192,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="9Nr-W9-JjV" id="rzD-6p-Kxn"/>
                         <outlet property="passwordTextField" destination="heN-OQ-6ek" id="ug9-cT-tDl"/>
-                        <segue destination="yEa-dl-yCA" kind="show" identifier="toProfile" id="gbf-Lg-9gD"/>
+                        <segue destination="yEa-dl-yCA" kind="show" identifier="toProfile" id="X4U-RG-wQI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cun-pB-z6U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -242,13 +242,13 @@
                     <connections>
                         <outlet property="table" destination="u5S-jb-13T" id="xm8-yq-EWZ"/>
                         <segue destination="36G-pW-9Cy" kind="presentation" identifier="toEdit" modalPresentationStyle="fullScreen" id="zHi-oJ-2kG"/>
-                        <segue destination="scQ-Ny-Wn7" kind="show" identifier="profileToDetail" id="3W2-T0-3oN"/>
                         <segue destination="ZVD-sR-ybu" kind="show" identifier="toFollow" id="new-Xv-zc0"/>
+                        <segue destination="scQ-Ny-Wn7" kind="show" identifier="profileToDetail" id="Bmh-ah-Fhe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHf-OG-uvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309" y="1767"/>
+            <point key="canvasLocation" x="3071" y="1760"/>
         </scene>
         <!--Profile Detail View Controller-->
         <scene sceneID="gOv-mQ-jFO">
@@ -284,7 +284,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j08-8a-aDo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3072" y="1767"/>
+            <point key="canvasLocation" x="3832" y="2502"/>
         </scene>
         <!--Profile Comment List View Controller-->
         <scene sceneID="LFR-DG-BeF">
@@ -371,12 +371,12 @@
                         <outlet property="commentBottom" destination="ARD-uY-Z0f" id="Min-jb-l0U"/>
                         <outlet property="commentTextView" destination="njA-cU-kbs" id="RIq-XW-aNm"/>
                         <outlet property="tableView" destination="IpF-5d-Zsw" id="Qdd-Wr-lE5"/>
-                        <segue destination="7B9-lh-Q2l" kind="show" identifier="commentToProfile" id="0tL-Og-tQQ"/>
+                        <segue destination="7B9-lh-Q2l" kind="show" identifier="commentToProfile" id="KiM-aC-IdV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cb1-XB-P4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3857" y="1767"/>
+            <point key="canvasLocation" x="4616" y="2502"/>
         </scene>
         <!--Follow User Profile View Controller-->
         <scene sceneID="79K-JM-gWK">
@@ -412,7 +412,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvB-O4-YVn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4619" y="2140"/>
+            <point key="canvasLocation" x="5397" y="1760"/>
         </scene>
         <!--Follow Detail View Controller-->
         <scene sceneID="sqD-jk-7Lj">
@@ -448,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0u-6e-ehp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5412" y="2140"/>
+            <point key="canvasLocation" x="6191" y="1760"/>
         </scene>
         <!--Follow Comment List View Controller-->
         <scene sceneID="SOD-ef-2Sn">
@@ -538,7 +538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0LZ-Ew-ooD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6212" y="2140"/>
+            <point key="canvasLocation" x="6991" y="1760"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="cI6-HT-6dz">
@@ -638,7 +638,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBa-Z3-RYy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3072" y="1064"/>
+            <point key="canvasLocation" x="3833" y="1057"/>
         </scene>
         <!--Follow List View Controller-->
         <scene sceneID="hAr-jb-K8Q">
@@ -683,12 +683,12 @@
                     <connections>
                         <outlet property="segmentControl" destination="ccL-Wk-aaX" id="DeN-CQ-dTK"/>
                         <outlet property="tableView" destination="DCQ-Ag-o8O" id="f54-u4-zvl"/>
-                        <segue destination="7B9-lh-Q2l" kind="show" identifier="followToProfile" id="7Xi-YF-80p"/>
+                        <segue destination="7B9-lh-Q2l" kind="show" identifier="followToProfile" id="WfA-9t-XHi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXz-wq-6Cx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3071" y="2519"/>
+            <point key="canvasLocation" x="3832" y="1760"/>
         </scene>
         <!--Item-->
         <scene sceneID="Eig-dc-mjl">
@@ -722,7 +722,7 @@
                     <connections>
                         <segue destination="cvl-6z-y9J" kind="relationship" relationship="viewControllers" id="aSL-PL-5ZB"/>
                         <segue destination="Ttw-w2-Fqm" kind="relationship" relationship="viewControllers" id="lDe-No-KUd"/>
-                        <segue destination="LW5-kb-Ddi" kind="relationship" relationship="viewControllers" id="2Wz-kn-9BQ"/>
+                        <segue destination="LW5-kb-Ddi" kind="relationship" relationship="viewControllers" id="b9j-Pl-fqV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mN-be-hQX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1037,8 +1037,8 @@
                     <navigationItem key="navigationItem" id="idZ-VJ-YfB"/>
                     <connections>
                         <outlet property="tableView" destination="0Lt-Aa-IRu" id="cOg-hr-GRu"/>
-                        <segue destination="cmQ-Qo-cLK" kind="show" identifier="toUserProfile" id="7O8-eG-gAh"/>
-                        <segue destination="yEb-lx-6dV" kind="show" identifier="toCommentList" id="oig-3x-tPT"/>
+                        <segue destination="cmQ-Qo-cLK" kind="show" identifier="toUserProfile" id="NXp-fm-7iN"/>
+                        <segue destination="yEb-lx-6dV" kind="show" identifier="toCommentList" id="ufS-y4-Iak"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qb2-dV-S8p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1123,12 +1123,12 @@
                         <outlet property="commentBottom" destination="sW3-me-sng" id="MFX-pl-Lmt"/>
                         <outlet property="commentTextView" destination="KFA-0b-tIW" id="zy1-Mt-prP"/>
                         <outlet property="tableView" destination="zgC-5O-b6Y" id="QGe-s6-VfD"/>
-                        <segue destination="cmQ-Qo-cLK" kind="show" identifier="commentToUser" id="iqu-aB-yQt"/>
+                        <segue destination="cmQ-Qo-cLK" kind="show" identifier="commentToUser" id="jqf-Rc-rmE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LXf-W2-PZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3070" y="-2000"/>
+            <point key="canvasLocation" x="3071" y="-2017"/>
         </scene>
         <!--User Comment List View Controller-->
         <scene sceneID="O7H-kP-aK9">
@@ -1220,7 +1220,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L1q-0O-uPC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Rsa-7W-pbl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4615.9420289855079" y="-2699.3303571428569"/>
+            <point key="canvasLocation" x="4620" y="-2777"/>
         </scene>
         <!--User Profile View Controller-->
         <scene sceneID="Rec-hC-9Wt">
@@ -1256,7 +1256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfP-qM-hpt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3069.5652173913045" y="-2699.3303571428569"/>
+            <point key="canvasLocation" x="3071" y="-2777"/>
         </scene>
         <!--User Detail View Controller-->
         <scene sceneID="8jh-CT-Naw">
@@ -1292,7 +1292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSF-UI-H4z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3853.6231884057975" y="-2699.3303571428569"/>
+            <point key="canvasLocation" x="3836" y="-2777"/>
         </scene>
         <!--Item-->
         <scene sceneID="q5c-aX-Eou">
@@ -1334,9 +1334,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iqu-aB-yQt"/>
-        <segue reference="7Xi-YF-80p"/>
-        <segue reference="hOr-6L-6dl"/>
+        <segue reference="NXp-fm-7iN"/>
+        <segue reference="WfA-9t-XHi"/>
+        <segue reference="h9J-al-GeQ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="person" catalog="system" width="128" height="117"/>

@@ -22,6 +22,7 @@ protocol UserProfileViewModel{
     func boolcheck() -> Bool
     func countFollower(completion: @escaping (Result<Int,Error>) -> Void)
     func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
+    func checkUserExist() -> Bool 
 }
 
 class UserProfileViewModelImpl: UserProfileViewModel{
@@ -32,11 +33,11 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     private let userObjectId: String
     private var datas: [ProfilePostedEntity] = []
     private var check: Bool = false
-    
     private let userProfileModel: CommentMBaaS = CommentMBaaSImpl()
     private let getImageModel: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
     private let followModel: UserProfileMBaaS = UserProfileMBaaSImpl()
+    private let checkUserExistModel: SelectPostMbaas = SelectPostMbaasImpl()
     
     func getUserObjectId() -> String {
         userObjectId
@@ -169,5 +170,9 @@ class UserProfileViewModelImpl: UserProfileViewModel{
                 completion(Result.failure(err))
             }
         }
+    }
+    
+    func checkUserExist() -> Bool {
+        checkUserExistModel.checkUserExist()
     }
 }

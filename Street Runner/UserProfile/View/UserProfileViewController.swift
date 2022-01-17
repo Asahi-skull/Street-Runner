@@ -148,34 +148,38 @@ extension UserProfileViewController: UITableViewDataSource{
     
     @objc func followButtonTapped(_ sender : UIButton) {
         viewModel.map{
-            if $0.boolcheck(){
-                $0.unFollow {
-                    switch $0{
-                    case .success:
-                        DispatchQueue.main.async {
-                            sender.backgroundColor = UIColor(named: "blueBack")
-                            sender.setTitle("フォローする", for: .normal)
-                            sender.setTitleColor(UIColor.white, for: .normal)
+            if $0.checkUserExist() {
+                if $0.boolcheck(){
+                    $0.unFollow {
+                        switch $0{
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.backgroundColor = UIColor(named: "blueBack")
+                                sender.setTitle("フォローする", for: .normal)
+                                sender.setTitleColor(UIColor.white, for: .normal)
+                            }
+                        case .failure:
+                            return
                         }
-                    case .failure:
-                        return
+                    }
+                }else{
+                    $0.follow {
+                        switch $0 {
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.backgroundColor = UIColor(named: "whiteBack")
+                                sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor
+                                sender.layer.borderWidth = 1.0
+                                sender.setTitle("フォロー中", for: .normal)
+                                sender.setTitleColor(UIColor(named: "blackText"), for: .normal)
+                            }
+                        case .failure:
+                            return
+                        }
                     }
                 }
             }else{
-                $0.follow {
-                    switch $0 {
-                    case .success:
-                        DispatchQueue.main.async {
-                            sender.backgroundColor = UIColor(named: "whiteBack")
-                            sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor
-                            sender.layer.borderWidth = 1.0
-                            sender.setTitle("フォロー中", for: .normal)
-                            sender.setTitleColor(UIColor(named: "blackText"), for: .normal)
-                        }
-                    case .failure:
-                        return
-                    }
-                }
+                router.resultAlert(titleText: "ログインしないとフォローできません", messageText: "", titleOK: "OK")
             }
         }
     }
