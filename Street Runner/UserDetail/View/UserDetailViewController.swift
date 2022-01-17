@@ -12,7 +12,7 @@ class UserDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: UserDetailViewModel?
-    private lazy var router: UserDetailRouter = UserDetailRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -20,8 +20,7 @@ class UserDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = UserDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
@@ -49,12 +48,23 @@ extension UserDetailViewController: UITableViewDataSource{
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailUserCell", for: indexPath) as! DetailUserTableViewCell
             viewModel.map{
-                $0.getUserInfo {
+                $0.getUserInfo {  [weak self] in
+                    guard let self = self else {return}
                     switch $0{
                     case .success(let data):
                         guard let iconImageFile = data.iconImageFile else {return}
                         self.viewModel.map{
-                            $0.getImage(fileName: iconImageFile, imageView: cell.iconImage)
+                            $0.getImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                         guard let userName = data.userName else {return}
                         cell.setData(userName: userName)
@@ -68,7 +78,17 @@ extension UserDetailViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
             viewModel.map{
                 guard let imageFileName = $0.getEntity().requestImage else {return}
-                $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
+                $0.getImage(fileName: imageFileName) {
+                    switch $0 {
+                    case .success(let imageData):
+                        let uiImage = UIImage(data: imageData)
+                        DispatchQueue.main.async {
+                            cell.postedImage.image = uiImage
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             return cell
         }else if indexPath.row == 2{
@@ -101,7 +121,7 @@ extension UserDetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0{
-            navigationController?.popViewController(animated: true)
+            router.popBackView()
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
@@ -117,5 +137,11 @@ extension UserDetailViewController: UITableViewDelegate{
             let commentData = commentData(objectId: entityItem.objectID, userObjectId: entityItem.userObjectID, className: entityItem.className)
             userToComment.entity = commentData
         }
+    }
+}
+
+extension UserDetailViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

@@ -13,7 +13,7 @@ class FollowListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel: FollowListViewModel = FollowListViewModelImpl()
-    private lazy var router: FollowListRouter = FollowListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,11 +83,22 @@ extension FollowListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "followListCell", for: indexPath) as! FollowListTableViewCell
         let data = viewModel.getData(indexPath: indexPath)
-        viewModel.getUserData(userObjectId: data) {
+        viewModel.getUserData(userObjectId: data) { [weak self] in
+            guard let self = self else {return}
             switch $0 {
             case .success(let datas):
-                guard let ImageFile = datas.iconImageFile else {return}
-                self.viewModel.setIconImage(fileName: ImageFile, imageView: cell.iconImage)
+                guard let imageFile = datas.iconImageFile else {return}
+                self.viewModel.setIconImage(fileName: imageFile) {
+                    switch $0 {
+                    case .success(let imageData):
+                        let uiImage = UIImage(data: imageData)
+                        DispatchQueue.main.async {
+                            cell.iconImage.image = uiImage
+                        }
+                    case .failure:
+                        return
+                    }
+                }
                 guard let userName = datas.userName else {return}
                 DispatchQueue.main.async {
                     cell.userNameLabel.text = userName

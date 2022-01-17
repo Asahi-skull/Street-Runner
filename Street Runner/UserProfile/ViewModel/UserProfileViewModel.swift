@@ -6,23 +6,23 @@
 //
 
 import Foundation
-import UIKit
 
 protocol UserProfileViewModel{
     func getUserObjectId() -> String
     func getCurrentUserObjectId() -> String
-    func getUserProfile(imageView: UIImageView,completion: @escaping (Result<String,Error>) -> Void)
+    func getUserProfile(completion: @escaping (Result<UserData,Error>) -> Void)
     func getRequestData(completion: @escaping (Result<Void,Error>) -> Void)
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> ProfilePostedEntity
-    func setImage(fileName: String,imageView: UIImageView)
+    func setImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func follow(completion: @escaping (Result<Void,Error>) -> Void)
     func unFollow(completion: @escaping (Result<Void,Error>) -> Void)
     func checkFollow() -> Result<Void,Error>
     func boolcheck() -> Bool
     func countFollower(completion: @escaping (Result<Int,Error>) -> Void)
     func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
+    func checkUserExist() -> Bool 
 }
 
 class UserProfileViewModelImpl: UserProfileViewModel{
@@ -33,11 +33,11 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     private let userObjectId: String
     private var datas: [ProfilePostedEntity] = []
     private var check: Bool = false
-    
     private let userProfileModel: CommentMBaaS = CommentMBaaSImpl()
     private let getImageModel: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
     private let followModel: UserProfileMBaaS = UserProfileMBaaSImpl()
+    private let checkUserExistModel: SelectPostMbaas = SelectPostMbaasImpl()
     
     func getUserObjectId() -> String {
         userObjectId
@@ -47,15 +47,11 @@ class UserProfileViewModelImpl: UserProfileViewModel{
         profileModel.getID()
     }
     
-    func getUserProfile(imageView: UIImageView,completion: @escaping (Result<String,Error>) -> Void) {
-        userProfileModel.getUserData(userObjectId: userObjectId) { [weak self] in
-            guard let self = self else {return}
+    func getUserProfile(completion: @escaping (Result<UserData,Error>) -> Void) {
+        userProfileModel.getUserData(userObjectId: userObjectId) {
             switch $0{
             case .success(let data):
-                guard let fileName = data.iconImageFile else {return}
-                self.getImageModel.getIconImage(fileName: fileName, imageView: imageView)
-                guard let userName = data.userName else {return}
-                completion(Result.success(userName))
+                completion(Result.success(data))
             case .failure(let err):
                 completion(Result.failure(err))
             }
@@ -96,8 +92,15 @@ class UserProfileViewModelImpl: UserProfileViewModel{
         datas[indexPath.row]
     }
     
-    func setImage(fileName: String,imageView: UIImageView) {
-        getImageModel.getIconImage(fileName: fileName, imageView: imageView)
+    func setImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        getImageModel.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func follow(completion: @escaping (Result<Void,Error>) -> Void) {
@@ -167,5 +170,9 @@ class UserProfileViewModelImpl: UserProfileViewModel{
                 completion(Result.failure(err))
             }
         }
+    }
+    
+    func checkUserExist() -> Bool {
+        checkUserExistModel.checkUserExist()
     }
 }

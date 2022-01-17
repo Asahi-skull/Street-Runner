@@ -12,7 +12,7 @@ class DetailPostedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: DetailPostedViewModel?
-    private lazy var router: DetailPostedRouter = DetailPostedRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -20,8 +20,7 @@ class DetailPostedViewController: UIViewController {
         if let entity = entity {
             viewModel = DetailPostedViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
@@ -54,7 +53,17 @@ extension DetailPostedViewController: UITableViewDataSource{
                     case .success(let data):
                         guard let iconImageFile = data.iconImageFile else {return}
                         self.viewModel.map{
-                            $0.getImage(fileName: iconImageFile, imageView: cell.iconImage)
+                            $0.getImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                         guard let userName = data.userName else {return}
                         cell.setData(userName: userName)
@@ -68,7 +77,17 @@ extension DetailPostedViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
             viewModel.map{
                 guard let imageFileName = $0.getEntity().requestImage else {return}
-                $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
+                $0.getImage(fileName: imageFileName) {
+                    switch $0 {
+                    case .success(let imageData):
+                        let uiImage = UIImage(data: imageData)
+                        DispatchQueue.main.async {
+                            cell.postedImage.image = uiImage
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             return cell
         }else if indexPath.row == 2{
@@ -124,5 +143,11 @@ extension DetailPostedViewController: UITableViewDelegate{
                 toCommentList.entity = commentData
             }
         }
+    }
+}
+
+extension DetailPostedViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

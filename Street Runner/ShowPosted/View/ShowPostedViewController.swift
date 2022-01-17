@@ -12,7 +12,7 @@ class ShowPostedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel: ShowPostedViewModel = ShowPostedViewModelImpl()
-    private lazy var router: ShowPostedRouter = ShowPostedRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     private var ncmbClass: String?
         
     override func viewDidLoad() {
@@ -120,8 +120,17 @@ extension ShowPostedViewController: UICollectionViewDataSource{
         guard let requestText = data.requestText else {return cell}
         cell.contentTextLabel.text = requestText
         guard let requestFileName = data.requestImage else {return cell}
-        viewModel.getIconImage(fileName: requestFileName, imageView: cell.requestImage)
-        
+        viewModel.getIconImage(fileName: requestFileName) {
+            switch $0 {
+            case .success(let imageData):
+                let uiImage = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    cell.requestImage.image = uiImage
+                }
+            case .failure:
+                return
+            }
+        }
         guard let userObjectId = data.userObjectID else {return cell}
         viewModel.getUserInfo(userObjectId: userObjectId) { [weak self] in
             guard let self = self else {return}
@@ -131,7 +140,17 @@ extension ShowPostedViewController: UICollectionViewDataSource{
                     cell.userNameLabel.text = datas.userName
                 }
                 guard let iconImageFile = datas.iconImageFile else {return}
-                self.viewModel.getIconImage(fileName: iconImageFile, imageView: cell.iconImage)
+                self.viewModel.getIconImage(fileName: iconImageFile) {
+                    switch $0 {
+                    case .success(let imageData):
+                        let uiImage = UIImage(data: imageData)
+                        DispatchQueue.main.async {
+                            cell.requestImage.image = uiImage
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             case .failure:
                 return
             }

@@ -10,7 +10,7 @@ import UIKit
 class SelectPostViewController: UIViewController{
     
     private let viewModel: SelectPostViewModel = SelectPostViewModelImpl()
-    private lazy var router: SelectPostRouter = SelectPostRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +44,17 @@ extension SelectPostViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
         if viewModel.checkUserExist() {
             if indexPath.row == 0{
-                router.transition(idetifier: "toPostRequest")
+                router.transition(idetifier: "toPostRequest",sender: nil)
             }else{
-                router.transition(idetifier: "toPostRecruitment")
+                router.transition(idetifier: "toPostRecruitment",sender: nil)
             }
         }else{
-            router.resultAlert(titleText: "ログインしないと投稿できません", messageText: "", titleOK: "OK")
-            let guestView = tabBarController?.viewControllers?[2]
-            tabBarController?.selectedViewController = guestView
+            router.changeViewAfterAlert(titleText: "ログインしないと投稿できません", messageText: "", titleOK: "OK")
         }
+    }
+}
+extension SelectPostViewController: AlertResult{
+    func changeView() {
+        router.changeTabBar(tabNum: 2)
     }
 }

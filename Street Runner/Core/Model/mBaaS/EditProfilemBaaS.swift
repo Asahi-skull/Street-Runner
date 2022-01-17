@@ -23,6 +23,7 @@ protocol EditProfilemBaaS{
     func saveImageFile(img: UIImage, fileName: String) -> Result<String,Error>
     func saveImageuser(fileName: String) -> Result<Void,Error>
     func saveUserName(userName: String) -> Result<Void,Error>
+    func userLogOut() -> Result<Void,Error>
 }
 
 class EditProfilemBaaSImpl: EditProfilemBaaS{
@@ -55,6 +56,16 @@ class EditProfilemBaaSImpl: EditProfilemBaaS{
         user.userName = userName
         let result = user.save()
         switch result{
+        case .success:
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
+    }
+    
+    func userLogOut() -> Result<Void,Error> {
+        let result = NCMBUser.logOut()
+        switch result {
         case .success:
             return Result.success(())
         case .failure(let err):

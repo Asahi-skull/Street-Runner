@@ -12,7 +12,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: UserProfileViewModel?
-    private lazy var router: UserProfileRouter = UserProfileRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var userObjectId: String?
     private var ncmbClass: String?
     
@@ -21,8 +21,7 @@ class UserProfileViewController: UIViewController {
         if let userObjectId = userObjectId {
             viewModel = UserProfileViewModelImpl(userObjectId: userObjectId)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -78,11 +77,27 @@ extension UserProfileViewController: UITableViewDataSource{
                 }else{
                     cell.followButton.isEnabled = true
                 }
-                $0.getUserProfile(imageView: cell.iconImage) {
-                    switch $0{
-                    case .success(let data):
+                $0.getUserProfile { [weak self] in
+                    guard let self = self else {return}
+                    switch $0 {
+                    case .success(let userData):
+                        guard let userName = userData.userName else {return}
                         DispatchQueue.main.async {
-                            cell.userNameLabel.text = data
+                            cell.userNameLabel.text = userName
+                        }
+                        self.viewModel.map{
+                            guard let iconImageFile = userData.iconImageFile else {return}
+                            $0.setImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                     case .failure:
                         return
@@ -133,34 +148,38 @@ extension UserProfileViewController: UITableViewDataSource{
     
     @objc func followButtonTapped(_ sender : UIButton) {
         viewModel.map{
-            if $0.boolcheck(){
-                $0.unFollow {
-                    switch $0{
-                    case .success:
-                        DispatchQueue.main.async {
-                            sender.backgroundColor = UIColor(named: "blueBack")
-                            sender.setTitle("フォローする", for: .normal)
-                            sender.setTitleColor(UIColor.white, for: .normal)
+            if $0.checkUserExist() {
+                if $0.boolcheck(){
+                    $0.unFollow {
+                        switch $0{
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.backgroundColor = UIColor(named: "blueBack")
+                                sender.setTitle("フォローする", for: .normal)
+                                sender.setTitleColor(UIColor.white, for: .normal)
+                            }
+                        case .failure:
+                            return
                         }
-                    case .failure:
-                        return
+                    }
+                }else{
+                    $0.follow {
+                        switch $0 {
+                        case .success:
+                            DispatchQueue.main.async {
+                                sender.backgroundColor = UIColor(named: "whiteBack")
+                                sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor
+                                sender.layer.borderWidth = 1.0
+                                sender.setTitle("フォロー中", for: .normal)
+                                sender.setTitleColor(UIColor(named: "blackText"), for: .normal)
+                            }
+                        case .failure:
+                            return
+                        }
                     }
                 }
             }else{
-                $0.follow {
-                    switch $0 {
-                    case .success:
-                        DispatchQueue.main.async {
-                            sender.backgroundColor = UIColor(named: "whiteBack")
-                            sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor
-                            sender.layer.borderWidth = 1.0
-                            sender.setTitle("フォロー中", for: .normal)
-                            sender.setTitleColor(UIColor(named: "blackText"), for: .normal)
-                        }
-                    case .failure:
-                        return
-                    }
-                }
+                router.resultAlert(titleText: "ログインしないとフォローできません", messageText: "", titleOK: "OK")
             }
         }
     }
@@ -238,7 +257,17 @@ extension UserProfileViewController: UICollectionViewDataSource {
         viewModel.map{
             let data = $0.getData(indexPath: indexPath)
             guard let fileName = data.requestImage else {return}
-            $0.setImage(fileName: fileName,  imageView: cell.postedImage)
+            $0.setImage(fileName: fileName) {
+                switch $0 {
+                case .success(let imageData):
+                    let uiImage = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        cell.postedImage.image = uiImage
+                    }
+                case .failure:
+                    return
+                }
+            }
             guard let postedText = data.requestText else {return}
             cell.commentText.text = postedText
         }
@@ -267,5 +296,11 @@ extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
         let horizontalSpace: CGFloat = 5
         let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
         return CGSize(width: cellSize, height: cellSize + cellSize/3)
+    }
+}
+
+extension UserProfileViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

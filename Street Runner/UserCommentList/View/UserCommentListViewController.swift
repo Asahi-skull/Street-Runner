@@ -15,7 +15,7 @@ class UserCommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: UserCommentListViewModel?
-    private lazy var router: UserCommentListRouter = UserCommentListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: commentData?
     
     override func viewDidLoad() {
@@ -23,8 +23,7 @@ class UserCommentListViewController: UIViewController {
         if let entity = entity {
             viewModel = UserCommentListViewModelImpl(entiry: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -67,19 +66,23 @@ class UserCommentListViewController: UIViewController {
     @IBAction func sendButton(_ sender: Any) {
         guard let commentText = commentTextView.text else {return}
         viewModel.map{
-            $0.saveComment(commentText: commentText) { [weak self] in
-                guard let self = self else {return}
-                switch $0{
-                case .success:
-                    DispatchQueue.main.async {
-                        self.commentTextView.text = ""
-                        self.commentTextView.endEditing(true)
-                    }
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.router.resultAlert(titleText: "コメントの保存に失敗", messageText: "もう一度送信してください", titleOK: "OK")
+            if $0.checkUserExit() {
+                $0.saveComment(commentText: commentText) { [weak self] in
+                    guard let self = self else {return}
+                    switch $0{
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.commentTextView.text = ""
+                            self.commentTextView.endEditing(true)
+                        }
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.router.resultAlert(titleText: "コメントの保存に失敗", messageText: "もう一度送信してください", titleOK: "OK")
+                        }
                     }
                 }
+            }else{
+                router.resultAlert(titleText: "ログインしないとコメントできません", messageText: "", titleOK: "OK")
             }
         }
     }
@@ -115,7 +118,17 @@ extension UserCommentListViewController: UITableViewDataSource{
                     }
                     guard let fileName = data.iconImageFile else {return}
                     self.viewModel.map{
-                        $0.getIconImage(fileName: fileName, imageView: cell.iconImage)
+                        $0.getIconImage(fileName: fileName) {  
+                            switch $0 {
+                            case .success(let imageData):
+                                let uiImage = UIImage(data: imageData)
+                                DispatchQueue.main.async {
+                                    cell.iconImage.image = uiImage
+                                }
+                            case .failure:
+                                return
+                            }
+                        }
                     }
                 case .failure:
                     return
@@ -192,5 +205,11 @@ extension UserCommentListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension UserCommentListViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

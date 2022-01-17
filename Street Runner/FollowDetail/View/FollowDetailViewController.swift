@@ -12,7 +12,7 @@ class FollowDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: FollowDetailViewModel?
-    private lazy var router: FollowDetailRouter = FollowDetailRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: detailData?
     
     override func viewDidLoad() {
@@ -20,8 +20,7 @@ class FollowDetailViewController: UIViewController {
         if let entity = entity {
             viewModel = FollowDetailViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         let userNib = UINib(nibName: "DetailUserTableViewCell", bundle: nil)
@@ -54,7 +53,17 @@ extension FollowDetailViewController: UITableViewDataSource{
                     case .success(let data):
                         guard let iconImageFile = data.iconImageFile else {return}
                         self.viewModel.map{
-                            $0.getImage(fileName: iconImageFile, imageView: cell.iconImage)
+                            $0.getImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                         guard let userName = data.userName else {return}
                         cell.setData(userName: userName)
@@ -68,7 +77,17 @@ extension FollowDetailViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailImageCell", for: indexPath) as! DetailImagTableViewCell
             viewModel.map{
                 guard let imageFileName = $0.getEntity().requestImage else {return}
-                $0.getImage(fileName: imageFileName, imageView: cell.postedImage)
+                $0.getImage(fileName: imageFileName) {
+                    switch $0 {
+                    case .success(let imageData):
+                        let uiImage = UIImage(data: imageData)
+                        DispatchQueue.main.async {
+                            cell.postedImage.image = uiImage
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             return cell
         }else if indexPath.row == 2{
@@ -101,7 +120,7 @@ extension FollowDetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0{
-            navigationController?.popViewController(animated: true)
+            router.popBackView()
         }else if indexPath.row == 1{
         }else if indexPath.row == 2{
         }else{
@@ -120,3 +139,8 @@ extension FollowDetailViewController: UITableViewDelegate{
     }
 }
 
+extension FollowDetailViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
+    }
+}

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol FollowCommentListViewModel{
     func getObjectId() -> commentData
@@ -15,7 +14,7 @@ protocol FollowCommentListViewModel{
     func dataCount() -> Int
     func getData() -> [CommentEntity]
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void)
-    func getIconImage(fileName: String,imageView: UIImageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func getCurrentUserObjectId() -> String
     func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void)
     func changeToTrue(cellRow: Int)
@@ -23,13 +22,12 @@ protocol FollowCommentListViewModel{
 }
 
 class FollowCommentListViewModelImpl: FollowCommentListViewModel{
-    init(entiry: commentData){
-        self.entity = entiry
+    init(entity: commentData){
+        self.entity = entity
     }
     
     private let entity: commentData
     private var datas: [CommentEntity] = []
-    
     private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
@@ -86,8 +84,15 @@ class FollowCommentListViewModelImpl: FollowCommentListViewModel{
         }
     }
     
-    func getIconImage(fileName: String,imageView: UIImageView){
-        iconMbaas.getIconImage(fileName: fileName, imageView: imageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        iconMbaas.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func getCurrentUserObjectId() -> String {

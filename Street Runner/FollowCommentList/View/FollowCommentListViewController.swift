@@ -15,16 +15,15 @@ class FollowCommentListViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     private var viewModel: FollowCommentListViewModel?
-    private lazy var router: FollowCommentListRouter = FollowCommentListRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var entity: commentData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let entity = entity {
-            viewModel = FollowCommentListViewModelImpl(entiry: entity)
+            viewModel = FollowCommentListViewModelImpl(entity: entity)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -115,7 +114,17 @@ extension FollowCommentListViewController: UITableViewDataSource{
                     }
                     guard let fileName = data.iconImageFile else {return}
                     self.viewModel.map{
-                        $0.getIconImage(fileName: fileName, imageView: cell.iconImage)
+                        $0.getIconImage(fileName: fileName) {  
+                            switch $0 {
+                            case .success(let imageData):
+                                let uiImage = UIImage(data: imageData)
+                                DispatchQueue.main.async {
+                                    cell.iconImage.image = uiImage
+                                }
+                            case .failure:
+                                return
+                            }
+                        }
                     }
                 case .failure:
                     return
@@ -195,3 +204,8 @@ extension FollowCommentListViewController: UITableViewDelegate{
     }
 }
 
+extension FollowCommentListViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
+    }
+}

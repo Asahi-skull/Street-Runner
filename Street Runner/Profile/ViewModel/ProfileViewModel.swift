@@ -6,16 +6,15 @@
 //
 
 import Foundation
-import UIKit
 
 protocol ProfileViewModel{
     func setUser() -> String
-    func getIconImage(imageView: UIImageView)
+    func getIconImage(completion: @escaping (Result<Data,Error>) -> Void)
     func dataCount() -> Int
     func getData(indexPath: IndexPath) -> ProfilePostedEntity
     func getRequest(completion: @escaping (Result<Void,Error>) -> Void)
     func getRecruitmentData(completion: @escaping (Result<Void,Error>) -> Void)
-    func getImage(fileName: String,imageView: UIImageView)
+    func getImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func countFollower(completion: @escaping (Result<Int,Error>) -> Void)
     func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
 }
@@ -30,8 +29,15 @@ class ProfileViewModelImpl: ProfileViewModel{
         profile.getUser()
     }
     
-    func getIconImage(imageView: UIImageView) {
-        showPosted.getIconImage(fileName: profile.getID(), imageView: imageView)
+    func getIconImage(completion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: profile.getID()) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func dataCount() -> Int {
@@ -68,8 +74,15 @@ class ProfileViewModelImpl: ProfileViewModel{
         }
     }
     
-    func getImage(fileName: String,imageView: UIImageView){
-        showPosted.getIconImage(fileName: fileName, imageView: imageView)
+    func getImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func countFollower(completion: @escaping (Result<Int,Error>) -> Void) {

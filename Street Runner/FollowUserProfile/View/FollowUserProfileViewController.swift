@@ -12,7 +12,7 @@ class FollowUserProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: FollowUserProfileViewModel?
-    private lazy var router: FollowUserProfileRouter = FollowUserProfileRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     var userObjectId: String?
     private var ncmbClass: String?
     
@@ -21,8 +21,7 @@ class FollowUserProfileViewController: UIViewController {
         if let userObjectId = userObjectId {
             viewModel = FollowUserProfileViewModelImpl(userObjectId: userObjectId)
         }else{
-            router.resultAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
-            navigationController?.popViewController(animated: true)
+            router.changeViewAfterAlert(titleText: "データの取得に失敗", messageText: "戻る", titleOK: "OK")
             return
         }
         viewModel.map{
@@ -78,11 +77,27 @@ extension FollowUserProfileViewController: UITableViewDataSource{
                 }else{
                     cell.followButton.isEnabled = true
                 }
-                $0.getUserProfile(imageView: cell.iconImage) {
-                    switch $0{
-                    case .success(let data):
+                $0.getUserProfile { [weak self] in
+                    guard let self = self else {return}
+                    switch $0 {
+                    case .success(let userData):
+                        guard let userName = userData.userName else {return}
                         DispatchQueue.main.async {
-                            cell.userNameLabel.text = data
+                            cell.userNameLabel.text = userName
+                        }
+                        self.viewModel.map{
+                            guard let iconImageFile = userData.iconImageFile else {return}
+                            $0.setImage(fileName: iconImageFile) {
+                                switch $0 {
+                                case .success(let imageData):
+                                    let uiImage = UIImage(data: imageData)
+                                    DispatchQueue.main.async {
+                                        cell.iconImage.image = uiImage
+                                    }
+                                case .failure:
+                                    return
+                                }
+                            }
                         }
                     case .failure:
                         return
@@ -238,7 +253,17 @@ extension FollowUserProfileViewController: UICollectionViewDataSource {
         viewModel.map{
             let data = $0.getData(indexPath: indexPath)
             guard let fileName = data.requestImage else {return}
-            $0.setImage(fileName: fileName,  imageView: cell.postedImage)
+            $0.setImage(fileName: fileName) {
+                switch $0 {
+                case .success(let imageData):
+                    let uiImage = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        cell.postedImage.image = uiImage
+                    }
+                case .failure:
+                    return
+                }
+            }
             guard let postedText = data.requestText else {return}
             cell.commentText.text = postedText
         }
@@ -267,5 +292,11 @@ extension FollowUserProfileViewController: UICollectionViewDelegateFlowLayout {
         let horizontalSpace: CGFloat = 5
         let cellSize: CGFloat = self.tableView.bounds.width/2 - horizontalSpace
         return CGSize(width: cellSize, height: cellSize + cellSize/3)
+    }
+}
+
+extension FollowUserProfileViewController: AlertResult{
+    func changeView() {
+        router.popBackView()
     }
 }

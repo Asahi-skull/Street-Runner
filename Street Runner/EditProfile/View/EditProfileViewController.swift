@@ -13,13 +13,24 @@ class EditProfileViewController: UIViewController{
     @IBOutlet weak var userNameTextField: UITextField!
     
     private let editProfile: EditProfileViewModel = EditProfileViewModelImpl()
-    private lazy var router: EditProfileRouter = EditProfileRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         iconImage.layer.cornerRadius = 60
         userNameTextField.text = editProfile.getUserName()
-        editProfile.getIconImage(imageView: iconImage)
+        editProfile.getIconImage { [weak self] in
+            guard let self = self else {return}
+            switch $0 {
+            case .success(let imageData):
+                let uiImage = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    self.iconImage.image = uiImage
+                }
+            case .failure:
+                return
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -43,7 +54,7 @@ class EditProfileViewController: UIViewController{
             let res = editProfile.saveUserName(userName: userName)
             switch res{
             case .success:
-                router.backView()
+                router.dismiss()
             case .failure:
                 router.resultAlert(titleText: "すでに使われているユーザーネーム", messageText: "別の名前を入力してください", titleOK: "OK")
                 return
@@ -55,7 +66,11 @@ class EditProfileViewController: UIViewController{
     }
     
     @IBAction func cancelButton(_ sender: Any) {
-        router.backView()
+        router.dismiss()
+    }
+    
+    @IBAction func logoutButton(_ sender: Any) {
+        router.checkActAfterAlert(titleText: "ログアウトしますか？", messageText: "")
     }
 }
 
@@ -66,6 +81,18 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else if let originalImage = info[.originalImage] as? UIImage {
             iconImage.image = originalImage
         }
-        router.backView()
+        router.dismiss()
+    }
+}
+
+extension EditProfileViewController: AlertResult{
+    func changeView() {
+        let result = editProfile.userLogOut()
+        switch result {
+        case .success:
+            router.transition(idetifier: "toGuest", sender: nil)
+        case .failure:
+            return
+        }
     }
 }

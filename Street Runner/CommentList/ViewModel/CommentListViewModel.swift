@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol CommentListViewModel{
     func getObjectId() -> commentData
@@ -15,11 +14,12 @@ protocol CommentListViewModel{
     func dataCount() -> Int
     func getData() -> [CommentEntity]
     func getUserData(userObjectId: String,completion: @escaping (Result<UserData,Error>) -> Void)
-    func getIconImage(fileName: String,imageView: UIImageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func getCurrentUserObjectId() -> String
     func changeGoodValue(objectId: String,value: Bool,completion: @escaping (Result<Void,Error>) -> Void)
     func changeToTrue(cellRow: Int)
     func changeTofalse(cellRow: Int)
+    func checkUserExist() -> Bool
 }
 
 class CommentListViewModelImpl: CommentListViewModel{
@@ -29,10 +29,10 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     private let entity: commentData
     private var datas: [CommentEntity] = []
-    
     private let commentMbaas: CommentMBaaS = CommentMBaaSImpl()
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
+    private let checkUserExistModel: SelectPostMbaas = SelectPostMbaasImpl()
     
     func getObjectId() -> commentData {
         entity
@@ -86,8 +86,15 @@ class CommentListViewModelImpl: CommentListViewModel{
         }
     }
     
-    func getIconImage(fileName: String,imageView: UIImageView){
-        iconMbaas.getIconImage(fileName: fileName, imageView: imageView)
+    func getIconImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void) {
+        iconMbaas.getIconImage(fileName: fileName) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func getCurrentUserObjectId() -> String {
@@ -111,5 +118,9 @@ class CommentListViewModelImpl: CommentListViewModel{
     
     func changeTofalse(cellRow: Int) {
         datas[cellRow].good = false
+    }
+    
+    func checkUserExist() -> Bool {
+        checkUserExistModel.checkUserExist()
     }
 }

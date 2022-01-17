@@ -13,7 +13,7 @@ class PostRecruitmentViewController: UIViewController {
     @IBOutlet weak var recruitmentText: UITextView!
     
     private let viewModel: PostRecruitmentViewModel = PostRecruitmentViewModelImpl()
-    private lazy var router: PostRecruitmentRouter = PostRecruitmentRouterImpl(viewController: self)
+    private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class PostRecruitmentViewController: UIViewController {
             let res = viewModel.saveRecruitment(requestImageFile: fileName, requestText: recruitText)
             switch res{
             case .success:
-                navigationController?.popViewController(animated: true)
+                router.popBackView()
             case .failure:
                 router.resultAlert(titleText: "投稿内容の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
                 viewModel.deleteImageFile(fileName: fileName)
@@ -71,6 +71,6 @@ extension PostRecruitmentViewController: UIImagePickerControllerDelegate, UINavi
         } else if let originalImage = info[.originalImage] as? UIImage {
             recruitmentImage.image = originalImage
         }
-        router.backView()
+        router.dismiss()
     }
 }

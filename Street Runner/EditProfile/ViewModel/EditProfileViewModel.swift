@@ -10,9 +10,10 @@ import UIKit
 
 protocol EditProfileViewModel{
     func saveImage(img: UIImage) -> Result<Void,Error>
-    func getIconImage(imageView: UIImageView)
+    func getIconImage(completion: @escaping (Result<Data,Error>) -> Void)
     func getUserName() -> String
     func saveUserName(userName: String) ->  Result<Void,Error>
+    func userLogOut() -> Result<Void,Error>
 }
 
 class EditProfileViewModelImpl: EditProfileViewModel{
@@ -38,8 +39,15 @@ class EditProfileViewModelImpl: EditProfileViewModel{
         }
     }
     
-    func getIconImage(imageView: UIImageView) {
-        showPosted.getIconImage(fileName: profile.getID(), imageView: imageView)
+    func getIconImage(completion: @escaping (Result<Data,Error>) -> Void) {
+        showPosted.getIconImage(fileName: profile.getID()) {
+            switch $0 {
+            case .success(let imageData):
+                completion(Result.success(imageData))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
     
     func getUserName() -> String {
@@ -48,5 +56,17 @@ class EditProfileViewModelImpl: EditProfileViewModel{
     
     func saveUserName(userName: String) ->  Result<Void,Error>{
         editProfile.saveUserName(userName: userName)
+    }
+    
+    func userLogOut() -> Result<Void,Error> {
+        let result = editProfile.userLogOut()
+        switch result {
+        case .success:
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "password")
+            return Result.success(())
+        case .failure(let err):
+            return Result.failure(err)
+        }
     }
 }
