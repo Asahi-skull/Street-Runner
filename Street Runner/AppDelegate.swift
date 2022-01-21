@@ -7,15 +7,16 @@
 
 import UIKit
 import NCMB
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         NCMB.initialize(applicationKey: "3a79b85206e96f75cdee3fe8c51b1b715036101293aa8e0f26cdf1cd43d2b3f2", clientKey: "47d8a02a14592f461247dd308c14eaefbe0d64367530910f3bba35cd75af77d6")
+        
+        FirebaseApp.configure()
 
         // Override point for customization after application launch.
         return true
