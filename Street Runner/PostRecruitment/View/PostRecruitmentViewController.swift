@@ -6,20 +6,35 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class PostRecruitmentViewController: UIViewController {
+class PostRecruitmentViewController: UIViewController,GADFullScreenContentDelegate {
     
     @IBOutlet weak var recruitmentImage: UIImageView!
     @IBOutlet weak var recruitmentText: UITextView!
     
     private let viewModel: PostRecruitmentViewModel = PostRecruitmentViewModelImpl()
     private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
+    private var interstitial: GADInterstitialAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            recruitmentText.layer.borderColor = UIColor.black.cgColor
+        recruitmentText.layer.borderColor = UIColor.black.cgColor
         recruitmentText.layer.borderWidth = 0.7
         recruitmentText.layer.cornerRadius = 10.0
+        getAd()
+    }
+    
+    private func getAd() {
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID: "ca-app-pub-3940256099942544/4411468910", request: request) { [weak self] (ad,err) in
+            guard let self = self else {return}
+            if err != nil {
+                return
+            }
+            self.interstitial = ad
+            self.interstitial?.fullScreenContentDelegate = self
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,6 +66,9 @@ class PostRecruitmentViewController: UIViewController {
             let res = viewModel.saveRecruitment(requestImageFile: fileName, requestText: recruitText)
             switch res{
             case .success:
+                if interstitial != nil{
+                    interstitial?.present(fromRootViewController: self)
+                }
                 router.popBackView()
             case .failure:
                 router.resultAlert(titleText: "投稿内容の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")

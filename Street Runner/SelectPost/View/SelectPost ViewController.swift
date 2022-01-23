@@ -6,14 +6,29 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class SelectPostViewController: UIViewController{
+class SelectPostViewController: UIViewController {
+    
+    private let bannerView: GADBannerView = {
+        let bannerView = GADBannerView()
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.load(GADRequest())
+        return bannerView
+    }()
     
     private let viewModel: SelectPostViewModel = SelectPostViewModelImpl()
     private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bannerView.rootViewController = self
+        view.addSubview(bannerView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        bannerView.frame = CGRect(x: 0, y: (navigationController?.navigationBar.frame.height)!, width: view.frame.size.width, height: 50)
     }
 }
 
