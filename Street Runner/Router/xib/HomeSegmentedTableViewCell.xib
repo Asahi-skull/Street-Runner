@@ -19,8 +19,8 @@
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xms-mT-T12">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                         <segments>
-                            <segment title="First"/>
-                            <segment title="Second"/>
+                            <segment title="依頼投稿"/>
+                            <segment title="募集投稿"/>
                         </segments>
                     </segmentedControl>
                 </subviews>

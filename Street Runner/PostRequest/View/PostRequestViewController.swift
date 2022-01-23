@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class PostRequestViewController: UIViewController {
+class PostRequestViewController: UIViewController, GADFullScreenContentDelegate {
 
     @IBOutlet weak var requestImage: UIImageView!
     @IBOutlet weak var requestTextView: UITextView!
+    private var rewardedAd: GADRewardedAd?
     
     private let postRequest: PostRequestViewModel = PostRequestViewModelImpl()
     private lazy var router: PerformAlertRouter = PerformAlertRouterImpl(viewController: self)
@@ -20,6 +22,15 @@ class PostRequestViewController: UIViewController {
         requestTextView.layer.borderColor = UIColor.black.cgColor
         requestTextView.layer.borderWidth = 0.7
         requestTextView.layer.cornerRadius = 10.0
+        let request = GADRequest()
+        GADRewardedAd.load(withAdUnitID: "ca-app-pub-3940256099942544/1712485313", request: request) { [weak self] (ad, err) in
+            guard let self = self else {return}
+            if err != nil{
+                return
+            }
+            self.rewardedAd = ad
+            self.rewardedAd?.fullScreenContentDelegate = self
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -52,6 +63,12 @@ class PostRequestViewController: UIViewController {
             let res = postRequest.saveRequest(requestImageFile: fileName, requestText: requestText)
             switch res{
             case .success:
+                if let ad = rewardedAd {
+                    ad.present(fromRootViewController: self) { [weak self] in
+                        guard let self = self else {return}
+                        self.router.popBackView()
+                    }
+                }
                 router.popBackView()
             case .failure:
                 router.resultAlert(titleText: "投稿内容の保存に失敗", messageText: "もう一度やり直してください", titleOK: "OK")
