@@ -42,7 +42,6 @@
 		415F03C9278ED64200FE8568 /* SelectPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F03C8278ED64200FE8568 /* SelectPostViewModel.swift */; };
 		415F03CC2793D90000FE8568 /* AlertResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F03CB2793D8FF00FE8568 /* AlertResult.swift */; };
 		415F03CF2793DE5F00FE8568 /* PerformAlertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F03CE2793DE5F00FE8568 /* PerformAlertRouter.swift */; };
-		415F03D12798160E00FE8568 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 415F03D02798160E00FE8568 /* GoogleService-Info.plist */; };
 		415F03D4279825F200FE8568 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 415F03D3279825F200FE8568 /* FirebaseAnalytics */; };
 		415F03D6279825F200FE8568 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 415F03D5279825F200FE8568 /* FirebaseCrashlytics */; };
 		4180F07B2770735D0014ED18 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4180F0792770735D0014ED18 /* CommentTableViewCell.swift */; };
@@ -106,6 +105,7 @@
 		41A3283A2779A22F005F290B /* UserProfileMBaaS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A328392779A22F005F290B /* UserProfileMBaaS.swift */; };
 		41AD8694278B0E38008D6E14 /* UserCommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD8693278B0E38008D6E14 /* UserCommentListViewController.swift */; };
 		41AD8696278B1072008D6E14 /* UserCommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD8695278B1072008D6E14 /* UserCommentListViewModel.swift */; };
+		41BD99ED27A7F4080069F5D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41BD99EC27A7F4080069F5D6 /* GoogleService-Info.plist */; };
 		41C37471276DD85F00264C46 /* DetailImagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3746F276DD85F00264C46 /* DetailImagTableViewCell.swift */; };
 		41C37472276DD85F00264C46 /* DetailImagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C37470276DD85F00264C46 /* DetailImagTableViewCell.xib */; };
 		41C37479276DDE7700264C46 /* DetailCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C37477276DDE7700264C46 /* DetailCommentTableViewCell.swift */; };
@@ -169,7 +169,6 @@
 		415F03C8278ED64200FE8568 /* SelectPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPostViewModel.swift; sourceTree = "<group>"; };
 		415F03CB2793D8FF00FE8568 /* AlertResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertResult.swift; sourceTree = "<group>"; };
 		415F03CE2793DE5F00FE8568 /* PerformAlertRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformAlertRouter.swift; sourceTree = "<group>"; };
-		415F03D02798160E00FE8568 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4180F0792770735D0014ED18 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		4180F07A2770735D0014ED18 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		4180F07D277084670014ED18 /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
@@ -235,6 +234,8 @@
 		41A328392779A22F005F290B /* UserProfileMBaaS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileMBaaS.swift; sourceTree = "<group>"; };
 		41AD8693278B0E38008D6E14 /* UserCommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentListViewController.swift; sourceTree = "<group>"; };
 		41AD8695278B1072008D6E14 /* UserCommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentListViewModel.swift; sourceTree = "<group>"; };
+		41BD99EC27A7F4080069F5D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		41BD99EE27A801690069F5D6 /* Street Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Street Runner.entitlements"; sourceTree = "<group>"; };
 		41C3746F276DD85F00264C46 /* DetailImagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImagTableViewCell.swift; sourceTree = "<group>"; };
 		41C37470276DD85F00264C46 /* DetailImagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailImagTableViewCell.xib; sourceTree = "<group>"; };
 		41C37477276DDE7700264C46 /* DetailCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -563,6 +564,7 @@
 		4188116827477D1700DE9280 /* Street Runner */ = {
 			isa = PBXGroup;
 			children = (
+				41BD99EE27A801690069F5D6 /* Street Runner.entitlements */,
 				4188116927477D1700DE9280 /* AppDelegate.swift */,
 				4188116B27477D1700DE9280 /* SceneDelegate.swift */,
 				418811C9274CB2B300DE9280 /* Core */,
@@ -592,7 +594,7 @@
 				4188117227477D1900DE9280 /* Assets.xcassets */,
 				4188117427477D1900DE9280 /* LaunchScreen.storyboard */,
 				4188117727477D1900DE9280 /* Info.plist */,
-				415F03D02798160E00FE8568 /* GoogleService-Info.plist */,
+				41BD99EC27A7F4080069F5D6 /* GoogleService-Info.plist */,
 			);
 			path = "Street Runner";
 			sourceTree = "<group>";
@@ -1187,6 +1189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41BD99ED27A7F4080069F5D6 /* GoogleService-Info.plist in Resources */,
 				41C37472276DD85F00264C46 /* DetailImagTableViewCell.xib in Resources */,
 				415CDED52782F32B000EB7E4 /* FollowListTableViewCell.xib in Resources */,
 				419E3C6F275B64A700059CB9 /* ShowPostedTableCell.xib in Resources */,
@@ -1198,7 +1201,6 @@
 				4180F09727771C940014ED18 /* HomeSegmentedTableViewCell.xib in Resources */,
 				41902CE327632D2200130C3B /* ProfileTableViewCell.xib in Resources */,
 				419E3C73275B679E00059CB9 /* SegmentedTableCell.xib in Resources */,
-				415F03D12798160E00FE8568 /* GoogleService-Info.plist in Resources */,
 				4180F08C2777013F0014ED18 /* UserProfileTableViewCell.xib in Resources */,
 				415B0FC02767381B00211118 /* DetailPostedTableViewCell.xib in Resources */,
 				41C3747A276DDE7700264C46 /* DetailCommentTableViewCell.xib in Resources */,
@@ -1608,12 +1610,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "Street Runner/Street Runner.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ADM7GLU8QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Street Runner/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "アルバムにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1624,9 +1628,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.asahi.Street-Runner";
+				PRODUCT_BUNDLE_IDENTIFIER = com.asahi.StreetRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = StreetRunner.develop;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1639,11 +1643,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Street Runner/Street Runner.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M2BKB7Y237;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Street Runner/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "アルバムにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1654,7 +1660,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.asahi.Street-Runner";
+				PRODUCT_BUNDLE_IDENTIFIER = com.asahi.StreetRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
