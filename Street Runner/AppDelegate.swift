@@ -9,6 +9,7 @@ import UIKit
 import NCMB
 import Firebase
 import GoogleMobileAds
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NCMB.initialize(applicationKey: "3a79b85206e96f75cdee3fe8c51b1b715036101293aa8e0f26cdf1cd43d2b3f2", clientKey: "47d8a02a14592f461247dd308c14eaefbe0d64367530910f3bba35cd75af77d6")
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if((error) != nil) {
+                    return
+                }
+                if granted {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }
+        }
 
         // Override point for customization after application launch.
         return true
@@ -37,6 +48,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let installation = NCMBInstallation.currentInstallation
+        installation.setDeviceTokenFromData(data: deviceToken)
+        installation.saveInBackground { [weak self] in
+            guard let self = self else {return}
+            switch $0 {
+            case .success:
+                break
+            case .failure(let error):
+                let errorCode = (error as! NCMBApiError).errorCode
+                if (errorCode == NCMBApiErrorCode.duplication) {
+                    self.updateExistInstallation(installation: installation)
+                }else if (errorCode == NCMBApiErrorCode.noDataAvailable) {
+                    self.reRegistInstallation(installation: installation)
+                }else{
+                    return
+                }
+            }
+        }
+    }
 
+    private func updateExistInstallation(installation: NCMBInstallation) -> Void {
+        var installationQuery = NCMBInstallation.query
+        installationQuery.where(field: "deviceToken", equalTo: installation.deviceToken!)
+        installationQuery.findInBackground {
+            switch $0 {
+            case .success(let data):
+                guard let searchDevice = data.first else {return}
+                installation.objectId = searchDevice.objectId
+                installation.saveInBackground {
+                    switch $0 {
+                    case .success:
+                        break
+                    case .failure:
+                        return
+                    }
+                }
+            case .failure:
+                return
+            }
+        }
+    }
+    
+    private func reRegistInstallation(installation: NCMBInstallation) -> Void {
+        installation.objectId = nil
+        installation.saveInBackground {
+            switch $0 {
+            case .success:
+                break
+            case .failure:
+                return
+            }
+        }
+    }
 }
 
