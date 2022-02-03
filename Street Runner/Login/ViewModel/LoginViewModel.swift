@@ -10,10 +10,12 @@ import Foundation
 protocol LoginViewModel{
     func loginUser(email: String, password: String) -> Result<Void,Error>
     func setAcl(completion: @escaping (Result<Void,Error>) -> Void)
+    func setUserIdToInstallation(completion: @escaping (Result<Void,Error>) -> Void)
 }
 
 class LoginViewModelimpl: LoginViewModel{
     private let login: LoginmBaaS = LoginmBaaSImpl()
+    private let pushModel: PushMbaas = PushMbaasImpl()
     
     func loginUser(email: String, password: String) -> Result<Void,Error> {
         let result = login.loginEmail(emailAddress: email, password: password)
@@ -27,6 +29,17 @@ class LoginViewModelimpl: LoginViewModel{
     
     func setAcl(completion: @escaping (Result<Void,Error>) -> Void) {
         login.setAcl {
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func setUserIdToInstallation(completion: @escaping (Result<Void,Error>) -> Void) {
+        pushModel.setUserIdToInstallation {
             switch $0 {
             case .success:
                 completion(Result.success(()))

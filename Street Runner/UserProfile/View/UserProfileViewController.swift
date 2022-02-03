@@ -163,9 +163,20 @@ extension UserProfileViewController: UITableViewDataSource{
                         }
                     }
                 }else{
-                    $0.follow {
+                    $0.follow { [weak self] in
+                        guard let self = self else {return}
                         switch $0 {
                         case .success:
+                            self.viewModel.map{
+                                $0.push() {
+                                    switch $0 {
+                                    case .success:
+                                        break
+                                    case .failure:
+                                        return
+                                    }
+                                }
+                            }
                             DispatchQueue.main.async {
                                 sender.backgroundColor = UIColor(named: "whiteBack")
                                 sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor
