@@ -9,18 +9,20 @@ import Foundation
 import NCMB
 
 protocol PushMbaas {
-    func push(title: String,message: String,userId: String,completion: @escaping (Result<Void,Error>) -> Void)
+    func push(title: String,message: String,category: String,userId: String,completion: @escaping (Result<Void,Error>) -> Void)
     func setUserIdToInstallation(completion: @escaping (Result<Void,Error>) -> Void)
 }
 
 class PushMbaasImpl: PushMbaas {
-    func push(title: String,message: String,userId: String,completion: @escaping (Result<Void,Error>) -> Void) {
+    func push(title: String,message: String,category: String,userId: String,completion: @escaping (Result<Void,Error>) -> Void) {
         let push = NCMBPush()
         push.sound = "defalt"
         push.badgeIncrementFlag = true
         push.contentAvailable = false
         push.title = title
         push.message = message
+        push.category = category
+        push.badgeIncrementFlag = false
         push.setImmediateDelivery()
         var query = NCMBInstallation.query
         query.where(field: "userId", equalTo: userId)

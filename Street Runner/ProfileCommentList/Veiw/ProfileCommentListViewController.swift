@@ -171,6 +171,16 @@ extension ProfileCommentListViewController: UITableViewDataSource{
                         guard let self = self else {return}
                         switch $0 {
                         case .success:
+                            self.viewModel.map{
+                                $0.goodPush(userId: commentUserObjectId) {
+                                    switch $0 {
+                                    case .success:
+                                        break
+                                    case .failure:
+                                        return
+                                    }
+                                }
+                            }
                             DispatchQueue.main.async {
                                 sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
                                 self.viewModel.map{

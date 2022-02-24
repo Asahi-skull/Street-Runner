@@ -86,6 +86,26 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title=""/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQq-4t-dc5">
+                                <rect key="frame" x="200" y="10" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="SKe-oo-XsN"/>
+                                    <constraint firstAttribute="height" constant="20" id="qGu-wO-EIh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="イイねの数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxu-Oe-hP1">
+                                <rect key="frame" x="200" y="30" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="AWG-Cj-HkF"/>
+                                    <constraint firstAttribute="height" constant="20" id="dwe-Ap-nhT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -95,9 +115,13 @@
                             <constraint firstItem="aM7-y2-CA4" firstAttribute="top" secondItem="yoq-QL-i21" secondAttribute="bottom" id="DGg-SB-bhe"/>
                             <constraint firstItem="ALX-1e-kXp" firstAttribute="top" secondItem="G4p-FA-BsT" secondAttribute="top" constant="10" id="Hcd-pC-liO"/>
                             <constraint firstItem="yoq-QL-i21" firstAttribute="top" secondItem="G4p-FA-BsT" secondAttribute="top" constant="10" id="QkA-Df-ZF0"/>
+                            <constraint firstItem="lxu-Oe-hP1" firstAttribute="leading" secondItem="aM7-y2-CA4" secondAttribute="trailing" constant="20" id="Vr2-MN-PlY"/>
                             <constraint firstItem="aM7-y2-CA4" firstAttribute="leading" secondItem="Y8d-ql-xLr" secondAttribute="trailing" constant="20" id="WdG-eF-UrV"/>
                             <constraint firstItem="ALX-1e-kXp" firstAttribute="leading" secondItem="G4p-FA-BsT" secondAttribute="leading" constant="20" id="bhA-Kq-HCu"/>
+                            <constraint firstItem="qQq-4t-dc5" firstAttribute="top" secondItem="G4p-FA-BsT" secondAttribute="top" constant="10" id="iFG-cm-bLh"/>
                             <constraint firstItem="yoq-QL-i21" firstAttribute="leading" secondItem="yOG-Vx-uzL" secondAttribute="trailing" constant="20" id="juc-T5-eQE"/>
+                            <constraint firstItem="lxu-Oe-hP1" firstAttribute="top" secondItem="qQq-4t-dc5" secondAttribute="bottom" id="k0x-KB-y0X"/>
+                            <constraint firstItem="qQq-4t-dc5" firstAttribute="leading" secondItem="aM7-y2-CA4" secondAttribute="trailing" constant="20" id="pTb-be-fsx"/>
                             <constraint firstItem="yOG-Vx-uzL" firstAttribute="top" secondItem="G4p-FA-BsT" secondAttribute="top" constant="10" id="u6Q-2S-p6d"/>
                         </constraints>
                     </view>
@@ -119,6 +143,7 @@
                 <outlet property="detailFollowButton" destination="ALX-1e-kXp" id="YXx-mq-lpr"/>
                 <outlet property="followerLabel" destination="yOG-Vx-uzL" id="jga-uv-vF9"/>
                 <outlet property="followingLabel" destination="yoq-QL-i21" id="oSA-8h-UAo"/>
+                <outlet property="goodNumberLabel" destination="qQq-4t-dc5" id="hDq-GG-7td"/>
                 <outlet property="iconImage" destination="6TH-ha-caT" id="usT-nh-0De"/>
                 <outlet property="userNameLabel" destination="YYc-fI-BSb" id="n5S-8P-y7t"/>
             </connections>

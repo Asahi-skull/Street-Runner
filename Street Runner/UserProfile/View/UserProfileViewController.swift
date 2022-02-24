@@ -130,6 +130,17 @@ extension UserProfileViewController: UITableViewDataSource{
                         return
                     }
                 }
+                $0.countGoodNumber {
+                    switch $0{
+                    case .success(let count):
+                        let count = String(count)
+                        DispatchQueue.main.async {
+                            cell.goodNumberLabel.text = count
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(_:)), for: .touchUpInside)
             return cell

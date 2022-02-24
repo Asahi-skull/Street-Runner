@@ -24,6 +24,7 @@ protocol UserProfileViewModel{
     func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
     func checkUserExist() -> Bool
     func push(completion: @escaping (Result<Void,Error>) -> Void)
+    func countGoodNumber(completion: @escaping (Result<Int,Error>) -> Void)
 }
 
 class UserProfileViewModelImpl: UserProfileViewModel{
@@ -181,10 +182,21 @@ class UserProfileViewModelImpl: UserProfileViewModel{
     func push(completion: @escaping (Result<Void,Error>) -> Void) {
         let username = profileModel.getUser()
         let message = username + "にフォローされました"
-        pushModel.push(title: "アプリからのメッセージ", message: message, userId: userObjectId) {
+        pushModel.push(title: "アプリからのメッセージ", message: message,category: "follow", userId: userObjectId) {
             switch $0{
             case .success:
                 completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func countGoodNumber(completion: @escaping (Result<Int,Error>) -> Void) {
+        followModel.countGoodNumber(userId: userObjectId) {
+            switch $0 {
+            case .success(let count):
+                completion(Result.success(count))
             case .failure(let err):
                 completion(Result.failure(err))
             }
