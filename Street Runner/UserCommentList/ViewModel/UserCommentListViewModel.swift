@@ -20,6 +20,8 @@ protocol UserCommentListViewModel{
     func changeToTrue(cellRow: Int)
     func changeTofalse(cellRow: Int)
     func checkUserExit() -> Bool
+    func commentPush(message: String,completion: @escaping (Result<Void,Error>) -> Void)
+    func goodPush(userId: String,completion: @escaping (Result<Void,Error>) -> Void)
 }
 
 class UserCommentListViewModelImpl: UserCommentListViewModel{
@@ -33,6 +35,7 @@ class UserCommentListViewModelImpl: UserCommentListViewModel{
     private let iconMbaas: ShowPostedMBaaS = ShowPostedMBaaSImpl()
     private let profileModel: ProfilemBaaS = ProfilemBaaSImpl()
     private let checkUserExistModel: SelectPostMbaas = SelectPostMbaasImpl()
+    private let pushModel: PushMbaas = PushMbaasImpl()
     
     func getObjectId() -> commentData {
         entity
@@ -122,5 +125,32 @@ class UserCommentListViewModelImpl: UserCommentListViewModel{
     
     func checkUserExit() -> Bool {
         checkUserExistModel.checkUserExist()
+    }
+    
+    func commentPush(message: String,completion: @escaping (Result<Void,Error>) -> Void) {
+        let commentUsername = profileModel.getUser()
+        let title = commentUsername + "があなたの投稿に対してコメントしました"
+        guard let userId = entity.userObjectId else {return}
+        pushModel.push(title: title, message: message, category: "comment", userId: userId) {
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func goodPush(userId: String,completion: @escaping (Result<Void,Error>) -> Void) {
+        let postedUsername = profileModel.getUser()
+        let message = postedUsername + "があなたのコメントにイイねしました"
+        pushModel.push(title: "アプリからのメッセージ", message: message, category: "good", userId: userId) {
+            switch $0 {
+            case .success:
+                completion(Result.success(()))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
     }
 }

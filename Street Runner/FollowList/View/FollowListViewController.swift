@@ -20,6 +20,7 @@ class FollowListViewController: UIViewController {
         let nib = UINib(nibName: "FollowListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "followListCell")
         self.segmentControl.addTarget(self, action: #selector(self.segmentChanged(_:)), for: .valueChanged)
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {

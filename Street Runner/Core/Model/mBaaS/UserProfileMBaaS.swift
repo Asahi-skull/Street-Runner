@@ -12,7 +12,9 @@ protocol UserProfileMBaaS{
     func follow(followedBy: String,followOn: String,comletion: @escaping (Result<Void,Error>) -> Void)
     func unFollow(followedBy: String,followOn: String,completion: @escaping (Result<Void,Error>) -> Void)
     func checkFollow(followedBy: String,followOn: String) -> Result<Int,Error>
-    func countFollow(field: String,userObjectId: String,completion: @escaping (Result<Int,Error>) -> Void)}
+    func countFollow(field: String,userObjectId: String,completion: @escaping (Result<Int,Error>) -> Void)
+    func countGoodNumber(userId: String,completion: @escaping (Result<Int,Error>) -> Void)
+}
 
 class UserProfileMBaaSImpl: UserProfileMBaaS{
     func follow(followedBy: String,followOn: String,comletion: @escaping (Result<Void,Error>) -> Void) {
@@ -71,6 +73,21 @@ class UserProfileMBaaSImpl: UserProfileMBaaS{
             switch $0{
             case .success(let int):
                 completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func countGoodNumber(userId: String,completion: @escaping (Result<Int,Error>) -> Void) {
+        var quary = NCMBQuery.getQuery(className: "comment")
+        quary.where(field: "good", equalTo: true)
+        quary.where(field: "postedClassName", equalTo: "request")
+        quary.where(field: "userObjectId", equalTo: userId)
+        quary.countInBackground {
+            switch $0 {
+            case .success(let count):
+                completion(Result.success(count))
             case .failure(let err):
                 completion(Result.failure(err))
             }

@@ -17,6 +17,7 @@ protocol ProfileViewModel{
     func getImage(fileName: String,completion: @escaping (Result<Data,Error>) -> Void)
     func countFollower(completion: @escaping (Result<Int,Error>) -> Void)
     func countFollowing(completion: @escaping (Result<Int,Error>) -> Void)
+    func countGoodNumber(completion: @escaping (Result<Int,Error>) -> Void)
 }
 
 class ProfileViewModelImpl: ProfileViewModel{
@@ -103,6 +104,18 @@ class ProfileViewModelImpl: ProfileViewModel{
             switch $0{
             case .success(let int):
                 completion(Result.success(int))
+            case .failure(let err):
+                completion(Result.failure(err))
+            }
+        }
+    }
+    
+    func countGoodNumber(completion: @escaping (Result<Int,Error>) -> Void) {
+        let userId = profile.getID()
+        followModel.countGoodNumber(userId: userId) {
+            switch $0 {
+            case .success(let count):
+                completion(Result.success(count))
             case .failure(let err):
                 completion(Result.failure(err))
             }

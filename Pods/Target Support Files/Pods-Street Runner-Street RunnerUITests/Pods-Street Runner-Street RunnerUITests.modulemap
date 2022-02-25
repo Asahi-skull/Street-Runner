@@ -1,0 +1,6 @@
+framework module Pods_Street_Runner_Street_RunnerUITests {
+  umbrella header "Pods-Street Runner-Street RunnerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

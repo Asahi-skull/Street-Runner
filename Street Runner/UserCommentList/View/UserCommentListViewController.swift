@@ -71,9 +71,22 @@ class UserCommentListViewController: UIViewController {
                     guard let self = self else {return}
                     switch $0{
                     case .success:
-                        DispatchQueue.main.async {
-                            self.commentTextView.text = ""
-                            self.commentTextView.endEditing(true)
+                        self.viewModel.map{
+                            guard let commentUserId = $0.getObjectId().userObjectId else {return}
+                            if commentUserId != $0.getCurrentUserObjectId() {
+                                $0.commentPush(message: commentText) {
+                                    switch $0 {
+                                    case .success:
+                                        break
+                                    case .failure:
+                                        return
+                                    }
+                                }
+                            }
+                            DispatchQueue.main.async {
+                                self.commentTextView.text = ""
+                                self.commentTextView.endEditing(true)
+                            }
                         }
                     case .failure:
                         DispatchQueue.main.async {
@@ -178,6 +191,16 @@ extension UserCommentListViewController: UITableViewDataSource{
                             guard let self = self else {return}
                             switch $0 {
                             case .success:
+                                self.viewModel.map{
+                                    $0.goodPush(userId: commentUserObjectId) {
+                                        switch $0 {
+                                        case .success:
+                                            break
+                                        case .failure:
+                                            return
+                                        }
+                                    }
+                                }
                                 DispatchQueue.main.async {
                                     sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
                                     self.viewModel.map{

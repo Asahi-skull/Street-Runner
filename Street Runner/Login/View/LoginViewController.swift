@@ -31,23 +31,29 @@ class LoginViewController: UIViewController {
         case .success:
             UserDefaults.standard.set(emailText, forKey:"email")
             UserDefaults.standard.set(passwordText, forKey: "password")
-            loginViewModel.setAcl { [weak self] in
+            loginViewModel.setUserIdToInstallation { [weak self] in
                 guard let self = self else {return}
                 switch $0 {
                 case .success:
+                    self.loginViewModel.setAcl {
+                        switch $0 {
+                        case .success:
+                            break
+                        case .failure:
+                            break
+                        }
+                    }
                     DispatchQueue.main.async {
                         self.router.transition(idetifier: "toProfile", sender: nil)
                     }
                 case .failure:
                     DispatchQueue.main.async {
-                        self.router.transition(idetifier: "toProfile", sender: nil)
+                        self.router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
                     }
                 }
             }
         case .failure:
-            DispatchQueue.main.async {
-                self.router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
-            }
+            router.resultAlert(titleText: "ログイン失敗", messageText: "もう一度やり直してください", titleOK: "OK")
         }
     }
 }

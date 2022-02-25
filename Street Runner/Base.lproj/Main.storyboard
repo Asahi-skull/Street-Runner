@@ -11,7 +11,7 @@
         <!--Guest View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GuestViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="guestView" id="BYZ-38-t0r" customClass="GuestViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1029,7 +1029,7 @@
         <!--Detail Posted View Controller-->
         <scene sceneID="TTx-GU-LHj">
             <objects>
-                <viewController id="JNH-Ot-WZ8" customClass="DetailPostedViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vc" id="JNH-Ot-WZ8" customClass="DetailPostedViewController" customModule="Street_Runner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Bj-FK-pXh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
