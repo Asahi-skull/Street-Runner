@@ -130,6 +130,17 @@ extension FollowUserProfileViewController: UITableViewDataSource{
                         return
                     }
                 }
+                $0.countGoodNumber {
+                    switch $0{
+                    case .success(let count):
+                        let count = String(count)
+                        DispatchQueue.main.async {
+                            cell.goodNumberLabel.text = count
+                        }
+                    case .failure:
+                        return
+                    }
+                }
             }
             cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(_:)), for: .touchUpInside)
             return cell
@@ -162,9 +173,20 @@ extension FollowUserProfileViewController: UITableViewDataSource{
                     }
                 }
             }else{
-                $0.follow {
+                $0.follow { [weak self] in
+                    guard let self = self else {return}
                     switch $0 {
                     case .success:
+                        self.viewModel.map{
+                            $0.push {
+                                switch $0 {
+                                case .success:
+                                    break
+                                case .failure:
+                                    return
+                                }
+                            }
+                        }
                         DispatchQueue.main.async {
                             sender.backgroundColor = UIColor(named: "whiteBack")
                             sender.layer.borderColor = UIColor(named: "blackBorder")?.cgColor

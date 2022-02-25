@@ -14,6 +14,7 @@ class ProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var followerLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var detailFollowButton: UIButton!
+    @IBOutlet weak var goodNumberLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

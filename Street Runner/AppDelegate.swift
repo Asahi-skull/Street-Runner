@@ -13,6 +13,8 @@ import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -29,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
         }
-
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
         // Override point for customization after application launch.
         return true
     }
@@ -104,3 +107,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let vc = windowScenes?.keyWindow?.rootViewController as! UITabBarController
+        let pushContent = response.notification.request.content
+        let category = pushContent.categoryIdentifier
+        if category == "follow" {
+            let guestView = vc.viewControllers![2]
+            vc.selectedViewController = guestView
+        }
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound,.banner,.list])
+    }
+}

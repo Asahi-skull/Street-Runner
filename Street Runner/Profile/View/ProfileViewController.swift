@@ -90,6 +90,17 @@ extension ProfileViewController: UITableViewDataSource{
                     return
                 }
             }
+            profileViewModel.countGoodNumber {
+                switch $0{
+                case  .success(let count):
+                    let count = String(count)
+                    DispatchQueue.main.async {
+                        cell.goodNumberLabel.text = count
+                    }
+                case .failure:
+                    return
+                }
+            }
             cell.detailFollowButton.addTarget(self, action: #selector(self.detailFollowButtonTapped(_:)), for: .touchUpInside)
             return cell
         }else if indexPath.row == 1{

@@ -13,6 +13,7 @@ class UserProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var followerLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var goodNumberLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
     override func awakeFromNib() {
