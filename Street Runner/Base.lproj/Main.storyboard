@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NdS-Ad-CYy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NdS-Ad-CYy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -708,11 +708,11 @@
             </objects>
             <point key="canvasLocation" x="3832" y="1760"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="Eig-dc-mjl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LW5-kb-Ddi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="4XP-ZQ-3Tw"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="4XP-ZQ-3Tw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yPe-JR-cTA">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1312,11 +1312,11 @@
             </objects>
             <point key="canvasLocation" x="3836" y="-2777"/>
         </scene>
-        <!--Item-->
+        <!--Post-->
         <scene sceneID="q5c-aX-Eou">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ttw-w2-Fqm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="SYp-Mz-AYm"/>
+                    <tabBarItem key="tabBarItem" title="Post" image="plus.circle" catalog="system" id="SYp-Mz-AYm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hd9-c6-eXj">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1331,11 +1331,11 @@
             </objects>
             <point key="canvasLocation" x="739" y="-882"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
         <scene sceneID="36R-Fa-wEf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cvl-6z-y9J" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Tuc-41-gbC"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="Tuc-41-gbC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DG9-Uh-MjG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1357,8 +1357,11 @@
         <segue reference="h9J-al-GeQ"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
